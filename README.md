@@ -1,9 +1,8 @@
 <h1>Open Book API</h1>
 
-<h2>Proposta da API</h2>
-<p>Ser um sistema para editoras e autores de livros publicarem suas obras literárias para leitura página a página.</p>
-<p>Permitir acesso a listagem de autores e livros cadastrados e publicados.</p>
-<hr>
+<h3><strong>Proposta:</strong></h3>
+<p>Ser um sistema para editoras e autores de livros publicarem suas obras literárias para leitura página a página e permitir acesso à listagem de autores e livros cadastrados e publicados.</p>
+<hr noshade />
 
 <h2>[201] Aderir autores ao sistema com sucesso.</h2>
 <h3>POST - /author</h3>
@@ -44,3 +43,54 @@
     "message": "Email already registered to another author."
 }
 </pre>
+<hr noshade />
+
+<h2>[200] Listar autores cadastrados no sistema e seus respectivos livros.</h2>
+<h3>GET - /author</h3>
+
+<strong>Essa rota não necessita autenticação Bearer token nem request body:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen">200</strong> para listagem bem sucedida:</p>
+<pre>
+[
+    {
+    "uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
+    "email": "marcelohm@gmail.com",
+    "name": "Marcelo Henrique Marques",
+    "city": "Belo Horizonte",
+    "country": "Brasil",
+    "isAdm": false,
+    "isActive": true,
+    "createdAt": "2023-01-01",
+    "updatedAt": "2023-01-01",
+    "books":[
+        {
+            "uuid": "97036eff-9a4a-4062-b11a-014f3842808a",
+            "title": "Hammerdown",
+            "category": ["Fiction","Adventure","Action"],
+            "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado.",
+            "coverUrl": "http://mh.app.br/HDCover.png"
+        }
+    ]
+    },
+    {
+    "uuid": "ce486924-b51f-4c39-a04f-5792e997cfad",
+    "email": "paulonogres@gmail.com",
+    "name": "Paulo Nogueira Resende",
+    "city": "Rio de Janeiro",
+    "country": "Brasil",
+    "isAdm": false,
+    "isActive": true,
+    "createdAt": "2023-01-02",
+    "updatedAt": "2023-01-02",
+    "books":[]
+    }
+]
+</pre>
+<p>Retorno esperado com status code <strong style="color:red">204</strong> para lista vazia de autores:</p>
+<pre>
+{
+    "message": "There are no authors registered yet."
+}
+</pre>
+<hr noshade />
