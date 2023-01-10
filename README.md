@@ -94,3 +94,39 @@
 }
 </pre>
 <hr noshade />
+
+<h2>[200] Listar um auto específico cadastrado no sistema e seus respectivos livros.</h2>
+<h3>GET - /author/:id</h3>
+
+<strong>Essa rota não necessita autenticação Bearer token nem request body:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+    "uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
+    "email": "marcelohm@gmail.com",
+    "name": "Marcelo Henrique Marques",
+    "city": "Belo Horizonte",
+    "country": "Brasil",
+    "isAdm": false,
+    "isActive": true,
+    "createdAt": "2023-01-01",
+    "updatedAt": "2023-01-01",
+    "books":[
+        {
+            "uuid": "97036eff-9a4a-4062-b11a-014f3842808a",
+            "title": "Hammerdown",
+            "category": ["Fiction","Adventure","Action"],
+            "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado.",
+            "coverUrl": "http://mh.app.br/HDCover.png"
+        }
+    ]
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red">404</strong> para autor inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Author not found."
+}
+</pre>
+<hr noshade />
