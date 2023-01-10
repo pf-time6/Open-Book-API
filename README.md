@@ -242,3 +242,52 @@
 }
 </pre>
 <hr noshade />
+
+<h2>[201] Criar nova página de um livro específico.</h2>
+<h3>POST - /books/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token para identificar o autor e enviar o id do livro como parâmetro. Campos de envio para request:</strong>
+<ul>
+    <li><strong>page: </strong>Entrada obrigatória do tipo number.</li>
+    <li><strong>chapter: </strong>Entrada obrigatória do tipo number.</li>
+    <li><strong>isChapter: </strong>Entrada obrigatória do tipo boolean.</li>
+    <li><strong>chapterTitle: </strong>Entrada obrigatória caso isChapter seja true, do tipo string e máximo 120 chars.</li>
+    <li><strong>content: </strong>Entrada obrigatória do tipo string e máximo 480 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
+<pre>
+{
+    "book": "97036eff-9a4a-4062-b11a-014f3842808a",
+    "page": 1,
+    "chapter": 1,
+    "isChapter": true,
+    "chapterTitle": "O Tesouro de Samarilla",
+    "content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para página já existente para o este livro:</p>
+<pre>
+{
+    "message": "Page already registered for this book."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para chapter e isChapter true já existente para o este livro:</p>
+<pre>
+{
+    "message": "Chapter page already registered for this book."
+}
+</pre>
+<hr noshade />
