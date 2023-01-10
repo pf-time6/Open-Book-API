@@ -19,7 +19,7 @@
 </ul>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen">201</strong> para criação realizada com sucesso:</p>
-<code><pre>
+<pre>
 {
     "uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
     "email": "marcelohm@gmail.com",
@@ -31,16 +31,16 @@
     "createdAt": "2023-01-01",
     "updatedAt": "2023-01-01"
 }
-</pre></code>
+</pre>
 <p>Retorno esperado com status code <strong style="color:red">400</strong> para request incorreto:</p>
-<code><pre>
+<pre>
 {
     "message": yup.error.errors
 }
-</pre></code>
+</pre>
 <p>Retorno esperado com status code <strong style="color:red">400</strong> para email já existente:</p>
-<code><pre>
+<pre>
 {
     "message": "Email already registered to another author."
 }
-</pre></code>
+</pre>
