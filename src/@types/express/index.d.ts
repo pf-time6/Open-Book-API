@@ -1,7 +1,11 @@
+import * as express from "express";
+
 declare global {
-    namespace Express {
-        interface Request {
-            // criar chaves aqui
-        }
+  namespace Express {
+    interface Request {
+      author: {
+        id: string;
+      };
     }
+  }
 }

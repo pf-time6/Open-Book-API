@@ -12,9 +12,9 @@ const ensureAuthMiddleware = async (req: Request, res: Response, next: NextFunct
           if (error) {
               return res.status(401).json({message: error.message});
           }
-        //   req.author = {
-        //       id: decoded.sub as string
-        //   }
+          req.author = {
+              id: decoded.sub as string
+          }
           return next();
     });
   };
