@@ -95,10 +95,10 @@
 </pre>
 <hr noshade />
 
-<h2>[200] Listar um auto específico cadastrado no sistema e seus respectivos livros.</h2>
+<h2>[200] Mostrar um autor específico cadastrado no sistema e seus respectivos livros.</h2>
 <h3>GET - /author/:id</h3>
 
-<strong>Essa rota não necessita autenticação Bearer token nem request body:</strong>
+<strong>Essa rota não necessita autenticação Bearer token nem request body, mas é preciso enviar o id do autor como parâmetro:</strong>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen">200</strong> para retorno bem sucedido:</p>
 <pre>
@@ -127,6 +127,36 @@
 <pre>
 {
     "message": "Author not found."
+}
+</pre>
+<hr noshade />
+
+
+<h2>[200] Atenticar acesso a autores cadastrados.</h2>
+<h3>POST - /login</h3>
+
+<strong>Essa rota não necessita autenticação Bearer token. Campos de envio para request:</strong>
+<ul>
+    <li><strong>email: </strong>Entrada obrigatória do tipo string email e máximo 100 chars.</li>
+    <li><strong>password: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen">200</strong> para validação de credenciais realizada com sucesso:</p>
+<pre>
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbSI6ZmFsc2UsImlhdCI6MTY3MTcyNjYyNSwiZXhwIjoxNjcxODEzMDI1LCJzdWIiOiJhMTkzYzY5YS02NzRkLTQ2N2QtOGZlOC0yNGUwOTBlZWYxNzAifQ.pZIAgGuHqx-70DrTnJ2lSH8WS6527RGTVDjldhdtlJ8"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red">403</strong> para email e/ou senha inválidas ou inexistente:</p>
+<pre>
+{
+    "message": "Invalid access credentials."
 }
 </pre>
 <hr noshade />
