@@ -30,7 +30,7 @@ class Books {
   @ManyToOne(() => Author, (author) => author.id)
   author: Author;
 
-  @OneToMany(() => Pages, (pages) => pages.id)
+  @OneToMany(() => Pages, (pages) => pages.books)
   pages: Pages[];
 
   @OneToMany(() => Books_Categories, (books_categories) => books_categories.books)
