@@ -321,3 +321,33 @@
 }
 </pre>
 <hr noshade />
+
+<h2>[200] Mostrar página de um livro específico.</h2>
+<h3>GET - /books/:id/:page</h3>
+
+<strong>Essa rota não necessita autenticação bearer token nem request body, mas necessita enviar o id do livro e a página do livro como parâmetros.</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+	"book": "97036eff-9a4a-4062-b11a-014f3842808a",
+	"page": 1,
+	"chapter": 1,
+	"isChapter": true,
+	"chapterTitle": "O Tesouro de Samarilla",
+	"content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página inexistente ou não encontrada:</p>
+<pre>
+{
+    "message": "Page not found."
+}
+</pre>
+<hr noshade />
