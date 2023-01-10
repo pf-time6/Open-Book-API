@@ -114,7 +114,7 @@
     "updatedAt": "2023-01-01",
     "books":[
         {
-            "uuid": "97036eff-9a4a-4062-b11a-014f3842808a",
+            "id": "97036eff-9a4a-4062-b11a-014f3842808a",
             "title": "Hammerdown",
             "category": ["Fiction","Adventure","Action"],
             "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado.",
@@ -206,13 +206,13 @@
 <pre>
 [
     {
-        "uuid": "97036eff-9a4a-4062-b11a-014f3842808a",
+        "id": "97036eff-9a4a-4062-b11a-014f3842808a",
         "title": "Hammerdown",
         "category": ["Fiction","Action","Adventure"],
         "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
         "coverUrl": "http://mh.app.br/HDCover.png"
         "author":{
-            "uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
+            "id": "9521d750-a277-4237-bad2-dc2d6d988151",
             "email": "marcelohm@gmail.com",
             "name": "Marcelo Henrique Marques",
             "city": "Belo Horizonte",
@@ -220,13 +220,13 @@
         }
     },
     {
-        "uuid": "7acb5d30-9d2b-4f15-aeb4-d71b67a6d051",
+        "id": "7acb5d30-9d2b-4f15-aeb4-d71b67a6d051",
         "title": "Interstellar Citizen",
         "category": ["Fiction","Science","Adventure"],
         "about": "Diário de um explorador espacial humano e suas máquinas companheiras de aventuras."
         "coverUrl": "http://imgur.com/ICCover.png"
         "author":{
-            "uuid": "ce486924-b51f-4c39-a04f-5792e997cfad",
+            "id": "ce486924-b51f-4c39-a04f-5792e997cfad",
             "email": "paulonogres@gmail.com",
             "name": "Paulo Nogueira Resende",
             "city": "Rio de Janeiro",
@@ -288,6 +288,36 @@
 <pre>
 {
     "message": "Chapter page already registered for this book."
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Mostrar informações sobre um livro específico.</h2>
+<h3>GET - /books/:id</h3>
+
+<strong>Essa rota não necessita autenticação bearer token nem request body, mas necessita enviar o id do livro como parâmetro.</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+    "id": "97036eff-9a4a-4062-b11a-014f3842808a",
+    "title": "Hammerdown",
+    "category": ["Fiction","Action","Adventure"],
+    "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
+    "coverUrl": "http://mh.app.br/HDCover.png"
+    "author":{
+        "id": "9521d750-a277-4237-bad2-dc2d6d988151",
+        "email": "marcelohm@gmail.com",
+        "name": "Marcelo Henrique Marques",
+        "city": "Belo Horizonte",
+        "country": "Brasil",
+    }
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
 }
 </pre>
 <hr noshade />
