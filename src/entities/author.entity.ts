@@ -29,7 +29,7 @@ class Author {
     updatedAt: Date;
 
 	@OneToMany(() => Books, books => books.author)
-    books: Books;
+    books: Books[];
 
     @BeforeInsert()
     @BeforeUpdate()
