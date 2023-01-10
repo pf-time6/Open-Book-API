@@ -1,4 +1,4 @@
-interface ICreateUserRequest {
+interface ICreateAuthorRequest  {
   name: string;
   email: string;
   password: string;
@@ -7,13 +7,13 @@ interface ICreateUserRequest {
   isAdmin?: boolean;
 }
 
-interface IOmitUserPassword extends Omit<ICreateUserRequest, "password"> {}
+interface IOmitAuthorPassword extends Omit<ICreateAuthorRequest, "password"> {}
 
-interface ICreateUserResponse extends IOmitUserPassword {
+interface ICreateAuthorResponse extends IOmitAuthorPassword {
   id: number;
   isAdmin: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export { ICreateUserRequest, IOmitUserPassword, ICreateUserResponse };
+export { ICreateAuthorRequest, IOmitAuthorPassword, ICreateAuthorResponse };

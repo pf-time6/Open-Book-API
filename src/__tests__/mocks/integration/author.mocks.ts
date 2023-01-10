@@ -3,7 +3,7 @@ import {
   IOmitUserPassword,
 } from "../../../interfaces/author.interface";
 
-const mockedCommonUserRequest: ICreateUserRequest = {
+const mockedCommonAuthorRequest: ICreateUserRequest = {
   name: "commonUser",
   email: "common@gmail.com",
   password: "123123",
@@ -11,14 +11,14 @@ const mockedCommonUserRequest: ICreateUserRequest = {
   country: "Brasil",
 };
 
-const mockedCommonUserResponse: IOmitUserPassword = {
+const mockedCommonAuthorResponse: IOmitUserPassword = {
   name: "commonUser",
   email: "common@gmail.com",
   city: "Rio de janeiro",
   country: "Brasil",
 };
 
-const mockedAdminUserRequest: ICreateUserRequest = {
+const mockedAdminAuthorRequest: ICreateUserRequest = {
   name: "adminUser",
   email: "admin123@gmail.com",
   isAdmin: true,
@@ -27,7 +27,7 @@ const mockedAdminUserRequest: ICreateUserRequest = {
   country: "Brasil",
 };
 
-const mockedAdminUserResponse: IOmitUserPassword = {
+const mockedAdminAuthorResponse: IOmitUserPassword = {
   name: "adminUser",
   email: "admin123@gmail.com",
   isAdmin: true,
@@ -36,8 +36,8 @@ const mockedAdminUserResponse: IOmitUserPassword = {
 };
 
 export {
-  mockedCommonUserRequest,
-  mockedCommonUserResponse,
-  mockedAdminUserRequest,
-  mockedAdminUserResponse,
+  mockedCommonAuthorRequest,
+  mockedCommonAuthorResponse,
+  mockedAdminAuthorRequest,
+  mockedAdminAuthorResponse,
 };
