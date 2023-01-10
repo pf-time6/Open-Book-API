@@ -1,3 +1,5 @@
+import "reflect-metadata"
+import "express-async-errors"
 import express, { json } from "express";
 import {
   authorRoutes,
