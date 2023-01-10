@@ -87,10 +87,10 @@
     }
 ]
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">204</strong> para lista vazia de autores:</p>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia de autores:</p>
 <pre>
 {
-    "message": "There are no authors registered yet."
+    "message": "There are no authors found."
 }
 </pre>
 <hr noshade />
@@ -235,10 +235,10 @@
     }
 ]
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">204</strong> para lista vazia de livros:</p>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia de livros:</p>
 <pre>
 {
-    "message": "There are no books registered yet."
+    "message": "There are no books found."
 }
 </pre>
 <hr noshade />
@@ -276,6 +276,12 @@
 <pre>
 {
     "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
+<pre>
+{
+    "message": "Unauthorized book access."
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para página já existente para o este livro:</p>
@@ -348,6 +354,70 @@
 <pre>
 {
     "message": "Page not found."
+}
+</pre>
+<hr noshade />
+
+<h2>[201] Criar nova opção de categoria para livros.</h2>
+<h3>POST - /categories</h3>
+
+<strong>Essa rota necessita autenticação bearer token de administrador. Campo de envio para request:</strong>
+<ul>
+    <li><strong>name: </strong>Entrada obrigatória do tipo string com máximo de 60 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
+<pre>
+{
+    "id": "12",
+    "name": "Action"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para nome de categoria já inexistente:</p>
+<pre>
+{
+    "message": "Category name already registered into the system."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para criação não autorizada:</p>
+<pre>
+{
+    "message": "Unauthorized category creation."
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Mostrar listagem de categorias cadastradas no sistema.</h2>
+<h3>GET - /categories</h3>
+
+<strong>Essa rota não necessita autenticação bearer token nem request body.</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+[
+    {
+	    "id": 1,
+        "name": "Fiction"
+    },
+    {
+	    "id": 8,
+        "name": "Adventure"
+    },
+    {
+	    "id": 12,
+        "name": "Action"
+    }
+]</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
+<pre>
+{
+    "message": "There are no categories found."
 }
 </pre>
 <hr noshade />
