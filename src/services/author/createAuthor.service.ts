@@ -5,6 +5,7 @@ import {
   ICreateAuthorRequest,
   ICreateAuthorResponse,
 } from "../../interfaces/author.interface";
+import createAuthorReturnSchema from "../../schemas/author/createAuthorReturn.schema";
 
 const createAuthorService = async (
   payload: ICreateAuthorRequest
@@ -18,11 +19,14 @@ const createAuthorService = async (
   const author = authorRepo.create(payload);
   await authorRepo.save(author);
 
-  // const userWithoutPassword = await createUserReturnSchema.validate(user, {
-  //   stripUnknown: true,
-  // });
+  const authorWithoutPassword = await createAuthorReturnSchema.validate(
+    author,
+    {
+      stripUnknown: true,
+    }
+  );
 
-  // return userWithoutPassword;
+  return authorWithoutPassword;
 };
 
 export default createAuthorService;
