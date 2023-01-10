@@ -1,8 +1,9 @@
 import { Router } from "express";
+
 import { createAuthorController } from "../controllers/author";
 
-const authorRouter = Router();
+const authorRoutes = Router();
 
-authorRouter.post("", createAuthorController);
+authorRoutes.post("", createAuthorController);
 
-export default authorRouter;
+export default authorRoutes;

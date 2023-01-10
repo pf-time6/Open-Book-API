@@ -1,12 +1,24 @@
 import express, { json } from "express";
-import { authorRouter, loginRouter } from "./routes";
+import {
+  authorRoutes,
+  loginRouter,
+  booksRoutes,
+  categoriesRoutes,
+  pagesRoutes,
+} from "./routes";
+import { errorHandler } from "./errors";
 
 //INSTANCIA EXPRESS
 const app = express();
 app.use(json());
 
 //ROTAS
-app.use("/author", authorRouter);
+app.use("/author", authorRoutes);
 app.use("/login", loginRouter);
+app.use("", booksRoutes);
+app.use("", pagesRoutes);
+app.use("", categoriesRoutes);
+
+app.use(errorHandler);
 
 export default app;
