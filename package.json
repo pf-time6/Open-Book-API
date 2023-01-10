@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "test": "jest"
+    "test": "cross-env NODE_ENV=test jest",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "dependencies": {
     "babel": "^6.23.0",
