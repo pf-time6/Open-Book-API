@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from "typeorm";
 import Books from "./books.entity";
 
 @Entity('pages')
@@ -16,12 +16,12 @@ class Pages {
     isChapter: boolean;
 
     @Column({ length: 120 })
-    chapterTitle: 280;
+    chapterTitle: string;
 	
 	@CreateDateColumn()
     createdAt: Date;
 
-	@OneToMany(() => Books, books => books.id)
+	@ManyToOne(() => Books, books => books.id)
     books: Books;
 }
 
