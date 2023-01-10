@@ -1,5 +1,9 @@
 import { Router } from "express";
 
+import { createAuthorController } from "../controllers/author";
+
 const authorRoutes = Router();
 
-export default authorRoutes
+authorRoutes.post("", createAuthorController);
+
+export default authorRoutes;
