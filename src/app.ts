@@ -1,15 +1,20 @@
 import express, { json } from "express";
+import {
+  authorRoutes,
+  loginRouter,
+  booksRoutes,
+  categoriesRoutes,
+  pagesRoutes,
+} from "./routes";
 import { errorHandler } from "./errors";
-import authorRoutes from "./routes/author.routes";
-import booksRoutes from "./routes/books.routes";
-import categoriesRoutes from "./routes/categories.routes";
-import pagesRoutes from "./routes/pages.routes";
 
+//INSTANCIA EXPRESS
 const app = express();
-
 app.use(json());
 
-app.use("", authorRoutes);
+//ROTAS
+app.use("/author", authorRoutes);
+app.use("/login", loginRouter);
 app.use("", booksRoutes);
 app.use("", pagesRoutes);
 app.use("", categoriesRoutes);
