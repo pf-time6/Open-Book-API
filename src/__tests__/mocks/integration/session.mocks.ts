@@ -1,34 +1,34 @@
 import { ICreateSessionRequest } from "../../../interfaces/session.interface";
 import {
-  mockedAdminUserRequest,
-  mockedCommonUserRequest,
+  mockedAdminAuthorRequest,
+  mockedCommonAuthorRequest,
 } from "./author.mocks";
 
-const mockedAdminUserSession: ICreateSessionRequest = {
-  email: mockedAdminUserRequest.email,
-  password: mockedAdminUserRequest.password,
+const mockedAdminAuthorSession: ICreateSessionRequest = {
+  email: mockedAdminAuthorRequest.email,
+  password: mockedAdminAuthorRequest.password,
 };
 
-const mockedCommonUserSession: ICreateSessionRequest = {
-  email: mockedCommonUserRequest.email,
-  password: mockedCommonUserRequest.password,
+const mockedCommonAuthorSession: ICreateSessionRequest = {
+  email: mockedCommonAuthorRequest.email,
+  password: mockedCommonAuthorRequest.password,
 };
 
 const mockedInvalidBodySession: object = {};
 
 const mockedInvalidEmailSession: ICreateSessionRequest = {
   email: "mail@gmail.com",
-  password: mockedCommonUserRequest.password,
+  password: mockedCommonAuthorRequest.password,
 };
 
 const mockedInvalidPasswordSession: ICreateSessionRequest = {
-  email: mockedCommonUserRequest.email,
+  email: mockedCommonAuthorRequest.email,
   password: "Password Invalid",
 };
 
 export {
-  mockedAdminUserSession,
-  mockedCommonUserSession,
+  mockedAdminAuthorSession,
+  mockedCommonAuthorSession,
   mockedInvalidBodySession,
   mockedInvalidEmailSession,
   mockedInvalidPasswordSession,

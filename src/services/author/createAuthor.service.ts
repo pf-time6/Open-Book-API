@@ -2,13 +2,13 @@ import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import { AppError } from "../../errors";
 import {
-  ICreateUserRequest,
-  ICreateUserResponse,
+  ICreateAuthorRequest,
+  ICreateAuthorResponse,
 } from "../../interfaces/author.interface";
 
 const createAuthorService = async (
-  payload: ICreateUserRequest
-): Promise<ICreateUserResponse | Error> => {
+  payload: ICreateAuthorRequest
+): Promise<ICreateAuthorResponse | Error> => {
   const authorRepo = AppDataSource.getRepository(Author);
 
   if (await authorRepo.findOne({ where: { email: payload.email } })) {
