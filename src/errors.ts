@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 class AppError extends Error {
   public statusCode: number;
@@ -10,9 +10,14 @@ class AppError extends Error {
   }
 }
 
-const errorHandler = (err: AppError, req: Request, res: Response) => {
+const errorHandler = async (
+  err: AppError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json(err.message);
+    return res.status(err.statusCode).json({ message: err.message });
   }
 
   return res.status(500).json({ message: "Internal server error" });

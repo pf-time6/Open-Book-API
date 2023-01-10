@@ -1,8 +1,14 @@
 import { Router } from "express";
 import { loginAuthorController } from "../controllers/author";
+import { ensureAuthMiddleware, validateSchemaMiddleware } from "../middlewares";
+import { loginAuthorSchema } from "../schemas/author";
 
-const loginRouter = Router();
+const loginRoutes = Router();
 
-loginRouter.post("", loginAuthorController);
+loginRoutes.post(
+  "",
+  validateSchemaMiddleware(loginAuthorSchema),
+  loginAuthorController
+);
 
-export default loginRouter;
+export default loginRoutes;

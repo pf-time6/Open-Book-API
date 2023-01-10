@@ -15,4 +15,14 @@ interface ICreateAuthorResponse extends IOmitAuthorPassword {
   updatedAt: Date;
 }
 
-export { ICreateAuthorRequest, IOmitAuthorPassword, ICreateAuthorResponse };
+interface ILoginAuthor {
+  email: string;
+  password: string;
+}
+
+export {
+  ICreateAuthorRequest,
+  IOmitAuthorPassword,
+  ICreateAuthorResponse,
+  ILoginAuthor,
+};

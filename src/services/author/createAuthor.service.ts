@@ -13,7 +13,7 @@ const createAuthorService = async (
   const authorRepo = AppDataSource.getRepository(Author);
 
   if (await authorRepo.findOne({ where: { email: payload.email } })) {
-    return new AppError("Author already exists", 409);
+    throw new AppError("Author already exists", 409);
   }
 
   const author = authorRepo.create(payload);
