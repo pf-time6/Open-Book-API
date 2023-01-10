@@ -38,7 +38,7 @@
     "message": yup.error.errors
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red">400</strong> para email já existente:</p>
+<p>Retorno esperado com status code <strong style="color:red">409</strong> para email já existente:</p>
 <pre>
 {
     "message": "Email already registered to another author."
