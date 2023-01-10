@@ -5,7 +5,7 @@ import {
   ICreateAuthorRequest,
   ICreateAuthorResponse,
 } from "../../interfaces/author.interface";
-import createAuthorReturnSchema from "../../schemas/author/createAuthorReturn.schema";
+import { createAuthorReturnSchema } from "../../schemas/author";
 
 const createAuthorService = async (
   payload: ICreateAuthorRequest
