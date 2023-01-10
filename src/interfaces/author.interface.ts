@@ -1,3 +1,5 @@
+import { StringDecoder } from "string_decoder";
+
 interface ICreateUserRequest {
   name: string;
   email: string;
@@ -10,10 +12,10 @@ interface ICreateUserRequest {
 interface IOmitUserPassword extends Omit<ICreateUserRequest, "password"> {}
 
 interface ICreateUserResponse extends IOmitUserPassword {
-  id: number;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
   isAdmin: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export { ICreateUserRequest, IOmitUserPassword, ICreateUserResponse };
