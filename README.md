@@ -21,7 +21,7 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen">201</strong> para criação realizada com sucesso:</p>
 <pre>
 {
-    "uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
+    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
     "email": "marcelohm@gmail.com",
     "name": "Marcelo Henrique Marques",
     "city": "Belo Horizonte",
