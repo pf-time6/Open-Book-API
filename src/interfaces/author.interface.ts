@@ -4,7 +4,7 @@ interface ICreateAuthorRequest {
   password: string;
   city: string;
   country: string;
-  isAdm?: boolean;
+  isAdmin?: boolean;
 }
 
 interface IOmitAuthorPassword extends Omit<ICreateAuthorRequest, "password"> {}
