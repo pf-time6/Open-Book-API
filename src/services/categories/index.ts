@@ -1,3 +1,3 @@
-// Centralizar services
+import createCategoryService from "./createCategories.service";
 
-export {}
+export { createCategoryService };

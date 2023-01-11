@@ -1,1 +1,3 @@
-// Centralizar controllers
+import createCategoryController from "./createCategories.controller";
+
+export {createCategoryController}
