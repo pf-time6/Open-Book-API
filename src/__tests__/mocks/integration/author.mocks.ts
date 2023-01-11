@@ -18,7 +18,7 @@ const mockedCommonAuthorResponse: IOmitAuthorPassword = {
 const mockedAdminAuthorRequest: ICreateAuthorRequest = {
   name: "adminUser",
   email: "admin123@gmail.com",
-  isAdmin: true,
+  isAdm: true,
   password: "123123",
   city: "Rio de janeiro",
   country: "Brasil",
@@ -27,7 +27,7 @@ const mockedAdminAuthorRequest: ICreateAuthorRequest = {
 const mockedAdminAuthorResponse: IOmitAuthorPassword = {
   name: "adminUser",
   email: "admin123@gmail.com",
-  isAdmin: true,
+  isAdm: true,
   city: "Rio de janeiro",
   country: "Brasil",
 };
