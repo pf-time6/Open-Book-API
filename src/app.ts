@@ -17,7 +17,7 @@ app.use(json());
 //ROTAS
 app.use("/author", authorRoutes);
 app.use("/login", loginRoutes);
-app.use("", booksRoutes);
+app.use("/books", booksRoutes);
 app.use("", pagesRoutes);
 app.use("/categories", categoriesRoutes);
 

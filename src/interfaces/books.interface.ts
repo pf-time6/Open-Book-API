@@ -1,2 +1,17 @@
+interface ICreateBookRequest {
+  title: string;
+  category: number[];
+  about: string;
+  coverUrl: string;
+}
 
-export {};
+interface ICreateBookResponse {
+  id: string;
+  title: string;
+  category: number[];
+  about: string;
+  coverUrl: string;
+  createdAt: string;
+}
+
+export { ICreateBookRequest, ICreateBookResponse };
