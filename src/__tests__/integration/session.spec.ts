@@ -3,7 +3,11 @@ import { DataSource, Repository } from "typeorm";
 import app from "../../app";
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
-import { mockedAdminAuthorSession, mockedCommonAuthorSession } from "../mocks";
+import {
+  mockedAdminAuthorSession,
+  mockedCommonAuthorSession,
+  mockedInvalidBodySession,
+} from "../mocks";
 
 describe("Create session route", async () => {
   let baseUrl: string = "/login";
@@ -62,5 +66,26 @@ describe("Create session route", async () => {
     expect(response.status).toBe(adminResponse.status);
     expect(response.body).toHaveProperty(adminResponse.bodyHaveProperty);
     expect(response.status).toStrictEqual(adminResponse.bodyStrictEqual);
+  });
+
+  it("Should not be able to login | Invalid body", async () => {
+    const response = await request(app)
+      .post(baseUrl)
+      .send(mockedInvalidBodySession);
+
+    const commonAuthorResponse = {
+      status: 400,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: expect.arrayContaining([
+          "Email is a required field",
+          "password is a required field",
+        ]),
+      }),
+    };
+
+    expect(response.status).toBe(commonAuthorResponse.status);
+    expect(response.body).toHaveProperty(commonAuthorResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(commonAuthorResponse.bodyStrictEqual);
   });
 });
