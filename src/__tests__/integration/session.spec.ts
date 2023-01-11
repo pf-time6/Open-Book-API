@@ -11,7 +11,7 @@ import {
   mockedInvalidPasswordSession,
 } from "../mocks";
 
-describe("Create session route", async () => {
+describe("Create session route", () => {
   let baseUrl: string = "/login";
   let conn: DataSource;
   let authorRepo: Repository<Author>;
@@ -80,7 +80,7 @@ describe("Create session route", async () => {
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
         message: expect.arrayContaining([
-          "Email is a required field",
+          "email is a required field",
           "password is a required field",
         ]),
       }),
