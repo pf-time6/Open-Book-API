@@ -20,8 +20,8 @@ describe("Create session route", async () => {
   });
 
   beforeEach(async () => {
-    const users = await authorRepo.find();
-    await authorRepo.remove(users);
+    const authors = await authorRepo.find();
+    await authorRepo.remove(authors);
   });
 
   afterAll(async () => {

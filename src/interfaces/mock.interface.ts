@@ -1,8 +1,7 @@
-import { ICreateUserRequest } from "./author.interface";
-import { ICreateSessionRequest } from "./sessions.interface";
+import { ICreateAuthorRequest, ICreateSessionRequest } from "./index";
 
 interface ICreateSessionPayloadMock {
-  authorPayload: ICreateUserRequest;
+  authorPayload: ICreateAuthorRequest;
   sessionPayload: ICreateSessionRequest;
 }
 
