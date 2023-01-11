@@ -5,4 +5,13 @@ interface ICreateBookRequest {
   coverUrl: string;
 }
 
-export { ICreateBookRequest };
+interface ICreateBookResponse {
+  id: string;
+  title: string;
+  category: number[];
+  about: string;
+  coverUrl: string;
+  createdAt: string;
+}
+
+export { ICreateBookRequest, ICreateBookResponse };

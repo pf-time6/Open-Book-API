@@ -3,6 +3,7 @@ import Author from "../../entities/author.entity";
 import Books from "../../entities/books.entity";
 import Categories from "../../entities/categories.entity";
 import Books_Categories from "../../entities/books_categories.entity";
+import createBooksResponseSchema from "../../schemas/books/createBookResponse.schema";
 import { AppError } from "../../errors";
 import { ICreateBookRequest } from "../../interfaces/books.interface";
 
@@ -15,7 +16,7 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
   });
 
   if (bookFound) {
-    throw new AppError("Tittle already exists", 409);
+    throw new AppError("Book title already registered into the system.", 409);
   }
 
   const authorRepo = AppDataSource.getRepository(Author);
@@ -26,7 +27,7 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
   });
 
   if (!authorFound) {
-    throw new AppError("Author not found", 409);
+    throw new AppError("Author not found.", 404);
   }
 
   const books = booksRepo.create({
@@ -37,27 +38,6 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
   const bcRepo = AppDataSource.getRepository(Books_Categories);
-
-  // body.category.forEach(async (el) => {
-  //   const categories = await categoriesRepo.findOneBy({
-  //     id: el,
-  //   });
-
-  //   console.log(categories);
-
-  //   if (!categories) {
-  //     throw new AppError(
-  //       `${el} There is at least one category that is not in the database.`,
-  //       404
-  //     );
-  //   }
-
-  //   const books_categories = bcRepo.create({
-  //     books,
-  //     categories,
-  //   });
-  //   await bcRepo.save(books_categories);
-  // });
 
   body.category.map(async (el) => {
     const categories = await categoriesRepo.findOneBy({
@@ -75,7 +55,14 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
     await bcRepo.save(books_categories);
   });
 
-  return books;
+  const booksResponse = await createBooksResponseSchema.validate(
+    { ...books, category: body.category },
+    {
+      stripUnknown: true,
+    }
+  );
+
+  return booksResponse;
 };
 
 export default createBookService;
