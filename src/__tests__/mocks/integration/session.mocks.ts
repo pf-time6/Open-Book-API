@@ -1,9 +1,5 @@
-import { ICreateSessionPayloadMock } from "../../../interfaces/mock.interface";
-import { ICreateSessionRequest } from "../../../interfaces/sessions.interface";
-import {
-  mockedAdminAuthorRequest,
-  mockedCommonAuthorRequest,
-} from "./author.mocks";
+import { ICreateSessionPayloadMock } from "../../../interfaces";
+import { mockedAdminAuthorRequest, mockedCommonAuthorRequest } from "../index";
 
 const mockedAdminAuthorSession: ICreateSessionPayloadMock = {
   authorPayload: mockedAdminAuthorRequest,

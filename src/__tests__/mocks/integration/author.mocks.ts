@@ -1,9 +1,6 @@
-import {
-  ICreateUserRequest,
-  IOmitUserPassword,
-} from "../../../interfaces/author.interface";
+import { ICreateAuthorRequest, IOmitAuthorPassword } from "../../../interfaces";
 
-const mockedCommonAuthorRequest: ICreateUserRequest = {
+const mockedCommonAuthorRequest: ICreateAuthorRequest = {
   name: "commonUser",
   email: "common@gmail.com",
   password: "123123",
@@ -11,14 +8,14 @@ const mockedCommonAuthorRequest: ICreateUserRequest = {
   country: "Brasil",
 };
 
-const mockedCommonAuthorResponse: IOmitUserPassword = {
+const mockedCommonAuthorResponse: IOmitAuthorPassword = {
   name: "commonUser",
   email: "common@gmail.com",
   city: "Rio de janeiro",
   country: "Brasil",
 };
 
-const mockedAdminAuthorRequest: ICreateUserRequest = {
+const mockedAdminAuthorRequest: ICreateAuthorRequest = {
   name: "adminUser",
   email: "admin123@gmail.com",
   isAdmin: true,
@@ -27,7 +24,7 @@ const mockedAdminAuthorRequest: ICreateUserRequest = {
   country: "Brasil",
 };
 
-const mockedAdminAuthorResponse: IOmitUserPassword = {
+const mockedAdminAuthorResponse: IOmitAuthorPassword = {
   name: "adminUser",
   email: "admin123@gmail.com",
   isAdmin: true,
