@@ -1,6 +1,7 @@
 import {
   mockedCommonAuthorRequest,
   mockedCommonAuthorResponse,
+  mockedCommonAuthorInvalidBodyRequest,
   mockedAdminAuthorRequest,
   mockedAdminAuthorResponse,
 } from "./integration/author.mocks";
@@ -16,6 +17,7 @@ import {
 export {
   mockedCommonAuthorRequest,
   mockedCommonAuthorResponse,
+  mockedCommonAuthorInvalidBodyRequest,
   mockedAdminAuthorRequest,
   mockedAdminAuthorResponse,
   mockedAdminAuthorSession,
