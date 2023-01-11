@@ -1,3 +1,3 @@
-// Centralizar services
+import createBookService from "./createBook.service";
 
-export {}
+export { createBookService };
