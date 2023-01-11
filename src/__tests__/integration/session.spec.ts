@@ -7,6 +7,8 @@ import {
   mockedAdminAuthorSession,
   mockedCommonAuthorSession,
   mockedInvalidBodySession,
+  mockedInvalidEmailSession,
+  mockedInvalidPasswordSession,
 } from "../mocks";
 
 describe("Create session route", async () => {
@@ -47,7 +49,7 @@ describe("Create session route", async () => {
 
     expect(response.status).toBe(adminResponse.status);
     expect(response.body).toHaveProperty(adminResponse.bodyHaveProperty);
-    expect(response.status).toStrictEqual(adminResponse.bodyStrictEqual);
+    expect(response.body).toStrictEqual(adminResponse.bodyStrictEqual);
   });
 
   it("Should be able to login as common author", async () => {
@@ -65,7 +67,7 @@ describe("Create session route", async () => {
 
     expect(response.status).toBe(adminResponse.status);
     expect(response.body).toHaveProperty(adminResponse.bodyHaveProperty);
-    expect(response.status).toStrictEqual(adminResponse.bodyStrictEqual);
+    expect(response.body).toStrictEqual(adminResponse.bodyStrictEqual);
   });
 
   it("Should not be able to login | Invalid body", async () => {
@@ -81,6 +83,46 @@ describe("Create session route", async () => {
           "Email is a required field",
           "password is a required field",
         ]),
+      }),
+    };
+
+    expect(response.status).toBe(commonAuthorResponse.status);
+    expect(response.body).toHaveProperty(commonAuthorResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(commonAuthorResponse.bodyStrictEqual);
+  });
+
+  it("Should not be able to login | Invalid email", async () => {
+    const { authorPayload, sessionPayload } = mockedInvalidEmailSession;
+    const author = authorRepo.create({ ...authorPayload });
+    await authorRepo.save(author);
+
+    const response = await request(app).post(baseUrl).send(sessionPayload);
+
+    const commonAuthorResponse = {
+      status: 401,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "Email or password invalid",
+      }),
+    };
+
+    expect(response.status).toBe(commonAuthorResponse.status);
+    expect(response.body).toHaveProperty(commonAuthorResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(commonAuthorResponse.bodyStrictEqual);
+  });
+
+  it("Should not be able to login | Invalid password", async () => {
+    const { authorPayload, sessionPayload } = mockedInvalidPasswordSession;
+    const author = authorRepo.create({ ...authorPayload });
+    await authorRepo.save(author);
+
+    const response = await request(app).post(baseUrl).send(sessionPayload);
+
+    const commonAuthorResponse = {
+      status: 401,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "Email or password invalid",
       }),
     };
 
