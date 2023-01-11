@@ -13,6 +13,11 @@ import {
   mockedInvalidPasswordSession,
 } from "./integration/session.mocks";
 
+import {
+  mockednBooksRequest,
+  mockedInvalidBodyBooks,
+} from "./integration/books.mocks";
+
 export {
   mockedCommonAuthorRequest,
   mockedCommonAuthorResponse,
@@ -23,4 +28,6 @@ export {
   mockedInvalidBodySession,
   mockedInvalidEmailSession,
   mockedInvalidPasswordSession,
+  mockednBooksRequest,
+  mockedInvalidBodyBooks,
 };
