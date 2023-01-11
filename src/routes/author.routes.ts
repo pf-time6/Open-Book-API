@@ -5,7 +5,11 @@ import {
   getAuthorController,
   listAllAuthorsController,
 } from "../controllers/author";
-import { validateSchemaMiddleware } from "../middlewares";
+import {
+  ensureAuthMiddleware,
+  isAdmMiddleware,
+  validateSchemaMiddleware,
+} from "../middlewares";
 import { createAuthorRequestSchema } from "../schemas/author";
 
 const authorRoutes = Router();
