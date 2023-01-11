@@ -5,6 +5,7 @@ import Categories from "../../entities/categories.entity";
 import Books_Categories from "../../entities/books_categories.entity";
 import { AppError } from "../../errors";
 import { ICreateBookRequest } from "../../interfaces/books.interface";
+import { Any } from "typeorm";
 
 const createBookService = async (body: ICreateBookRequest, userId: string) => {
   const booksRepo = AppDataSource.getRepository(Books);
@@ -33,31 +34,21 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
     ...body,
     author: authorFound,
   });
-  await booksRepo.save(books);
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
   const bcRepo = AppDataSource.getRepository(Books_Categories);
 
-  // body.category.forEach(async (el) => {
-  //   const categories = await categoriesRepo.findOneBy({
-  //     id: el,
-  //   });
+  const loopCategories = await categoriesRepo.findBy({
+    id: Any(body.category),
+  });
 
-  //   console.log(categories);
-
-  //   if (!categories) {
-  //     throw new AppError(
-  //       `${el} There is at least one category that is not in the database.`,
-  //       404
-  //     );
-  //   }
-
-  //   const books_categories = bcRepo.create({
-  //     books,
-  //     categories,
-  //   });
-  //   await bcRepo.save(books_categories);
-  // });
+  if (loopCategories.length !== body.category.length) {
+    throw new AppError(
+      `There is at least one category that is not in the database.`,
+      404
+    );
+  }
+  await booksRepo.save(books);
 
   body.category.map(async (el) => {
     const categories = await categoriesRepo.findOneBy({
