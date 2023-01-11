@@ -5,9 +5,13 @@ import AppDataSource from "../../../data-source";
 import Author from "../../../entities/author.entity";
 
 //mocks
-import { mockedCommonAuthorRequest, mockedAdminAuthorRequest } from "../../mocks";
+import {
+  mockedCommonAuthorRequest,
+  mockedAdminAuthorRequest,
+  mockedCommonAuthorInvalidBodyRequest,
+} from "../../mocks";
 
-describe("Author route", () => {
+describe("Create Author Tests", () => {
   let baseUrl: string = "/author";
   let conn: DataSource;
   let authorRepo: Repository<Author>;
@@ -30,7 +34,7 @@ describe("Author route", () => {
     await conn.destroy();
   });
 
-  it("Should be possible create an Author", async () => {
+  it("POST: /author -> Should be able to create an Author", async () => {
     const authorPayload = mockedCommonAuthorRequest;
 
     const response = await request(app).post(baseUrl).send(authorPayload);
@@ -44,6 +48,7 @@ describe("Author route", () => {
         city: expect.any(String),
         country: expect.any(String),
         isAdm: expect.any(Boolean),
+        isActive: expect.any(Boolean),
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
       }),
@@ -55,7 +60,7 @@ describe("Author route", () => {
     expect(response.body).toStrictEqual(routeResponse.bodyStrictEqual);
   });
 
-  it("Should be not allowed create a existing Author", async () => {
+  it("POST: /author -> Should be not allowed create a existing Author", async () => {
     const authorPayload = mockedCommonAuthorRequest;
     const author = authorRepo.create({ ...authorPayload });
     await authorRepo.save(author);
@@ -71,7 +76,21 @@ describe("Author route", () => {
     expect(response.body).toHaveProperty(expectResults.bodyHaveProperty);
   });
 
-  it("Should be possible create adm Author", async () => {
+  it("POST: /author -> Should not be able to create an Author with invalid body", async () => {
+    const invalidBody = mockedCommonAuthorInvalidBodyRequest;
+    const response = await request(app).post(baseUrl).send(invalidBody);
+
+    const expectResults = {
+      status: 400,
+      bodyToHaveProperty: "message",
+    };
+
+    expect(response.status).toBe(expectResults.status);
+    expect(response.body).toHaveProperty(expectResults.bodyToHaveProperty);
+    expect(response.body.isActive).not.toBe(false)
+  });
+
+  it("POST: /author -> Should be able to create adm Author", async () => {
     const admAuthorPayload = mockedAdminAuthorRequest;
 
     const response = await request(app).post(baseUrl).send(admAuthorPayload);
@@ -86,6 +105,7 @@ describe("Author route", () => {
         city: expect.any(String),
         country: expect.any(String),
         isAdm: expect.any(Boolean),
+        isActive: expect.any(Boolean),
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
       }),
@@ -93,8 +113,8 @@ describe("Author route", () => {
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).not.toHaveProperty(expectResults.bodyNotHaveProperty);
     expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
     expect(response.body.isAdm).toBe(true);
+    expect(response.body).not.toHaveProperty(expectResults.bodyNotHaveProperty);
   });
 });
