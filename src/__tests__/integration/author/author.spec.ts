@@ -1,11 +1,11 @@
 import request from "supertest";
 import { DataSource, Repository } from "typeorm";
-import app from "../../app";
-import AppDataSource from "../../data-source";
-import Author from "../../entities/author.entity";
+import app from "../../../app";
+import AppDataSource from "../../../data-source";
+import Author from "../../../entities/author.entity";
 
 //mocks
-import { mockedCommonAuthorRequest, mockedAdminAuthorRequest } from "../mocks";
+import { mockedCommonAuthorRequest, mockedAdminAuthorRequest } from "../../mocks";
 
 describe("Author route", () => {
   let baseUrl: string = "/author";
