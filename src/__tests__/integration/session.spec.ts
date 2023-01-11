@@ -11,7 +11,7 @@ import {
   mockedInvalidPasswordSession,
 } from "../mocks";
 
-describe("Create session route", async () => {
+describe("Create session route", () => {
   let baseUrl: string = "/login";
   let conn: DataSource;
   let authorRepo: Repository<Author>;
