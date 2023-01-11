@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createCategoryController } from "../controllers/categories";
-import { ensureAuthMiddleware, ensureAuthorAdmMiddleware } from "../middlewares";
+import { ensureAuthMiddleware } from "../middlewares";
+import ensureAuthorAdmMiddleware from "../middlewares/ensureAuthorAdm.middleware";
 
 const categoriesRoutes = Router();
 
