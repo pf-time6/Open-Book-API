@@ -1,7 +1,9 @@
+import "reflect-metadata";
+import "express-async-errors";
 import express, { json } from "express";
 import {
   authorRoutes,
-  loginRouter,
+  loginRoutes,
   booksRoutes,
   categoriesRoutes,
   pagesRoutes,
@@ -14,7 +16,7 @@ app.use(json());
 
 //ROTAS
 app.use("/author", authorRoutes);
-app.use("/login", loginRouter);
+app.use("/login", loginRoutes);
 app.use("", booksRoutes);
 app.use("", pagesRoutes);
 app.use("", categoriesRoutes);

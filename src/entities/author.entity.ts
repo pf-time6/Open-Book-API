@@ -1,39 +1,56 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+} from "typeorm";
 import Books from "./books.entity";
 import { hashSync } from "bcryptjs";
 
-@Entity('author')
+@Entity("author")
 class Author {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column({ length:100 })
-    name: string;
+  @Column({ length: 100 })
+  name: string;
 
-    @Column({ length:100, unique: true })
-    email: string;
+  @Column({ length: 100, unique: true })
+  email: string;
 
-    @Column({length: 120,})
-    password: string;
+  @Column({ length: 120 })
+  password: string;
 
-    @Column({default: false})
-    isAdm: boolean;
+  @Column({ length: 120 })
+  city: string;
 
-    @Column({default: true})
-    isActive: boolean;
+  @Column({ length: 120 })
+  country: string;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @Column({ default: false })
+  isAdm: boolean;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @Column({ default: true })
+  isActive: boolean;
 
-	@OneToMany(() => Books, books => books.author)
-    books: Books[];
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @BeforeInsert()
-    @BeforeUpdate()
-    hashPassword(){this.password = hashSync(this.password, 10)};
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @OneToMany(() => Books, (books) => books.author)
+  books: Books[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    this.password = hashSync(this.password, 10);
+  }
 }
 
 export default Author;

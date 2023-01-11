@@ -1,9 +1,25 @@
 import { Router } from "express";
 
-import { createAuthorController } from "../controllers/author";
+import {
+  createAuthorController,
+  getAuthorController,
+  listAllAuthorsController,
+} from "../controllers/author";
+import {
+  ensureAuthMiddleware,
+  isAdmMiddleware,
+  validateSchemaMiddleware,
+} from "../middlewares";
+import { createAuthorRequestSchema } from "../schemas/author";
 
 const authorRoutes = Router();
 
-authorRoutes.post("", createAuthorController);
+authorRoutes.get("", listAllAuthorsController);
+authorRoutes.get("/:id", getAuthorController);
+authorRoutes.post(
+  "",
+  validateSchemaMiddleware(createAuthorRequestSchema),
+  createAuthorController
+);
 
 export default authorRoutes;

@@ -10,10 +10,19 @@ interface ICreateAuthorRequest {
 interface IOmitAuthorPassword extends Omit<ICreateAuthorRequest, "password"> {}
 
 interface ICreateAuthorResponse extends IOmitAuthorPassword {
-  id: number;
-  isAdmin: boolean;
-  createdAt: string;
-  updatedAt: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export { ICreateAuthorRequest, IOmitAuthorPassword, ICreateAuthorResponse };
+interface ILoginAuthor {
+  email: string;
+  password: string;
+}
+
+export {
+  ICreateAuthorRequest,
+  IOmitAuthorPassword,
+  ICreateAuthorResponse,
+  ILoginAuthor,
+};
