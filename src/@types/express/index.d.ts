@@ -5,6 +5,7 @@ declare global {
     interface Request {
       author: {
         id: string;
+        isAdm: boolean;
       };
     }
   }
