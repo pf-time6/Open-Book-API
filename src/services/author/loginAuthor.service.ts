@@ -4,10 +4,7 @@ import "dotenv/config";
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import { AppError } from "../../errors";
-import {
-  ICreateSessionRequest,
-  ICreateSessionResponse,
-} from "../../interfaces/session.interface";
+import { ICreateSessionRequest, ICreateSessionResponse } from "../../interfaces";
 
 const loginAuthorService = async (
   payload: ICreateSessionRequest

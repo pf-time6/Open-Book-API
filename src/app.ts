@@ -19,7 +19,7 @@ app.use("/author", authorRoutes);
 app.use("/login", loginRoutes);
 app.use("", booksRoutes);
 app.use("", pagesRoutes);
-app.use("", categoriesRoutes);
+app.use("/categories", categoriesRoutes);
 
 app.use(errorHandler);
 
