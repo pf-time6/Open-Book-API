@@ -1,4 +1,6 @@
-import createBooksRequestSchema from "./createBookRequest.schema";
-
 // Centralizar imports
-export { createBooksRequestSchema };
+import createBooksRequestSchema from "./createBookRequest.schema";
+import listBooksResponseSchema from "./listBooksResponse.schema";
+
+export { createBooksRequestSchema, listBooksResponseSchema };
+
