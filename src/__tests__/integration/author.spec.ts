@@ -95,6 +95,6 @@ describe("Author route", () => {
     expect(response.status).toBe(expectResults.status);
     expect(response.body).not.toHaveProperty(expectResults.bodyNotHaveProperty);
     expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
-    expect(response.body.isAdm).toEqual(true);
+    expect(response.body.isAdm).toBe(true);
   });
 });
