@@ -25,15 +25,15 @@ describe("Create Author Tests", () => {
       .catch((err) => console.error(err));
   });
 
+  afterAll(async () => {
+    await conn.destroy();
+  });
+  
   beforeEach(async () => {
     const authors = await authorRepo.find();
     await authorRepo.remove(authors);
   });
-
-  afterAll(async () => {
-    await conn.destroy();
-  });
-
+  
   it("POST: /author -> Should be able to create an Author", async () => {
     const authorPayload = mockedCommonAuthorRequest;
 
