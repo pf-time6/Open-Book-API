@@ -17,6 +17,9 @@ class Pages {
 
     @Column({ length: 120 })
     chapterTitle: string;
+
+    @Column({ length: 1800 })
+    content: string;
 	
 	@CreateDateColumn()
     createdAt: Date;
