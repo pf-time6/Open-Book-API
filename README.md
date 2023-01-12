@@ -235,7 +235,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para email e/ou senha inválidas ou inexistente:</p>
 <pre>
 {
-    "message": "Invalid access credentials."
+    "message": "Email or password invalid"
 }
 </pre>
 <hr noshade />
@@ -277,7 +277,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para título de livro já existente:</p>
 <pre>
 {
-    "message": "Book title already registered into the system."
+    "message": "Title already registered in the system"
 }
 </pre>
 <hr noshade />
