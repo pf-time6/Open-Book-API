@@ -4,6 +4,7 @@ import {
   IOmitAuthorPassword,
   ICreateAuthorResponse,
   IAuthorWithBooksResponse,
+  IAuthorUpdateRequest,
 } from "./author.interface";
 import {
   ICreateSessionRequest,
@@ -25,8 +26,9 @@ export {
   ICreateSessionResponse,
   ICreateBookResponse,
   IAuthorWithBooksResponse,
+  IAuthorUpdateRequest,
   ICreateBookRequest,
   ICreatePagesBookRequest,
   ICreatePagesBookResponse,
-  IDecodedToken
+  IDecodedToken,
 };
