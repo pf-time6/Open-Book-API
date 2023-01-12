@@ -1,6 +1,6 @@
 interface ICreateBookRequest {
   title: string;
-  category: Number[];
+  category: number[];
   about: string;
   coverUrl: string;
 }
@@ -14,4 +14,7 @@ interface ICreateBookResponse {
   createdAt: string;
 }
 
-export { ICreateBookRequest, ICreateBookResponse };
+export {
+  ICreateBookRequest,
+  ICreateBookResponse,
+};

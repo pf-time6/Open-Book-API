@@ -34,7 +34,7 @@ describe("Create session route", () => {
     await conn.destroy();
   });
 
-  it("Should be able to login as admin author", async () => {
+  it("POST: /login -> Should be able to login as admin author", async () => {
     const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
     const author = authorRepo.create({ ...authorPayload });
     await authorRepo.save(author);
@@ -52,7 +52,7 @@ describe("Create session route", () => {
     expect(response.body).toStrictEqual(adminResponse.bodyStrictEqual);
   });
 
-  it("Should be able to login as common author", async () => {
+  it("POST: /login -> Should be able to login as common author", async () => {
     const { authorPayload, sessionPayload } = mockedCommonAuthorSession;
     const author = authorRepo.create({ ...authorPayload });
     await authorRepo.save(author);
@@ -70,7 +70,7 @@ describe("Create session route", () => {
     expect(response.body).toStrictEqual(adminResponse.bodyStrictEqual);
   });
 
-  it("Should not be able to login | Invalid body", async () => {
+  it("POST: /login -> Should not be able to login | Invalid body", async () => {
     const response = await request(app)
       .post(baseUrl)
       .send(mockedInvalidBodySession);
@@ -91,7 +91,7 @@ describe("Create session route", () => {
     expect(response.body).toStrictEqual(commonAuthorResponse.bodyStrictEqual);
   });
 
-  it("Should not be able to login | Invalid email", async () => {
+  it("POST: /login -> Should not be able to login | Invalid email", async () => {
     const { authorPayload, sessionPayload } = mockedInvalidEmailSession;
     const author = authorRepo.create({ ...authorPayload });
     await authorRepo.save(author);
@@ -102,7 +102,7 @@ describe("Create session route", () => {
       status: 401,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Invalid access credentials.",
+        message: "Email or password invalid",
       }),
     };
 
@@ -111,7 +111,7 @@ describe("Create session route", () => {
     expect(response.body).toStrictEqual(commonAuthorResponse.bodyStrictEqual);
   });
 
-  it("Should not be able to login | Invalid password", async () => {
+  it("POST: /login -> Should not be able to login | Invalid password", async () => {
     const { authorPayload, sessionPayload } = mockedInvalidPasswordSession;
     const author = authorRepo.create({ ...authorPayload });
     await authorRepo.save(author);

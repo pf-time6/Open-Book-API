@@ -4,7 +4,6 @@ import {
   mockedAdminAuthorRequest,
   mockedAdminAuthorResponse,
 } from "./integration/author.mocks";
-
 import {
   mockedAdminAuthorSession,
   mockedCommonAuthorSession,
@@ -12,11 +11,15 @@ import {
   mockedInvalidEmailSession,
   mockedInvalidPasswordSession,
 } from "./integration/session.mocks";
-
 import {
-  mockednBooksRequest,
+  mockedBooksRequest,
   mockedInvalidBodyBooks,
+  mockedListBooks,
 } from "./integration/books.mocks";
+import {
+  mockedPagesBooksRequest,
+  mockedInvalidBodyPagesBooks,
+} from "./integration/pages.mocks";
 
 export {
   mockedCommonAuthorRequest,
@@ -28,6 +31,9 @@ export {
   mockedInvalidBodySession,
   mockedInvalidEmailSession,
   mockedInvalidPasswordSession,
-  mockednBooksRequest,
+  mockedBooksRequest,
   mockedInvalidBodyBooks,
+  mockedListBooks,
+  mockedPagesBooksRequest,
+  mockedInvalidBodyPagesBooks,
 };
