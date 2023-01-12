@@ -165,7 +165,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
@@ -194,7 +194,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
@@ -265,7 +265,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -354,7 +354,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -443,7 +443,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -478,7 +478,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
@@ -547,7 +547,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -588,7 +588,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
@@ -629,7 +629,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token"
+    "message": "Missing or invalid token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
