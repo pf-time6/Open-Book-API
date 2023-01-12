@@ -1,4 +1,5 @@
 import validateSchemaMiddleware from "./validateSchema.middleware";
 import ensureAuthMiddleware from "./ensureAuth.middleware";
+import ensureAlreadyExistChapter from "./ensureAlreadyExistChapter.middleware";
 
-export { validateSchemaMiddleware, ensureAuthMiddleware };
+export { validateSchemaMiddleware, ensureAuthMiddleware, ensureAlreadyExistChapter };
