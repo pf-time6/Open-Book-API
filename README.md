@@ -90,7 +90,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia de autores:</p>
 <pre>
 {
-    "message": "There are no authors found."
+    "message": "There are no authors found"
 }
 </pre>
 <hr noshade />
@@ -126,7 +126,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Author not found."
+    "message": "Author not found"
 }
 </pre>
 <hr noshade />
@@ -165,19 +165,19 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Author not found."
+    "message": "Author not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para acesso indevido de autor não administrador:</p>
 <pre>
 {
-    "message": "Unauthorized credential."
+    "message": "Unauthorized credential"
 }
 </pre>
 <hr noshade />
@@ -194,19 +194,19 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Author not found."
+    "message": "Author not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para acesso indevido de autor não administrador:</p>
 <pre>
 {
-    "message": "Unauthorized credential."
+    "message": "Unauthorized credential"
 }
 </pre>
 <hr noshade />
@@ -265,7 +265,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -323,7 +323,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia de livros:</p>
 <pre>
 {
-    "message": "There are no books found."
+    "message": "There are no books found"
 }
 </pre>
 <hr noshade />
@@ -354,7 +354,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -366,25 +366,25 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
 <pre>
 {
-    "message": "Unauthorized book access."
+    "message": "Unauthorized book access"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para página já existente para o este livro:</p>
 <pre>
 {
-    "message": "Page already registered for this book."
+    "message": "Page already registered for this book"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para chapter e isChapter true já existente para o este livro:</p>
 <pre>
 {
-    "message": "Chapter page already registered for this book."
+    "message": "Chapter page already registered for this book"
 }
 </pre>
 <hr noshade />
@@ -414,7 +414,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <hr noshade />
@@ -443,7 +443,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -455,13 +455,13 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
 <pre>
 {
-    "message": "Unauthorized book access."
+    "message": "Unauthorized book access"
 }
 </pre>
 <hr noshade />
@@ -478,19 +478,19 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
 <pre>
 {
-    "message": "Unauthorized book access."
+    "message": "Unauthorized book access"
 }
 </pre>
 <hr noshade />
@@ -514,13 +514,13 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página inexistente ou não encontrada:</p>
 <pre>
 {
-    "message": "Page not found."
+    "message": "Page not found"
 }
 </pre>
 <hr noshade />
@@ -547,7 +547,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -559,19 +559,19 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página de livro inexistente ou não encontrada:</p>
 <pre>
 {
-    "message": "Page not found."
+    "message": "Page not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
 <pre>
 {
-    "message": "Unauthorized book access."
+    "message": "Unauthorized book access"
 }
 </pre>
 <hr noshade />
@@ -588,25 +588,25 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
 <pre>
 {
-    "message": "Book not found."
+    "message": "Book not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página de livro inexistente ou não encontrada:</p>
 <pre>
 {
-    "message": "Page not found."
+    "message": "Page not found"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
 <pre>
 {
-    "message": "Unauthorized book access."
+    "message": "Unauthorized book access"
 }
 </pre>
 <hr noshade />
@@ -629,7 +629,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Invalid Token."
+    "message": "Invalid Token"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -647,7 +647,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para criação não autorizada:</p>
 <pre>
 {
-    "message": "Unauthorized category creation."
+    "message": "Unauthorized category creation"
 }
 </pre>
 <hr noshade />
@@ -676,7 +676,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
 <pre>
 {
-    "message": "There are no categories found."
+    "message": "There are no categories found"
 }
 </pre>
 <hr noshade />
