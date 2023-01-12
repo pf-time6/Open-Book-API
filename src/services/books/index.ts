@@ -1,3 +1,6 @@
-// Centralizar services
+import createBookService from "./createBook.service";
+import listBooksService from "./listBooks.service";
+import showBookService from "./showBook.service";
 
-export {}
+export { createBookService, listBooksService, showBookService };
+

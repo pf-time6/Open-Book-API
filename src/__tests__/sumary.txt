@@ -1,0 +1,65 @@
+Começar os usuários;
+/author e /login
+criação de author. Tests
+1 - Deve ser possível criar um usuário (
+    	{
+		"email": "marcelohm@gmail.com",
+		"password": "123456",
+		"name": "Marcelo Henrique Marques",
+		"city": "Belo Horizonte",
+		"country": "Brasil"
+	}
+    expect:
+	{
+		"uuid": "9521d750-a277-4237-bad2-dc2d6d988151",
+		"email": "marcelohm@gmail.com",
+		"name": "Marcelo Henrique Marques",
+		"city": "Belo Horizonte",
+		"country": "Brasil",
+		"isAdm": false,
+		"isActive": true,
+		"createdAt": "2023-01-01",
+		"updatedAt": "2023-01-01",
+		"books":[]
+	}
+    não deve conter senha
+    status = 201
+);
+2 - Não deve ser possível criar um usuário com propriedades inválidas (
+    (mock sem os dados necesários)
+    expect email, password, name, city, country, isAdm
+    not.contain isActive, createdAt, updatedAt, books, id
+    contain message
+    status = 400
+)
+3 - Não deve ser possível criar um usuário já existente (
+    (mock com email já existente)
+    contain message
+    status = 409
+)
+4 - Deve ser possível listar os dados de vários autores (
+    expect (array of object) id, email, name, city, country, idAdm, isActive, createdAt, updatedAt, books[];
+    not.expect password;
+    status = 200
+)
+5 - Deve ser possível listar os dados de um autor específico (
+    expect (object) id, email, name, city, country, idAdm, isActive, createdAt, updatedAt, books[];
+    not.expect password;
+    status = 200
+)
+6 - Deve ser possível deletar o usuário
+7 - Deve ser possível atualizar informações do usuário
+Login Tests
+1 - Deve ser possível logar (
+    contain token
+    status = 200
+)
+2 - Não deve ser possível logar com email ou senha incorreta (
+    contain message
+    status = 401
+)
+3 - Não deve ser possível um usuário com isActive=false logar (
+    contain message
+    status = 400
+)
+Books, pages, categories;

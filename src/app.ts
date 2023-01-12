@@ -1,18 +1,25 @@
+import "reflect-metadata";
+import "express-async-errors";
 import express, { json } from "express";
+import {
+  authorRoutes,
+  loginRoutes,
+  booksRoutes,
+  categoriesRoutes,
+  pagesRoutes,
+} from "./routes";
 import { errorHandler } from "./errors";
-import authorRoutes from "./routes/author.routes";
-import booksRoutes from "./routes/books.routes";
-import categoriesRoutes from "./routes/categories.routes";
-import pagesRoutes from "./routes/pages.routes";
 
+//INSTANCIA EXPRESS
 const app = express();
-
 app.use(json());
 
-app.use("", authorRoutes);
-app.use("", booksRoutes);
+//ROTAS
+app.use("/author", authorRoutes);
+app.use("/login", loginRoutes);
+app.use("/books", booksRoutes);
 app.use("", pagesRoutes);
-app.use("", categoriesRoutes);
+app.use("/categories", categoriesRoutes);
 
 app.use(errorHandler);
 
