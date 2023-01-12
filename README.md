@@ -131,6 +131,85 @@
 </pre>
 <hr noshade />
 
+<h2>[200] Alterar informações de um autor específico cadastrado no sistema.</h2>
+<h3>PATCH - /author/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar modificação nos campos:</strong>
+<ul>
+    <li><strong>name: </strong>Entrada opcional do tipo string e máximo 100 chars.</li>
+    <li><strong>password: </strong>Entrada opcional do tipo string e máximo 50 chars.</li>
+    <li><strong>city: </strong>Entrada opcional do tipo string e máximo 100 chars.</li>
+    <li><strong>country: </strong>Entrada opcional do tipo string e máximo 100 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
+    "email": "marcelohm@gmail.com",
+    "name": "Marcelo Henrique Marques",
+    "city": "Belo Horizonte",
+    "country": "Brasil",
+    "isAdm": false,
+    "isActive": true,
+    "createdAt": "2023-01-01",
+    "updatedAt": "2023-01-01"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Author not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para acesso indevido de autor não administrador:</p>
+<pre>
+{
+    "message": "Unauthorized credential."
+}
+</pre>
+<hr noshade />
+
+<h2>[204] Aplicar soft delete em um author específico.</h2>
+<h3>DELETE - /author/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar esta operação:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> com um objeto vazio:</p>
+<pre>
+{ }
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Author not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para acesso indevido de autor não administrador:</p>
+<pre>
+{
+    "message": "Unauthorized credential."
+}
+</pre>
+<hr noshade />
 
 <h2>[200] Autenticar acesso a autores cadastrados.</h2>
 <h3>POST - /login</h3>
@@ -181,6 +260,12 @@
     "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
     "coverUrl": "http://mh.app.br/HDCover.png",
     "createdAt": "2023-01-01"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -266,6 +351,12 @@
     "content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
 }
 </pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
 <pre>
 {
@@ -328,6 +419,82 @@
 </pre>
 <hr noshade />
 
+<h2>[200] Alterar as informações de um livro específico.</h2>
+<h3>PATCH - /books/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e enviar o id do livro como parâmetro. Campos de envio para request:</strong>
+<ul>
+    <li><strong>category: </strong>Entrada opcional do tipo array de numbers com o id das categorias a serem relacionadas com o livro.</li>
+    <li><strong>about: </strong>Entrada opcional do tipo string e máximo 120 chars.</li>
+    <li><strong>coverUrl: </strong>Entrada opcional do tipo string e máximo 350 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para alteração realizada com sucesso:</p>
+<pre>
+{
+    "id": "97036eff-9a4a-4062-b11a-014f3842808a",
+    "title": "Hammerdown",
+    "category": [1,8,12],
+    "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
+    "coverUrl": "http://mh.app.br/HDCover.png",
+    "createdAt": "2023-01-01"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
+<pre>
+{
+    "message": "Unauthorized book access."
+}
+</pre>
+<hr noshade />
+
+<h2>[204] Deletar um livro específico.</h2>
+<h3>DELETE - /books/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e enviar o id do livro como parâmetro:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> e um objeto vazio:</p>
+<pre>
+{ }
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
+<pre>
+{
+    "message": "Unauthorized book access."
+}
+</pre>
+<hr noshade />
+
 <h2>[200] Mostrar página de um livro específico.</h2>
 <h3>GET - /books/:id/:page</h3>
 
@@ -358,6 +525,92 @@
 </pre>
 <hr noshade />
 
+<h2>[200] Alterar as informações de uma página de livro específico.</h2>
+<h3>PATCH - /books/:id/:page</h3>
+
+<strong>Essa rota necessita autenticação bearer token e enviar o id do livro e o número da página como parâmetros. Campos de envio para request:</strong>
+<ul>
+    <li><strong>content: </strong>Entrada opcional do tipo string e máximo 480 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para alteração realizada com sucesso:</p>
+<pre>
+{
+    "book": "97036eff-9a4a-4062-b11a-014f3842808a",
+    "page": 1,
+    "chapter": 1,
+    "isChapter": true,
+    "chapterTitle": "O Tesouro de Samarilla",
+    "content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página de livro inexistente ou não encontrada:</p>
+<pre>
+{
+    "message": "Page not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
+<pre>
+{
+    "message": "Unauthorized book access."
+}
+</pre>
+<hr noshade />
+
+<h2>[204] Deletar uma página de um livro específico.</h2>
+<h3>DELETE - /books/:id/:page</h3>
+
+<strong>Essa rota necessita autenticação bearer token e enviar o id do livro e a página como parâmetros:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> e um objeto vazio:</p>
+<pre>
+{ }
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
+<pre>
+{
+    "message": "Book not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para página de livro inexistente ou não encontrada:</p>
+<pre>
+{
+    "message": "Page not found."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para id de livro que não pertence ao autor logado:</p>
+<pre>
+{
+    "message": "Unauthorized book access."
+}
+</pre>
+<hr noshade />
+
 <h2>[201] Criar nova opção de categoria para livros.</h2>
 <h3>POST - /categories</h3>
 
@@ -371,6 +624,12 @@
 {
     "id": "12",
     "name": "Action"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Invalid Token."
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -402,15 +661,15 @@
 <pre>
 [
     {
-	    "id": 1,
+        "id": 1,
         "name": "Fiction"
     },
     {
-	    "id": 8,
+        "id": 8,
         "name": "Adventure"
     },
     {
-	    "id": 12,
+        "id": 12,
         "name": "Action"
     }
 ]</pre>
