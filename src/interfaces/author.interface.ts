@@ -1,5 +1,6 @@
 import { ICreateBookResponse } from "./books.interface";
 
+//CREATE
 interface ICreateAuthorRequest {
   name: string;
   email: string;
@@ -21,9 +22,18 @@ interface IAuthorWithBooksResponse extends ICreateAuthorResponse {
   books: Omit<ICreateBookResponse, "category">[];
 }
 
+//LOGIN
 interface ILoginAuthor {
   email: string;
   password: string;
+}
+
+//UPDATE
+interface IAuthorUpdateRequest {
+  name: string;
+  password: string;
+  city: string;
+  country: string;
 }
 
 export {
@@ -32,4 +42,5 @@ export {
   ICreateAuthorResponse,
   ILoginAuthor,
   IAuthorWithBooksResponse,
+  IAuthorUpdateRequest,
 };
