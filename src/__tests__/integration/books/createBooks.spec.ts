@@ -38,10 +38,10 @@ describe("Create books route", () => {
     const token = authorLogged.body.token;
 
     const response = await request(app)
-      .post(baseUrl)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedBooksRequest);
-
+    .post(baseUrl)
+    .set("Authorization", `Bearer ${token}`)
+    .send(mockedBooksRequest);
+    
     const booksResponse = {
       status: 201,
       bodyToEqual1: expect.objectContaining(mockedBooksRequest),
