@@ -1,28 +1,37 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+} from "typeorm";
 import Books from "./books.entity";
 
-@Entity('pages')
+@Entity("pages")
 class Pages {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-	@Column()
-    page: number;
+  @Column()
+  page: number;
 
-    @Column()
-    chapter: number;
+  @Column()
+  chapter: number;
 
-    @Column({default: false})
-    isChapter: boolean;
+  @Column({ default: false })
+  isChapter: boolean;
 
-    @Column({ length: 120 })
-    chapterTitle: string;
-	
-	@CreateDateColumn()
-    createdAt: Date;
+  @Column({ length: 120 })
+  chapterTitle: string;
 
-	@ManyToOne(() => Books, books => books.id)
-    books: Books;
+  @Column({ length: 480 })
+  content: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @ManyToOne(() => Books, (books) => books.id)
+  books: Books;
 }
 
 export default Pages;
