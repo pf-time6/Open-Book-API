@@ -30,7 +30,7 @@ class Pages {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Books, (books) => books.id)
+  @ManyToOne(() => Books, (books) => books.pages)
   books: Books;
 }
 

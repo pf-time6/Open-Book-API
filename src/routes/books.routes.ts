@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { listBooksController, createBookController, showBookController } from "../controllers/books";
-import { createPagesController } from "../controllers/pages";
-import { ensureAlreadyExistChapter, ensureAuthMiddleware, ensureBookExists, isAdmOrOwnAuthorMiddleware, validateSchemaMiddleware } from "../middlewares";
+import { createPagesController, showPageController } from "../controllers/pages";
+import { ensureAlreadyExistChapter, ensureAuthMiddleware, ensureBookExists, ensurePageExists, isAdmOrBookAuthorMiddleware, validateSchemaMiddleware } from "../middlewares";
 import { createBooksRequestSchema } from "../schemas/books";
 import { createPageRequestSchema } from "../schemas/pages";
 
@@ -23,9 +23,14 @@ booksRoutes.post("/:id",
   validateSchemaMiddleware(createPageRequestSchema), 
   ensureAuthMiddleware, 
   ensureBookExists,
-  isAdmOrOwnAuthorMiddleware,
+  isAdmOrBookAuthorMiddleware,
   ensureAlreadyExistChapter, 
   createPagesController
+);
+booksRoutes.get("/:id/:page", 
+  ensureBookExists,
+  ensurePageExists,
+  showPageController
 );
 
 
