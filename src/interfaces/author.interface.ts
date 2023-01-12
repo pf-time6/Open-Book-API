@@ -18,6 +18,7 @@ interface ICreateAuthorResponse extends IOmitAuthorPassword {
   updatedAt: Date;
 }
 
+//RESPONSE GET AUTHOR
 interface IAuthorWithBooksResponse extends ICreateAuthorResponse {
   books: Omit<ICreateBookResponse, "category">[];
 }
