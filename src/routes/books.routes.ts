@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { listBooksController } from "../controllers/books";
-import createBookController from "../controllers/books/createBook.controller";
-import { ensureAuthMiddleware, validateSchemaMiddleware } from "../middlewares";
+import { listBooksController, createBookController, showBookController } from "../controllers/books";
+import { createPagesController } from "../controllers/pages";
+import { ensureAuthMiddleware, ensureBookExists, validateSchemaMiddleware } from "../middlewares";
 import { createBooksRequestSchema } from "../schemas/books";
 
 const booksRoutes = Router();
@@ -14,5 +14,8 @@ booksRoutes.post(
 );
 
 booksRoutes.get("", listBooksController);
+booksRoutes.get("/:id", ensureBookExists, showBookController);
+booksRoutes.post("/:id", createPagesController);
+
 
 export default booksRoutes;
