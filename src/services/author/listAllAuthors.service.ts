@@ -1,17 +1,21 @@
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
-import { ICreateAuthorResponse } from "../../interfaces/author.interface";
 import {
-  authorArrayReturnSchema,
-  createAuthorReturnSchema,
-} from "../../schemas/author";
+  IAuthorWithBooksResponse,
+  ICreateAuthorResponse,
+} from "../../interfaces/author.interface";
+import { authorArrayReturnSchema } from "../../schemas/author";
 
-const listAllAuthorsService = async (): Promise<ICreateAuthorResponse[]> => {
+const listAllAuthorsService = async (): Promise<IAuthorWithBooksResponse[]> => {
   const authorRepo = AppDataSource.getRepository(Author);
-  const authors = await authorRepo.find();
+
+  const authorWithBooks = await authorRepo
+    .createQueryBuilder("author")
+    .innerJoinAndSelect("author.books", "books")
+    .getMany();
 
   const authorWithoutPassword = await authorArrayReturnSchema.validate(
-    authors,
+    authorWithBooks,
     {
       stripUnknown: true,
     }
@@ -21,3 +25,5 @@ const listAllAuthorsService = async (): Promise<ICreateAuthorResponse[]> => {
 };
 
 export default listAllAuthorsService;
+
+//: Promise<ICreateAuthorResponse[]>

@@ -3,11 +3,13 @@ import {
   ICreateAuthorRequest,
   IOmitAuthorPassword,
   ICreateAuthorResponse,
+  IAuthorWithBooksResponse,
 } from "./author.interface";
 import {
   ICreateSessionRequest,
   ICreateSessionResponse,
 } from "./sessions.interface";
+import { ICreateBookResponse } from "./books.interface";
 
 export {
   ICreateSessionPayloadMock,
@@ -16,4 +18,6 @@ export {
   ICreateAuthorResponse,
   ICreateSessionRequest,
   ICreateSessionResponse,
+  ICreateBookResponse,
+  IAuthorWithBooksResponse,
 };

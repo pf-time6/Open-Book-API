@@ -1,3 +1,5 @@
+import { ICreateBookResponse } from "./books.interface";
+
 interface ICreateAuthorRequest {
   name: string;
   email: string;
@@ -15,6 +17,10 @@ interface ICreateAuthorResponse extends IOmitAuthorPassword {
   updatedAt: Date;
 }
 
+interface IAuthorWithBooksResponse extends ICreateAuthorResponse {
+  books: Omit<ICreateBookResponse, "category">[];
+}
+
 interface ILoginAuthor {
   email: string;
   password: string;
@@ -25,4 +31,5 @@ export {
   IOmitAuthorPassword,
   ICreateAuthorResponse,
   ILoginAuthor,
+  IAuthorWithBooksResponse,
 };
