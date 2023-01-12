@@ -14,5 +14,7 @@ interface ICreateBookResponse {
   createdAt: string;
 }
 
-export { ICreateBookRequest, ICreateBookResponse };
-
+export {
+  ICreateBookRequest,
+  ICreateBookResponse,
+};

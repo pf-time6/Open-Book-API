@@ -4,12 +4,18 @@ import {
   IOmitAuthorPassword,
   ICreateAuthorResponse,
   IAuthorWithBooksResponse,
+  IAuthorUpdateRequest,
 } from "./author.interface";
 import {
   ICreateSessionRequest,
   ICreateSessionResponse,
 } from "./sessions.interface";
-import { ICreateBookResponse } from "./books.interface";
+import { ICreateBookRequest, ICreateBookResponse } from "./books.interface";
+import {
+  ICreatePagesBookRequest,
+  ICreatePagesBookResponse,
+  IDecodedToken,
+} from "./pages.interface";
 
 export {
   ICreateSessionPayloadMock,
@@ -20,4 +26,9 @@ export {
   ICreateSessionResponse,
   ICreateBookResponse,
   IAuthorWithBooksResponse,
+  IAuthorUpdateRequest,
+  ICreateBookRequest,
+  ICreatePagesBookRequest,
+  ICreatePagesBookResponse,
+  IDecodedToken,
 };
