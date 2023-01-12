@@ -6,8 +6,6 @@ import {
   listAllAuthorsController,
 } from "../controllers/author";
 import {
-  ensureAuthMiddleware,
-  isAdmMiddleware,
   validateSchemaMiddleware,
 } from "../middlewares";
 import { createAuthorRequestSchema } from "../schemas/author";

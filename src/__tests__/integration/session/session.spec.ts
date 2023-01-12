@@ -102,7 +102,7 @@ describe("Create session route", () => {
       status: 401,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Email or password invalid",
+        message: "Invalid access credentials.",
       }),
     };
 
