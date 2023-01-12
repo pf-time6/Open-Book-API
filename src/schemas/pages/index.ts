@@ -1,3 +1,4 @@
 // Centralizar imports
+import createPageRequestSchema from "./createPageRequest.schema"
 
-export {}
+export { createPageRequestSchema }
