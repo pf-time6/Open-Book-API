@@ -15,6 +15,11 @@ const mockedCommonAuthorResponse: IOmitAuthorPassword = {
   country: "Brasil",
 };
 
+const mockedCommonAuthorInvalidBodyRequest = {
+  name: "commonUser",
+  email: "common@gmail.com",
+}
+
 const mockedAdminAuthorRequest: ICreateAuthorRequest = {
   name: "adminUser",
   email: "admin123@gmail.com",
@@ -35,6 +40,7 @@ const mockedAdminAuthorResponse: IOmitAuthorPassword = {
 export {
   mockedCommonAuthorRequest,
   mockedCommonAuthorResponse,
+  mockedCommonAuthorInvalidBodyRequest,
   mockedAdminAuthorRequest,
   mockedAdminAuthorResponse,
 };
