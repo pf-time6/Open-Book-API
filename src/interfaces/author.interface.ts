@@ -31,10 +31,11 @@ interface ILoginAuthor {
 
 //UPDATE
 interface IAuthorUpdateRequest {
-  name: string;
-  password: string;
-  city: string;
-  country: string;
+  name?: string;
+  password?: string;
+  city?: string;
+  country?: string;
+  isActive?: boolean;
 }
 
 export {

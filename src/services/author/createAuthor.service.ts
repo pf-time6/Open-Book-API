@@ -11,16 +11,24 @@ const createAuthorService = async (
   payload: ICreateAuthorRequest
 ): Promise<ICreateAuthorResponse | Error> => {
   const authorRepo = AppDataSource.getRepository(Author);
+  const author = await authorRepo
+    .createQueryBuilder("author")
+    .withDeleted()
+    .leftJoinAndSelect("author.books", "books")
+    .where("author.email = :email", { email: payload.email })
+    .getOne();
 
-  if (await authorRepo.findOne({ where: { email: payload.email } })) {
+  console.log(author);
+
+  if (author) {
     throw new AppError("Author already exists", 409);
   }
 
-  const author = authorRepo.create(payload);
-  await authorRepo.save(author);
+  const authorCreate = authorRepo.create(payload);
+  await authorRepo.save(authorCreate);
 
   const authorWithoutPassword = await createAuthorReturnSchema.validate(
-    author,
+    authorCreate,
     {
       stripUnknown: true,
     }
