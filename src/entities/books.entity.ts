@@ -27,13 +27,16 @@ class Books {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Author, (author) => author.id)
+  @ManyToOne(() => Author, (author) => author.books)
   author: Author;
 
   @OneToMany(() => Pages, (pages) => pages.books)
   pages: Pages[];
 
-  @OneToMany(() => Books_Categories, (books_categories) => books_categories.books)
+  @OneToMany(
+    () => Books_Categories,
+    (books_categories) => books_categories.books
+  )
   books_categories: Books_Categories[];
 }
 
