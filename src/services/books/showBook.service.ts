@@ -2,13 +2,14 @@ import AppDataSource from "../../data-source";
 import Books from "../../entities/books.entity";
 import { showBookResponseSchema } from "../../schemas/books";
 
-const showBookService = async (bookId, data) => {
+const showBookService = async (bookId) => {
   const booksRepo = AppDataSource.getRepository(Books);
 
   const books = await booksRepo.findOne({
     where: {id:bookId},
     relations: {
-      author: true
+      author: true,
+      pages: true
     },
   });
 
@@ -16,7 +17,8 @@ const showBookService = async (bookId, data) => {
     stripUnknown: true,
   });
 
-  return booksResponse;
+  //return booksResponse;
+  return books;
 };
 
 export default showBookService;
