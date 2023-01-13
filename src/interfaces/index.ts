@@ -12,8 +12,8 @@ import {
 } from "./sessions.interface";
 import { ICreateBookRequest, ICreateBookResponse } from "./books.interface";
 import {
-  ICreatePagesBookRequest,
-  ICreatePagesBookResponse,
+  ICreatePageRequest,
+  ICreatePageResponse,
   IDecodedToken,
 } from "./pages.interface";
 
@@ -28,7 +28,7 @@ export {
   IAuthorWithBooksResponse,
   IAuthorUpdateRequest,
   ICreateBookRequest,
-  ICreatePagesBookRequest,
-  ICreatePagesBookResponse,
+  ICreatePageRequest,
+  ICreatePageResponse,
   IDecodedToken,
 };
