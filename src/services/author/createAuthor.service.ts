@@ -18,8 +18,6 @@ const createAuthorService = async (
     .where("author.email = :email", { email: payload.email })
     .getOne();
 
-  console.log(author);
-
   if (author) {
     throw new AppError("Author already exists", 409);
   }

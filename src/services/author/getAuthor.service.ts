@@ -27,6 +27,3 @@ const getAuthorService = async (authorId: string) => {
 };
 
 export default getAuthorService;
-
-// const author = await authorRepo.findOneBy({ id: authorId });
-//: Promise<ICreateAuthorResponse>

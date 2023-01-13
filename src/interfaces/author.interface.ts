@@ -1,6 +1,7 @@
 import { ICreateBookResponse } from "./books.interface";
 
-//CREATE
+//POST
+//  REQUEST
 interface ICreateAuthorRequest {
   name: string;
   email: string;
@@ -18,24 +19,29 @@ interface ICreateAuthorResponse extends IOmitAuthorPassword {
   updatedAt: Date;
 }
 
-//RESPONSE GET AUTHOR
+//  RESPONSE
 interface IAuthorWithBooksResponse extends ICreateAuthorResponse {
   books: Omit<ICreateBookResponse, "category">[];
 }
 
 //LOGIN
+//  REQUEST
 interface ILoginAuthor {
   email: string;
   password: string;
 }
 
 //UPDATE
+//  REQUEST
 interface IAuthorUpdateRequest {
   name?: string;
   password?: string;
   city?: string;
   country?: string;
-  isActive?: boolean;
+}
+//  RESPONSE
+interface IUpdateAuthorResponse extends ICreateAuthorResponse {
+  deletedAt?: Date;
 }
 
 export {
@@ -45,4 +51,5 @@ export {
   ILoginAuthor,
   IAuthorWithBooksResponse,
   IAuthorUpdateRequest,
+  IUpdateAuthorResponse,
 };
