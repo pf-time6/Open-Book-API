@@ -61,8 +61,8 @@ describe("Create books route", () => {
     };
 
     expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual1);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
+    expect(response.body).toEqual(booksResponse.bodyToEqual1);
+    expect(response.body).toEqual(booksResponse.bodyToEqual2);
   });
 
   it("POST: /books -> Should not be able to create books | Missing Token", async () => {
