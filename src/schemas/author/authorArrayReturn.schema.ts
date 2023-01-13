@@ -1,18 +1,19 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
-import { ICreateAuthorResponse } from "../../interfaces/author.interface";
+import { IAuthorWithBooksResponse } from "../../interfaces/author.interface";
 
-const authorArrayReturnSchema: SchemaOf<ICreateAuthorResponse[]> = yup.array(
+const authorArrayReturnSchema: SchemaOf<IAuthorWithBooksResponse[]> = yup.array(
   yup.object().shape({
-    id: yup.string().notRequired(),
-    name: yup.string().required(),
-    email: yup.string().email().required(),
-    city: yup.string().required(),
-    country: yup.string().required(),
-    isAdm: yup.boolean().notRequired(),
-    isActive: yup.boolean().notRequired(),
+    books: yup.array(),
     createdAt: yup.date().notRequired(),
     updatedAt: yup.date().notRequired(),
+    city: yup.string().required(),
+    country: yup.string().required(),
+    isActive: yup.boolean().notRequired(),
+    isAdm: yup.boolean().notRequired(),
+    email: yup.string().email().required(),
+    name: yup.string().required(),
+    id: yup.string().notRequired(),
   })
 );
 
