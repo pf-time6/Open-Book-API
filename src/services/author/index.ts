@@ -4,6 +4,7 @@ import loginAuthorService from "./loginAuthor.service";
 import listAllAuthorsService from "./listAllAuthors.service";
 import getAuthorService from "./getAuthor.service";
 import updateAuthorService from "./updateAuthor.service";
+import deleteAuthorService from "./deleteAuthor.service";
 
 export {
   createAuthorService,
@@ -11,4 +12,5 @@ export {
   listAllAuthorsService,
   getAuthorService,
   updateAuthorService,
+  deleteAuthorService,
 };
