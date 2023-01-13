@@ -63,6 +63,8 @@ interface ICategoriesData {
   name: string;
 }
 
+interface IGetBooksResposne {}
+
 export {
   ICreateBookRequest,
   ICreateBookResponse,
