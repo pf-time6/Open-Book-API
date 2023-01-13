@@ -1,8 +1,8 @@
 import AppDataSource from "../../data-source"
 import Categories from "../../entities/categories.entity"
-import { ICategoryRequest } from "../../interfaces/categories.interface"
+import { ICategoryRequest, ICategoryResponse } from "../../interfaces/categories.interface"
 
-const patchCategoriesService = async (categoryBody: ICategoryRequest, categoryId: number) => {
+const patchCategoriesService = async (categoryBody: ICategoryRequest, categoryId: number):Promise<ICategoryResponse> => {
     const categoriesRepo = AppDataSource.getRepository(Categories)
     const updatedCategory = await categoriesRepo.findOne({where:{id:categoryId}})
 
