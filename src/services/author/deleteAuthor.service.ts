@@ -1,8 +1,11 @@
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
+import { IDeleteAuthorResponse } from "../../interfaces/author.interface";
 import updateAuthorService from "./updateAuthor.service";
 
-const deleteAuthorService = async (userId: string) => {
+const deleteAuthorService = async (
+  userId: string
+): Promise<IDeleteAuthorResponse> => {
   const authorRepo = AppDataSource.getRepository(Author);
 
   const author = await authorRepo

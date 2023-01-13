@@ -44,6 +44,13 @@ interface IUpdateAuthorResponse extends ICreateAuthorResponse {
   deletedAt?: Date;
 }
 
+//DELETE
+//  RESPONSE
+interface IDeleteAuthorResponse {
+  deleted?: IUpdateAuthorResponse;
+  restored?: IUpdateAuthorResponse;
+}
+
 export {
   ICreateAuthorRequest,
   IOmitAuthorPassword,
@@ -52,4 +59,5 @@ export {
   IAuthorWithBooksResponse,
   IAuthorUpdateRequest,
   IUpdateAuthorResponse,
+  IDeleteAuthorResponse,
 };
