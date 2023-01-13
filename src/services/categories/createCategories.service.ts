@@ -6,9 +6,7 @@ import {
   ICategoryResponse,
 } from "../../interfaces/categories.interface";
 
-const createCategoryService = async (
-  categoryData: ICategoryRequest
-): Promise<ICategoryResponse> => {
+const createCategoryService = async ( categoryData: ICategoryRequest): Promise<ICategoryResponse> => {
   const categoryRepo = AppDataSource.getRepository(Categories);
   const createdCategory = categoryRepo.create(categoryData);
 
