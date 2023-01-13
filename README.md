@@ -690,18 +690,17 @@
 <hr noshade />
 
 <h2>[200] Editar categorias cadastradas no sistema.</h2>
-<h3>GET - /categories</h3>
+<h3>GET - /categories/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar modificação nos campos:</strong>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
-[
     {
         "id": 1,
         "name": "Fiction"
     }
-]</pre>
+</pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
 <pre>
 {
