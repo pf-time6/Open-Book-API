@@ -4,7 +4,11 @@ import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Author from "../../../entities/author.entity";
 import Books from "../../../entities/books.entity";
-import { mockedAdminAuthorSession, mockedBooksRequest } from "../../mocks";
+import {
+  mockedAdminAuthorSession,
+  mockedBooksRequest,
+  mockedCategoryRequest,
+} from "../../mocks";
 
 describe("Create books route", () => {
   let baseUrl: string = "/books";
@@ -37,11 +41,16 @@ describe("Create books route", () => {
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
 
+    const category = await request(app)
+      .post("/categories")
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedCategoryRequest);
+
     const response = await request(app)
-    .post(baseUrl)
-    .set("Authorization", `Bearer ${token}`)
-    .send(mockedBooksRequest);
-    
+      .post(baseUrl)
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedBooksRequest);
+
     const booksResponse = {
       status: 201,
       bodyToEqual1: expect.objectContaining(mockedBooksRequest),

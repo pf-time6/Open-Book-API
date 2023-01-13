@@ -21,6 +21,10 @@ import {
   mockedPagesBooksRequest,
   mockedInvalidBodyPagesBooks,
 } from "./integration/pages.mocks";
+import {
+  mockedCategoryRequest,
+  mockedInvalidCategoryRequest,
+} from "./integration/categories.mocks";
 
 export {
   mockedCommonAuthorRequest,
@@ -38,4 +42,6 @@ export {
   mockedListBooks,
   mockedPagesBooksRequest,
   mockedInvalidBodyPagesBooks,
+  mockedCategoryRequest,
+  mockedInvalidCategoryRequest,
 };

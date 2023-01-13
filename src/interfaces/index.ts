@@ -16,6 +16,7 @@ import {
   ICreatePageResponse,
   IDecodedToken,
 } from "./pages.interface";
+import { ICategoryRequest } from "./categories.interface";
 
 export {
   ICreateSessionPayloadMock,
@@ -31,4 +32,5 @@ export {
   ICreatePageRequest,
   ICreatePageResponse,
   IDecodedToken,
+  ICategoryRequest
 };

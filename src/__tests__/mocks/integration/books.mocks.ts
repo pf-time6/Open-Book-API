@@ -4,7 +4,7 @@ const mockedBooksRequest: ICreateBookRequest = {
   title: "This book is very good",
   category: [1],
   about: "A história de um herói guerreiro da idade média que enfrenta o im...",
-  coverUrl: "http://mh.app.br/HDCover.png",
+  coverUrl: "asdasd",
 };
 
 const mockedInvalidBodyBooks: object = {};
