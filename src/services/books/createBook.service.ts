@@ -1,13 +1,21 @@
+import { Any } from "typeorm";
+
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import Books from "../../entities/books.entity";
 import Categories from "../../entities/categories.entity";
 import Books_Categories from "../../entities/books_categories.entity";
+import createBooksResponseSchema from "../../schemas/books/createBookResponse.schema";
 import { AppError } from "../../errors";
-import { ICreateBookRequest } from "../../interfaces/books.interface";
-import { Any } from "typeorm";
+import {
+  ICreateBookRequest,
+  ICreateBookResponse,
+} from "../../interfaces/books.interface";
 
-const createBookService = async (body: ICreateBookRequest, userId: string) => {
+const createBookService = async (
+  body: ICreateBookRequest,
+  userId: string
+): Promise<ICreateBookResponse> => {
   const booksRepo = AppDataSource.getRepository(Books);
   const bookFound = await booksRepo.findOne({
     where: {
@@ -67,7 +75,14 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
     await bcRepo.save(books_categories);
   });
 
-  return books;
+  const authorWithoutPassword = await createBooksResponseSchema.validate(
+    { ...books, category: body.category },
+    {
+      stripUnknown: true,
+    }
+  );
+
+  return authorWithoutPassword;
 };
 
 export default createBookService;
