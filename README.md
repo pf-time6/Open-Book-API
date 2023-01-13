@@ -692,12 +692,11 @@
 <h2>[200] Editar categorias cadastradas no sistema.</h2>
 <h3>GET - /categories/:id</h3>
 
-<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar modificação nos campos:</strong>
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores e o próprio autor podem realizar modificação no campo:</strong>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
     {
-        "id": 1,
         "name": "Fiction"
     }
 </pre>
