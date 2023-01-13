@@ -8,6 +8,7 @@
 <h3>POST - /author</h3>
 
 <strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>name: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
     <li><strong>email: </strong>Entrada obrigatória do tipo string email e máximo 100 chars.</li>
@@ -135,6 +136,7 @@
 <h3>PATCH - /author/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar modificação nos campos:</strong>
+
 <ul>
     <li><strong>name: </strong>Entrada opcional do tipo string e máximo 100 chars.</li>
     <li><strong>password: </strong>Entrada opcional do tipo string e máximo 50 chars.</li>
@@ -215,6 +217,7 @@
 <h3>POST - /login</h3>
 
 <strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>email: </strong>Entrada obrigatória do tipo string email e máximo 100 chars.</li>
     <li><strong>password: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
@@ -244,6 +247,7 @@
 <h3>POST - /books</h3>
 
 <strong>Essa rota necessita autenticação bearer token para identificar o autor. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>title: </strong>Entrada obrigatória e única do tipo string e máximo 100 chars.</li>
     <li><strong>category: </strong>Entrada obrigatória do tipo array de numbers com o id das categorias a serem relacionadas com o livro.</li>
@@ -332,6 +336,7 @@
 <h3>POST - /books/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token para identificar o autor e enviar o id do livro como parâmetro. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>page: </strong>Entrada obrigatória do tipo number.</li>
     <li><strong>chapter: </strong>Entrada obrigatória do tipo number.</li>
@@ -423,6 +428,7 @@
 <h3>PATCH - /books/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token e enviar o id do livro como parâmetro. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>category: </strong>Entrada opcional do tipo array de numbers com o id das categorias a serem relacionadas com o livro.</li>
     <li><strong>about: </strong>Entrada opcional do tipo string e máximo 120 chars.</li>
@@ -529,6 +535,7 @@
 <h3>PATCH - /books/:id/:page</h3>
 
 <strong>Essa rota necessita autenticação bearer token e enviar o id do livro e o número da página como parâmetros. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>content: </strong>Entrada opcional do tipo string e máximo 480 chars.</li>
 </ul>
@@ -615,6 +622,7 @@
 <h3>POST - /categories</h3>
 
 <strong>Essa rota necessita autenticação bearer token de administrador. Campo de envio para request:</strong>
+
 <ul>
     <li><strong>name: </strong>Entrada obrigatória do tipo string com máximo de 60 chars.</li>
 </ul>
@@ -671,6 +679,27 @@
     {
         "id": 12,
         "name": "Action"
+    }
+]</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
+<pre>
+{
+    "message": "There are no categories found"
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Editar categorias cadastradas no sistema.</h2>
+<h3>GET - /categories</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar modificação nos campos:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+[
+    {
+        "id": 1,
+        "name": "Fiction"
     }
 ]</pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
