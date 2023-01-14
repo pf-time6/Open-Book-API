@@ -1,7 +1,8 @@
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
+import { AppError } from "../../errors";
 import { IDeleteAuthorResponse } from "../../interfaces/author.interface";
-import updateAuthorService from "./updateAuthor.service";
+import updateAuthorReturnSchema from "../../schemas/author/updateAuthorReturn.schema";
 
 const deleteAuthorService = async (
   userId: string
@@ -13,6 +14,10 @@ const deleteAuthorService = async (
     .withDeleted()
     .where("author.id = :id", { id: userId })
     .getOne();
+
+  if (!author) {
+    throw new AppError("Author not found", 404);
+  }
 
   if (author.isActive === false) {
     await authorRepo
@@ -30,7 +35,14 @@ const deleteAuthorService = async (
 
     const author = await authorRepo.findOneBy({ id: userId });
 
-    return { restored: author };
+    const authorWithoutPassword = await updateAuthorReturnSchema.validate(
+      author,
+      {
+        stripUnknown: true,
+      }
+    );
+
+    return { restored: authorWithoutPassword };
   }
 
   await authorRepo
@@ -52,7 +64,13 @@ const deleteAuthorService = async (
     .where("author.id = :id", { id: userId })
     .getOne();
 
-  return { deleted: addSoftDelete };
+  const authorWithoutPassword = await updateAuthorReturnSchema.validate(
+    addSoftDelete,
+    {
+      stripUnknown: true,
+    }
+  );
+  return { deleted: authorWithoutPassword };
 };
 
 export default deleteAuthorService;

@@ -38,7 +38,6 @@ authorRoutes.patch(
 authorRoutes.delete(
   "/:id",
   ensureAuthMiddleware,
-  // isValidIdMiddleware,
   isAdmOrOwnAuthorMiddleware,
   deleteAuthorController
 );
