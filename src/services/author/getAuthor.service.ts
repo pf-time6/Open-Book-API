@@ -1,9 +1,12 @@
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import { AppError } from "../../errors";
+import { IAuthorWithBooksResponse } from "../../interfaces";
 import { authorObjectReturnSchema } from "../../schemas/author";
 
-const getAuthorService = async (authorId: string) => {
+const getAuthorService = async (
+  authorId: string
+): Promise<IAuthorWithBooksResponse> => {
   const authorRepo = AppDataSource.getRepository(Author);
 
   const author = await authorRepo
@@ -27,6 +30,3 @@ const getAuthorService = async (authorId: string) => {
 };
 
 export default getAuthorService;
-
-// const author = await authorRepo.findOneBy({ id: authorId });
-//: Promise<ICreateAuthorResponse>

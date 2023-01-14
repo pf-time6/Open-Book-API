@@ -12,7 +12,7 @@ const listBooksResponseSchema = yup.array(
       })
       .notRequired(),
     coverUrl: yup.string().notRequired(),
-    category: yup.array(yup.number()).notRequired(),
+    category: yup.array(yup.string()).notRequired(),
     about: yup.string().notRequired(),
     title: yup.string().notRequired(),
     id: yup.string().notRequired(),
