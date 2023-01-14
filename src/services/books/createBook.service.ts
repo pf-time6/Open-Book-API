@@ -45,10 +45,22 @@ const createBookService = async (
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
   const bcRepo = AppDataSource.getRepository(Books_Categories);
+  const categories = await categoriesRepo.find();
 
-  const loopCategories = await categoriesRepo.findBy({
-    id: In([...body.category]),
-  });
+  const filter = body.category.filter((eB) =>
+    categories.find((eC) => eC.id === eB)
+  );
+  console.log(filter);
+  const loopCategories = await categoriesRepo
+    .createQueryBuilder("categories")
+    .where("categories.id IN (:...ids)", { ids: [...filter] })
+    .getMany();
+  // console.log(loopCategories);
+  // const loopCategories = await categoriesRepo.find({
+  //   where: {
+  //     id: Any(filter),
+  //   },
+  // });
 
   if (loopCategories.length !== body.category.length) {
     throw new AppError(

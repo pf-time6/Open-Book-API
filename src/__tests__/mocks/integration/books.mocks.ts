@@ -1,8 +1,9 @@
 import { ICreateBookRequest } from "../../../interfaces";
+import { ICreateBookRequestTests } from "../../../interfaces/books.interface";
 
-const mockedBooksRequest: ICreateBookRequest = {
+const mockedBooksRequest: ICreateBookRequestTests = {
   title: "This book is very good",
-  category: [1],
+  category: [1, 2],
   about: "A história de um herói guerreiro da idade média que enfrenta o im...",
   coverUrl: "asdasd",
 };
