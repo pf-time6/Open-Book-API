@@ -191,7 +191,20 @@
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> com um objeto vazio:</p>
 <pre>
-{ }
+{
+	"deleted": {
+		"id": "1f2031fb-681f-42cd-87ac-6452fd5d66a9",
+		"name": "12345",
+		"email": "pablo2@mail.com",
+		"city": "Rio de janeiro",
+		"country": "Brasil",
+		"isAdm": true,
+		"isActive": false,
+		"createdAt": "2023-01-12T12:36:16.475Z",
+		"updatedAt": "2023-01-14T11:43:07.040Z",
+		"deletedAt": "2023-01-14T11:43:07.040Z"
+	}
+}
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
