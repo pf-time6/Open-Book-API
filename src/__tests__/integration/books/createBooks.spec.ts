@@ -4,6 +4,8 @@ import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Author from "../../../entities/author.entity";
 import Books from "../../../entities/books.entity";
+import Books_Categories from "../../../entities/books_categories.entity";
+import Categories from "../../../entities/categories.entity";
 import {
   mockedAdminAuthorSession,
   mockedBooksRequest,
@@ -15,6 +17,8 @@ describe("Create books route", () => {
   let conn: DataSource;
   let booksRepo: Repository<Books>;
   let authorRepo: Repository<Author>;
+  let books_categoriesRepo: Repository<Books_Categories>;
+  let categoriesRepo: Repository<Categories>;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -22,13 +26,21 @@ describe("Create books route", () => {
         conn = dataSource;
         booksRepo = conn.getRepository(Books);
         authorRepo = conn.getRepository(Author);
+        books_categoriesRepo = conn.getRepository(Books_Categories);
+        categoriesRepo = conn.getRepository(Categories);
       })
       .catch((err) => console.log(err));
   });
 
   beforeEach(async () => {
+    const books_categories = await books_categoriesRepo.find();
     const books = await booksRepo.find();
+    const categories = await categoriesRepo.find();
+    const author = await authorRepo.find();
+    await books_categoriesRepo.remove(books_categories);
+    await categoriesRepo.remove(categories);
     await booksRepo.remove(books);
+    await authorRepo.remove(author);
   });
 
   afterAll(async () => {
@@ -65,33 +77,13 @@ describe("Create books route", () => {
     expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
   });
 
-  it("POST: /books -> Should not be able to create books | Missing Token", async () => {
-    const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
-
-    const category = await request(app)
-      .post("/categories")
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedCategoryRequest);
-
-    const response = await request(app).post(baseUrl).send(mockedBooksRequest);
-
-    const booksResponse = {
-      status: 401,
-      bodyHaveProperty: "message",
-      bodyStrictEqual: expect.objectContaining({
-        message: "invalid token",
-      }),
-    };
-
-    expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
-    // expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
+  it("POST: /books -> ROTA DE ERRO", async () => {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   });
 
   it("POST: /books -> Should not be able to create books | Invalid body", async () => {
-    const { sessionPayload } = mockedAdminAuthorSession;
+    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
+    await request(app).post("/author").send(authorPayload);
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
 
@@ -118,8 +110,35 @@ describe("Create books route", () => {
     expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
   });
 
+  it("POST: /books -> Should not be able to create books | missing token", async () => {
+    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
+    await request(app).post("/author").send(authorPayload);
+    const authorLogged = await request(app).post("/login").send(sessionPayload);
+    const token = authorLogged.body.token;
+
+    const category = await request(app)
+      .post("/categories")
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedCategoryRequest);
+
+    const response = await request(app).post(baseUrl).send(mockedBooksRequest);
+
+    const booksResponse = {
+      status: 401,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "invalid token",
+      }),
+    };
+
+    expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
+  });
+
   it("POST: /books -> Should not be able to create books | Title already exists", async () => {
-    const { sessionPayload } = mockedAdminAuthorSession;
+    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
+    await request(app).post("/author").send(authorPayload);
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
 
