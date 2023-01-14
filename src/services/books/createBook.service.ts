@@ -49,7 +49,6 @@ const createBookService = async (
   const loopCategories = await categoriesRepo.findBy({
     id: In([...body.category]),
   });
-  console.log(loopCategories);
 
   if (loopCategories.length !== body.category.length) {
     throw new AppError(
