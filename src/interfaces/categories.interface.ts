@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export interface ICategoryRequest {
-  name: string;
-}
-=======
 //CREATE
 //  REQUEST
 interface ICategoryRequest {
@@ -20,4 +15,3 @@ interface ICategoryDelete {
 }
 
 export { ICategoryDelete, ICategoryResponse, ICategoryRequest };
->>>>>>> 7eb8c79d427cb8447be61138f9d6da2f011d39f4
