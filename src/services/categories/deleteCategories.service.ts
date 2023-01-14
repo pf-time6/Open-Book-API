@@ -1,8 +1,12 @@
 import AppDataSource from "../../data-source";
 import Categories from "../../entities/categories.entity";
+import { ICategoryDelete } from "../../interfaces/categories.interface";
 
-const deleteCategoriesService = async (iCategory: any) => {
+const deleteCategoriesService = async (
+  idCategory: string
+): Promise<ICategoryDelete> => {
   const categoryRepo = AppDataSource.getRepository(Categories);
-  return await categoryRepo.delete(iCategory);
+  await categoryRepo.delete(idCategory);
+  return { message: "Category deleted" };
 };
 export default deleteCategoriesService;
