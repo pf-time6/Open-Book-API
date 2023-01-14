@@ -14,11 +14,6 @@ interface ICreateBookResponse {
   createdAt: string;
 }
 
-<<<<<<< HEAD
-export {
-  ICreateBookRequest,
-  ICreateBookResponse,
-=======
 interface IListBooksResponse {
   id: string;
   title: string;
@@ -78,5 +73,4 @@ export {
   iBooksData,
   IBooks_CategoriesData,
   ICategoriesData,
->>>>>>> 7eb8c79d427cb8447be61138f9d6da2f011d39f4
 };
