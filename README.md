@@ -705,18 +705,43 @@
 <h2>[200] Editar categorias cadastradas no sistema.</h2>
 <h3>GET - /categories/:id</h3>
 
-<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores e o próprio autor podem realizar modificação no campo:</strong>
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
-    {
-        "name": "Fiction"
-    }
+{
+    "name": "Fiction"
+}
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
 <pre>
 {
     "message": "There are no categories found"
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Deletar categorias cadastradas no sistema.</h2>
+<h3>GET - /categories/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+    "message": "Category deleted"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
+<pre>
+{
+    "message": "There are no categories found"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para categoria utilizada em algum book:</p>
+<pre>
+{
+    "message": "Category is already being used""
 }
 </pre>
 <hr noshade />
