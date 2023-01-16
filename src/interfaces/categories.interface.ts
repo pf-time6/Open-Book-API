@@ -1,4 +1,17 @@
+//CREATE
+//  REQUEST
+interface ICategoryRequest {
+  name: string;
+}
+//  RESPONSE
+interface ICategoryResponse extends ICategoryRequest {
+  id: number;
+}
 
-export interface ICategoryRequest {
-    name: string
-};
+//DELETE
+//  RESPONSE
+interface ICategoryDelete {
+  message: string;
+}
+
+export { ICategoryDelete, ICategoryResponse, ICategoryRequest };

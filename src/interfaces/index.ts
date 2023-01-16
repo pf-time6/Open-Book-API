@@ -5,6 +5,7 @@ import {
   ICreateAuthorResponse,
   IAuthorWithBooksResponse,
   IAuthorUpdateRequest,
+  IUpdateAuthorResponse,
 } from "./author.interface";
 import {
   ICreateSessionRequest,
@@ -12,10 +13,11 @@ import {
 } from "./sessions.interface";
 import { ICreateBookRequest, ICreateBookResponse } from "./books.interface";
 import {
-  ICreatePagesBookRequest,
-  ICreatePagesBookResponse,
+  ICreatePageRequest,
+  ICreatePageResponse,
   IDecodedToken,
 } from "./pages.interface";
+import { ICategoryRequest } from "./categories.interface";
 
 export {
   ICreateSessionPayloadMock,
@@ -28,7 +30,9 @@ export {
   IAuthorWithBooksResponse,
   IAuthorUpdateRequest,
   ICreateBookRequest,
-  ICreatePagesBookRequest,
-  ICreatePagesBookResponse,
+  ICreatePageRequest,
+  ICreatePageResponse,
   IDecodedToken,
+  ICategoryRequest,
+  IUpdateAuthorResponse,
 };

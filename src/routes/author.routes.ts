@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   createAuthorController,
+  deleteAuthorController,
   getAuthorController,
   listAllAuthorsController,
   updateAuthorController,
@@ -33,6 +34,12 @@ authorRoutes.patch(
   isAdmOrOwnAuthorMiddleware,
   validateSchemaMiddleware(updateAuthorRequestSchema),
   updateAuthorController
+);
+authorRoutes.delete(
+  "/:id",
+  ensureAuthMiddleware,
+  isAdmOrOwnAuthorMiddleware,
+  deleteAuthorController
 );
 
 export default authorRoutes;

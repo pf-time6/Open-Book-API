@@ -1,18 +1,24 @@
+import { Any, In } from "typeorm";
+
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import Books from "../../entities/books.entity";
 import Categories from "../../entities/categories.entity";
 import Books_Categories from "../../entities/books_categories.entity";
+import createBooksResponseSchema from "../../schemas/books/createBookResponse.schema";
 import { AppError } from "../../errors";
-import { ICreateBookRequest } from "../../interfaces/books.interface";
-import { Any } from "typeorm";
+import {
+  ICreateBookRequest,
+  ICreateBookResponse,
+} from "../../interfaces/books.interface";
 
-const createBookService = async (body: ICreateBookRequest, userId: string) => {
+const createBookService = async (
+  body: ICreateBookRequest,
+  userId: string
+): Promise<ICreateBookResponse> => {
   const booksRepo = AppDataSource.getRepository(Books);
-  const bookFound = await booksRepo.findOne({
-    where: {
-      title: body.title,
-    },
+  const bookFound = await booksRepo.findOneBy({
+    title: body.title,
   });
 
   if (bookFound) {
@@ -20,10 +26,8 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
   }
 
   const authorRepo = AppDataSource.getRepository(Author);
-  const authorFound = await authorRepo.findOne({
-    where: {
-      id: userId,
-    },
+  const authorFound = await authorRepo.findOneBy({
+    id: userId,
   });
 
   if (!authorFound) {
@@ -36,11 +40,10 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
   });
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
-  const bcRepo = AppDataSource.getRepository(Books_Categories);
-
-  const loopCategories = await categoriesRepo.findBy({
-    id: Any(body.category),
-  });
+  const loopCategories = await categoriesRepo
+    .createQueryBuilder("categories")
+    .where("categories.id IN (:...ids)", { ids: [...body.category] })
+    .getMany();
 
   if (loopCategories.length !== body.category.length) {
     throw new AppError(
@@ -48,25 +51,27 @@ const createBookService = async (body: ICreateBookRequest, userId: string) => {
       404
     );
   }
+
   await booksRepo.save(books);
 
-  body.category.map(async (el) => {
-    const categories = await categoriesRepo.findOneBy({
-      id: el,
-    });
+  const bcRepo = AppDataSource.getRepository(Books_Categories);
 
-    if (!categories) {
-      return;
-    }
-
+  for (let i = 0; i < loopCategories.length; i++) {
     const books_categories = bcRepo.create({
       books,
-      categories,
+      categories: loopCategories[i],
     });
     await bcRepo.save(books_categories);
-  });
+  }
 
-  return books;
+  const authorWithoutPassword = await createBooksResponseSchema.validate(
+    { ...books, category: body.category },
+    {
+      stripUnknown: true,
+    }
+  );
+
+  return authorWithoutPassword;
 };
 
 export default createBookService;

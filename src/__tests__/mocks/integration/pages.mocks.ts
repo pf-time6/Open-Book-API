@@ -1,6 +1,6 @@
-import { ICreatePagesBookRequest } from "../../../interfaces";
+import { ICreatePageRequest } from "../../../interfaces";
 
-const mockedPagesBooksRequest: ICreatePagesBookRequest = {
+const mockedPagesBooksRequest: ICreatePageRequest = {
   page: 1,
   chapter: 1,
   isChapter: true,

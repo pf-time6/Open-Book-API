@@ -1,4 +1,4 @@
-interface ICreatePagesBookRequest {
+interface ICreatePageRequest {
   page: number;
   chapter: number;
   isChapter: boolean;
@@ -6,8 +6,8 @@ interface ICreatePagesBookRequest {
   content: string;
 }
 
-interface ICreatePagesBookResponse {
-  book: string;
+interface ICreatePageResponse {
+  id: string;
   page: number;
   chapter: number;
   isChapter: boolean;
@@ -23,4 +23,4 @@ interface IDecodedToken {
   sub: string;
 }
 
-export { ICreatePagesBookRequest, ICreatePagesBookResponse, IDecodedToken };
+export { ICreatePageRequest, ICreatePageResponse, IDecodedToken };
