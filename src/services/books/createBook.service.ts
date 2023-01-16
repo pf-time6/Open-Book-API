@@ -1,4 +1,4 @@
-import { Any } from "typeorm";
+import { Any, In } from "typeorm";
 
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
@@ -17,10 +17,8 @@ const createBookService = async (
   userId: string
 ): Promise<ICreateBookResponse> => {
   const booksRepo = AppDataSource.getRepository(Books);
-  const bookFound = await booksRepo.findOne({
-    where: {
-      title: body.title,
-    },
+  const bookFound = await booksRepo.findOneBy({
+    title: body.title,
   });
 
   if (bookFound) {
@@ -28,10 +26,8 @@ const createBookService = async (
   }
 
   const authorRepo = AppDataSource.getRepository(Author);
-  const authorFound = await authorRepo.findOne({
-    where: {
-      id: userId,
-    },
+  const authorFound = await authorRepo.findOneBy({
+    id: userId,
   });
 
   if (!authorFound) {
@@ -44,12 +40,10 @@ const createBookService = async (
   });
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
-  const bcRepo = AppDataSource.getRepository(Books_Categories);
-
-  const loopCategories = await categoriesRepo.findBy({
-    id: Any(body.category),
-  });
-  console.log(loopCategories);
+  const loopCategories = await categoriesRepo
+    .createQueryBuilder("categories")
+    .where("categories.id IN (:...ids)", { ids: [...body.category] })
+    .getMany();
 
   if (loopCategories.length !== body.category.length) {
     throw new AppError(
@@ -57,23 +51,18 @@ const createBookService = async (
       404
     );
   }
+
   await booksRepo.save(books);
 
-  body.category.map(async (el) => {
-    const categories = await categoriesRepo.findOneBy({
-      id: el,
-    });
+  const bcRepo = AppDataSource.getRepository(Books_Categories);
 
-    if (!categories) {
-      return;
-    }
-
+  for (let i = 0; i < loopCategories.length; i++) {
     const books_categories = bcRepo.create({
       books,
-      categories,
+      categories: loopCategories[i],
     });
     await bcRepo.save(books_categories);
-  });
+  }
 
   const authorWithoutPassword = await createBooksResponseSchema.validate(
     { ...books, category: body.category },
