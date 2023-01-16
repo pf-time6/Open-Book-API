@@ -1,7 +1,6 @@
 import { response } from "express";
 import request from "supertest";
 import { DataSource, Repository } from "typeorm";
-import { object, string } from "yup";
 import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Books from "../../../entities/books.entity";
@@ -45,7 +44,7 @@ describe("List books route", () => {
     await conn.destroy();
   });
 
-  it("PATCH: /author/:id -> Should be able to update the city of an author", async () => {
+  it("PATCH: /author/:id -> Should be able to update a book's data", async () => {
     const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
     await request(app).post("/author").send(authorPayload);
     const authorLogged = await request(app).post("/login").send(sessionPayload);
@@ -70,6 +69,11 @@ describe("List books route", () => {
       .patch(`${baseUrl}/${book.body.id}`)
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksUpdateRequest);
+
+    const books = await booksRepo.find();
+
+    console.log(books)
+    console.log(response.body)
 
     // const expectResults = {
     //   status: 201,

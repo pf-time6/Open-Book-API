@@ -12,8 +12,8 @@ const mockedBooksRequest: ICreateBookRequest = {
 
 const mockedBooksUpdateRequest: IUpdateBookRequest = {
   category: [2],
-  about: "About atualizado com sucesso",
-  coverUrl: "coverUrl atualizado com sucesso",
+  // about: "About atualizado com sucesso",
+  // coverUrl: "coverUrl atualizado com sucesso",
 };
 
 const mockedInvalidBodyBooks: object = {};

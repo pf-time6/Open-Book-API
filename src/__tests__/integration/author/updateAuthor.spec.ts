@@ -56,6 +56,8 @@ describe("Retrieve Author Tests", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(data);
 
+    console.log(response.body)
+
     const expectResults = {
       status: 201,
       bodyToEqual: {
