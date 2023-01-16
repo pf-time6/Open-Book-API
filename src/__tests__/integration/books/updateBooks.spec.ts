@@ -70,10 +70,7 @@ describe("List books route", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksUpdateRequest);
 
-    const books = await booksRepo.find();
-
-    console.log(books)
-    console.log(response.body)
+    // console.log(response.body)
 
     // const expectResults = {
     //   status: 201,

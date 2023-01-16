@@ -48,8 +48,8 @@ describe("Create books route", () => {
     await request(app).post("/author").send(authorPayload); //1 - CRIEI AUTOR
     const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
     const token = authorLogged.body.token; //1 - PEGUEI TOKEN
-    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
-    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
+    // const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    // mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
     await request(app) // 3 - CRIEI CATEGORIA
       .post("/categories")
@@ -60,8 +60,6 @@ describe("Create books route", () => {
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksRequest);
-    
-    // const { title, category, about, coverUrl } = mockedBooksRequest;
 
     const booksResponse = {
       status: 201,

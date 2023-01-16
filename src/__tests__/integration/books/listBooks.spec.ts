@@ -63,16 +63,9 @@ describe("List books route", () => {
 
     const response = await request(app).get(baseUrl);
 
-    // console.log(response.body);
-
     const booksResponse = {
       status: 200,
       bodyLength: mockedListBooks.length,
-      // bodyNotToContain: expect.arrayContaining([
-      //   expect.objectContaining({
-      //     author: expect.objectContaining({ city: expect.any(String) }),
-      //   }),
-      // ]),
       bodyNotToContain: expect.arrayContaining([
         expect.objectContaining({
           author: expect.objectContaining({ password: expect.any(String) }),
@@ -82,7 +75,7 @@ describe("List books route", () => {
 
     expect(response.status).toBe(booksResponse.status);
     expect(response.body.length).toBe(booksResponse.bodyLength);
-    expect(response.body).not.toContain(booksResponse.bodyNotToContain);
+    expect(response.body).not.toStrictEqual(booksResponse.bodyNotToContain);
   });
 
   // it("GET: /books -> Should not be able to list books | empty list", async () => {
