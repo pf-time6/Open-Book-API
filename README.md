@@ -294,7 +294,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para título de livro já existente:</p>
 <pre>
 {
-    "message": "Title already registered in the system"
+    "message": "Title already exists"
 }
 </pre>
 <hr noshade />
