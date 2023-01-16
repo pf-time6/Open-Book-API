@@ -1,8 +1,8 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
-import { ICreateBookRequest } from "../../interfaces/books.interface";
+import { ICreateBookRequestSchema } from "../../interfaces/books.interface";
 
-const createBooksRequestSchema: SchemaOf<ICreateBookRequest> = yup
+const createBooksRequestSchema: SchemaOf<ICreateBookRequestSchema> = yup
   .object()
   .shape({
     title: yup.string().max(100).required(),

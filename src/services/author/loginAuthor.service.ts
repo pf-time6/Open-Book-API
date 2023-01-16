@@ -4,7 +4,10 @@ import "dotenv/config";
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import { AppError } from "../../errors";
-import { ICreateSessionRequest, ICreateSessionResponse } from "../../interfaces";
+import {
+  ICreateSessionRequest,
+  ICreateSessionResponse,
+} from "../../interfaces";
 
 const loginAuthorService = async (
   payload: ICreateSessionRequest
@@ -14,7 +17,7 @@ const loginAuthorService = async (
     where: { email: payload.email },
   });
   if (!authorFound) {
-    throw new AppError("Author/password is invalid", 404);
+    throw new AppError("Email or password invalid", 401);
   }
 
   const passwordMatch = await bcrypt.compare(
@@ -23,7 +26,7 @@ const loginAuthorService = async (
   );
 
   if (!passwordMatch) {
-    throw new AppError("Author/password is invalid", 401);
+    throw new AppError("Email or password invalid", 401);
   }
 
   const token = jwt.sign(

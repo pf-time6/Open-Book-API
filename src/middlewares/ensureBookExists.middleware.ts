@@ -9,15 +9,16 @@ const ensureBookExists = async (
   next: NextFunction
 ) => {
   const bookId = req.params.id;
+
   if (bookId.length < 36) {
-    throw new AppError("Book not found. ", 404);
+    throw new AppError("Book not found", 404);
   }
 
   const bookRepo = AppDataSource.getRepository(Books);
   const alreadyExistBook = await bookRepo.exist({ where: { id: bookId } });
 
   if (!alreadyExistBook) {
-    throw new AppError("Book not found. ", 404);
+    throw new AppError("Book not found", 404);
   }
 
   return next();
