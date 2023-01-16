@@ -10,13 +10,13 @@ import {
   mockedAdminAuthorSession,
   mockedBooksRequest,
   mockedCategoryRequest,
+  mockedInvalidBodyBooks,
 } from "../../mocks";
 
 describe("Create books route", () => {
   let baseUrl: string = "/books";
   let conn: DataSource;
   let booksRepo: Repository<Books>;
-  let authorRepo: Repository<Author>;
   let book_categoryRepo: Repository<Books_Categories>;
   let categoriesRepo: Repository<Categories>;
 
@@ -25,7 +25,6 @@ describe("Create books route", () => {
       .then((dataSource) => {
         conn = dataSource;
         booksRepo = conn.getRepository(Books);
-        authorRepo = conn.getRepository(Author);
         book_categoryRepo = conn.getRepository(Books_Categories);
         categoriesRepo = conn.getRepository(Categories);
       })
@@ -82,7 +81,7 @@ describe("Create books route", () => {
     const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
     mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
-    const category = await request(app)
+    await request(app)
       .post("/categories")
       .set("Authorization", `Bearer ${token}`)
       .send(mockedCategoryRequest);
@@ -112,7 +111,7 @@ describe("Create books route", () => {
     const response = await request(app)
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
-      .send({});
+      .send(mockedInvalidBodyBooks);
 
     const booksResponse = {
       status: 400,
