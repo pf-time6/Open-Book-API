@@ -13,6 +13,26 @@ interface ICreatePageResponse {
   isChapter: boolean;
   chapterTitle: string;
   content: string;
+   createdAt: Date;
+  books: IBooks;
+}
+
+interface IShowPageResponse {
+  page: number;
+  chapter: number;
+  isChapter: boolean;
+  chapterTitle: string;
+  content: string;
+  createdAt: Date;
+  books: IBooks;
+}
+
+interface IBooks {
+  id: string;
+  title: string;
+  about: string;
+  coverUrl: string;
+  createdAt: Date;
 }
 
 interface IDecodedToken {
@@ -23,4 +43,5 @@ interface IDecodedToken {
   sub: string;
 }
 
-export { ICreatePageRequest, ICreatePageResponse, IDecodedToken };
+export { ICreatePageRequest, ICreatePageResponse, IShowPageResponse, IDecodedToken };
+

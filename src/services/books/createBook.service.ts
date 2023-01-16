@@ -40,10 +40,12 @@ const createBookService = async (
   });
 
   const categoriesRepo = AppDataSource.getRepository(Categories);
+
   const loopCategories = await categoriesRepo
     .createQueryBuilder("categories")
     .where("categories.id IN (:...ids)", { ids: [...body.category] })
     .getMany();
+
 
   if (loopCategories.length !== body.category.length) {
     throw new AppError(

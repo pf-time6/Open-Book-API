@@ -1,7 +1,12 @@
 import AppDataSource from "../../data-source";
 import Pages from "../../entities/pages.entity";
+import { IShowPageResponse } from "../../interfaces/pages.interface";
+import showPageResponseSchema from "../../schemas/pages/showPageResponse.schema";
 
-const showPageService = async (bookId: string, pageNum: number) => {
+const showPageService = async (
+  bookId: string,
+  pageNum: number
+): Promise<IShowPageResponse> => {
   const pagesRepo = AppDataSource.getRepository(Pages);
   const selectPage = await pagesRepo
     .createQueryBuilder("pages")
@@ -10,7 +15,11 @@ const showPageService = async (bookId: string, pageNum: number) => {
     .andWhere("pages.page = :page", { page: pageNum })
     .getOne();
 
-  return selectPage;
+  const pageResponse = await showPageResponseSchema.validate(selectPage, {
+    stripUnknown: true,
+  });
+
+  return pageResponse;
 };
 
 export default showPageService;

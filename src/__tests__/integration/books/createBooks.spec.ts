@@ -60,17 +60,20 @@ describe("Create books route", () => {
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksRequest);
+    
+    // const { title, category, about, coverUrl } = mockedBooksRequest;
 
     const booksResponse = {
       status: 201,
-      bodyToEqual1: expect.objectContaining(mockedBooksRequest),
-      bodyToEqual2: expect.objectContaining({
+      bodyToEqual1: expect.objectContaining({
+        ...mockedBooksRequest,
         id: expect.any(String),
         createdAt: expect.any(String),
       }),
     };
+
     expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
+    expect(response.body).toStrictEqual(booksResponse.bodyToEqual1);
   });
 
   it("POST: /books -> Should not be able to create books | Missing Token", async () => {

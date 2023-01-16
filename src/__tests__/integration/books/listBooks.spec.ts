@@ -1,6 +1,7 @@
 import { response } from "express";
 import request from "supertest";
 import { DataSource, Repository } from "typeorm";
+import { object, string } from "yup";
 import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Books from "../../../entities/books.entity";
@@ -62,11 +63,20 @@ describe("List books route", () => {
 
     const response = await request(app).get(baseUrl);
 
+    // console.log(response.body);
+
     const booksResponse = {
       status: 200,
       bodyLength: mockedListBooks.length,
+      // bodyNotToContain: expect.arrayContaining([
+      //   expect.objectContaining({
+      //     author: expect.objectContaining({ city: expect.any(String) }),
+      //   }),
+      // ]),
       bodyNotToContain: expect.arrayContaining([
-        expect.objectContaining({ password: expect.any(String) }),
+        expect.objectContaining({
+          author: expect.objectContaining({ password: expect.any(String) }),
+        }),
       ]),
     };
 
@@ -103,16 +113,49 @@ describe("List books route", () => {
 
     const response = await request(app).get(`${baseUrl}/${book.body.id}`);
 
+    const { title, about, coverUrl } = mockedBooksRequest;
+
     const booksResponse = {
       status: 200,
-      bodyStrictEqual: mockedListBooks.length,
-      bodyNotToContain: expect.objectContaining({
-        password: expect.any(String),
+      bodyStrictEqual2: expect.objectContaining({
+        title,
+        about,
+        coverUrl,
+        id: expect.any(String),
+        createdAt: expect.any(String),
+        author: expect.objectContaining({
+          city: expect.any(String),
+          country: expect.any(String),
+          email: expect.any(String),
+          id: expect.any(String),
+          name: expect.any(String),
+        }),
+        category: expect.arrayContaining([
+          expect.objectContaining({
+            id: expect.any(String),
+            name: expect.any(String),
+          }),
+        ]),
       }),
     };
 
     expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual2);
+  });
+
+  it("GET: /books:id -> Should not be able to list books | Book not found", async () => {
+    const response = await request(app).get(`${baseUrl}/123`);
+
+    const booksResponse = {
+      status: 404,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "Book not found",
+      }),
+    };
+
+    expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
     expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
-    expect(response.body).not.toContain(booksResponse.bodyNotToContain);
   });
 });
