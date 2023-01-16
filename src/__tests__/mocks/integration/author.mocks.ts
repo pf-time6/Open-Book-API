@@ -20,6 +20,13 @@ const mockedCommonAuthorInvalidBodyRequest = {
   email: "common@gmail.com",
 }
 
+const mockedCommonAuthorPatchRequest = {
+  name: "anotherCommonUsername",
+  password: "anotherPassword",
+  city: "Qebec",
+  country: "Canadá"
+}
+
 const mockedAdminAuthorRequest: ICreateAuthorRequest = {
   name: "adminUser",
   email: "admin123@gmail.com",
@@ -41,6 +48,7 @@ export {
   mockedCommonAuthorRequest,
   mockedCommonAuthorResponse,
   mockedCommonAuthorInvalidBodyRequest,
+  mockedCommonAuthorPatchRequest,
   mockedAdminAuthorRequest,
   mockedAdminAuthorResponse,
 };
