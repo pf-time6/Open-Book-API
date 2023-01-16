@@ -9,6 +9,7 @@ const ensureBookExists = async (
   next: NextFunction
 ) => {
   const bookId = req.params.id;
+
   if (bookId.length < 36) {
     throw new AppError("Book not found. ", 404);
   }
