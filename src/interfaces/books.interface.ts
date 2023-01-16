@@ -70,7 +70,28 @@ interface ICategoriesData {
   name: string;
 }
 
-interface IGetBooksResposne {}
+interface IGetBookResposne {
+  author: IAuthor;
+  createdAt: Date;
+  coverUrl: string;
+  category: ICategory[];
+  about: string;
+  title: string;
+  id: string;
+}
+
+interface IAuthor {
+  country: string;
+  city: string;
+  name: string;
+  email: string;
+  id: string;
+}
+
+interface ICategory {
+  id: string;
+  name: string;
+}
 
 export {
   ICreateBookRequest,
@@ -80,5 +101,9 @@ export {
   iBooksData,
   IBooks_CategoriesData,
   ICategoriesData,
+
   ICreateBookRequestTests,
+
+  IGetBookResposne,
+
 };
