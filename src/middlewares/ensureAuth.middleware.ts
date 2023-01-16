@@ -9,7 +9,7 @@ const ensureAuthMiddleware = async (
 ) => {
   let token = req.headers.authorization;
   if (!token) {
-    return res.status(401).json({ message: "invalid token" });
+    return res.status(401).json({ message: "Missing or invalid token" });
   }
   token = token.split(" ")[1];
   jwt.verify(

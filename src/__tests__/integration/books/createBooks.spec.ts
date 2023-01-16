@@ -2,7 +2,6 @@ import request from "supertest";
 import { DataSource, Repository } from "typeorm";
 import app from "../../../app";
 import AppDataSource from "../../../data-source";
-import Author from "../../../entities/author.entity";
 import Books from "../../../entities/books.entity";
 import Books_Categories from "../../../entities/books_categories.entity";
 import Categories from "../../../entities/categories.entity";
@@ -92,7 +91,7 @@ describe("Create books route", () => {
       status: 401,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "invalid token",
+        message: "Missing or invalid token",
       }),
     };
 
@@ -158,7 +157,7 @@ describe("Create books route", () => {
       status: 409,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Tittle already exists",
+        message: "Title already exists",
       }),
     };
 

@@ -1,4 +1,3 @@
-import { ICreateBookRequest } from "../../../interfaces";
 import { ICreateBookRequestTests } from "../../../interfaces/books.interface";
 
 const mockedBooksRequest: ICreateBookRequestTests = {
@@ -16,6 +15,18 @@ const mockedListBooks = [
     category: [1],
     about:
       "A história de um herói guerreiro da idade média que enfrenta o im...",
+    coverUrl: "asdasd",
+  },
+  {
+    title: "Harry Potter",
+    category: [1],
+    about: "Harry potter é emo.",
+    coverUrl: "asdasd",
+  },
+  {
+    title: "Mal e o bem",
+    category: [1],
+    about: "amor e odio",
     coverUrl: "asdasd",
   },
 ];
