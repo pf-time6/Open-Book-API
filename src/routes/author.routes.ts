@@ -5,6 +5,7 @@ import {
   deleteAuthorController,
   getAuthorController,
   listAllAuthorsController,
+  restoreAuthorController,
   updateAuthorController,
 } from "../controllers/author";
 import {
@@ -42,6 +43,12 @@ authorRoutes.delete(
   ensureAuthMiddleware,
   isAdmOrOwnAuthorMiddleware,
   deleteAuthorController
+);
+authorRoutes.delete(
+  "/restore/:id",
+  ensureAuthMiddleware,
+  isAdmOrOwnAuthorMiddleware,
+  restoreAuthorController
 );
 
 export default authorRoutes;
