@@ -10,6 +10,7 @@ import {
   mockedAdminAuthorSession,
   mockedBooksRequest,
   mockedCategoryRequest,
+  mockedInvalidBodyBooks,
 } from "../../mocks";
 
 describe("Create books route", () => {
@@ -17,7 +18,7 @@ describe("Create books route", () => {
   let conn: DataSource;
   let booksRepo: Repository<Books>;
   let authorRepo: Repository<Author>;
-  let books_categoriesRepo: Repository<Books_Categories>;
+  let book_categoryRepo: Repository<Books_Categories>;
   let categoriesRepo: Repository<Categories>;
 
   beforeAll(async () => {
@@ -26,21 +27,19 @@ describe("Create books route", () => {
         conn = dataSource;
         booksRepo = conn.getRepository(Books);
         authorRepo = conn.getRepository(Author);
-        books_categoriesRepo = conn.getRepository(Books_Categories);
+        book_categoryRepo = conn.getRepository(Books_Categories);
         categoriesRepo = conn.getRepository(Categories);
       })
       .catch((err) => console.log(err));
   });
 
   beforeEach(async () => {
-    const books_categories = await books_categoriesRepo.find();
-    const books = await booksRepo.find();
+    const books_category = await book_categoryRepo.find();
+    await book_categoryRepo.remove(books_category);
     const categories = await categoriesRepo.find();
-    const author = await authorRepo.find();
-    await books_categoriesRepo.remove(books_categories);
     await categoriesRepo.remove(categories);
+    const books = await booksRepo.find();
     await booksRepo.remove(books);
-    await authorRepo.remove(author);
   });
 
   afterAll(async () => {
@@ -49,11 +48,13 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should be able to create books", async () => {
     const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload);
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+    await request(app).post("/author").send(authorPayload); //1 - CRIEI AUTOR
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
-    const category = await request(app)
+    await request(app) // 3 - CRIEI CATEGORIA
       .post("/categories")
       .set("Authorization", `Bearer ${token}`)
       .send(mockedCategoryRequest);
@@ -71,50 +72,16 @@ describe("Create books route", () => {
         createdAt: expect.any(String),
       }),
     };
-
     expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual1);
     expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
   });
 
-  it("POST: /books -> ROTA DE ERRO", async () => {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-  });
-
-  it("POST: /books -> Should not be able to create books | Invalid body", async () => {
-    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload);
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
-
-    const response = await request(app)
-      .post(baseUrl)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedBooksRequest);
-
-    const booksResponse = {
-      status: 400,
-      bodyHaveProperty: "message",
-      bodyStrictEqual: expect.objectContaining({
-        message: expect.arrayContaining([
-          "title is a required field",
-          "category is a required field",
-          "about is a required field",
-          "coverUrl is a required field",
-        ]),
-      }),
-    };
-
-    expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
-    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
-  });
-
-  it("POST: /books -> Should not be able to create books | missing token", async () => {
-    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload);
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+  it("POST: /books -> Should not be able to create books | Missing Token", async () => {
+    const { sessionPayload } = mockedAdminAuthorSession;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
     const category = await request(app)
       .post("/categories")
@@ -136,11 +103,48 @@ describe("Create books route", () => {
     expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
   });
 
+  it("POST: /books -> Should not be able to create books | Invalid body", async () => {
+    const { sessionPayload } = mockedAdminAuthorSession;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
+
+    const response = await request(app)
+      .post(baseUrl)
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedInvalidBodyBooks);
+
+    const booksResponse = {
+      status: 400,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: expect.arrayContaining([
+          "title is a required field",
+          "category is a required field",
+          "about is a required field",
+          "coverUrl is a required field",
+        ]),
+      }),
+    };
+
+    expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
+  });
+
   it("POST: /books -> Should not be able to create books | Title already exists", async () => {
-    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload);
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+    const { sessionPayload } = mockedAdminAuthorSession;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
+    mockedBooksRequest.category = [3]; //3 - MUDEI CATEGORIES
+
+    await request(app)
+      .post("/categories")
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedCategoryRequest);
 
     await request(app)
       .post(baseUrl)
@@ -156,7 +160,7 @@ describe("Create books route", () => {
       status: 409,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Title already registered in the system",
+        message: "Tittle already exists",
       }),
     };
 

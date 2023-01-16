@@ -1,6 +1,7 @@
 import { ICreateBookRequest } from "../../../interfaces";
+import { ICreateBookRequestTests } from "../../../interfaces/books.interface";
 
-const mockedBooksRequest: ICreateBookRequest = {
+const mockedBooksRequest: ICreateBookRequestTests = {
   title: "This book is very good",
   category: [1],
   about: "A história de um herói guerreiro da idade média que enfrenta o im...",
@@ -17,20 +18,6 @@ const mockedListBooks = [
       "A história de um herói guerreiro da idade média que enfrenta o im...",
     coverUrl: "asdasd",
   },
-  // {
-  //   title: "Harry Potter",
-  //   category: [1],
-  //   about:
-  //     "A história de um herói guerreiro da idade média que enfrenta o im...",
-  //   coverUrl: "asdasd",
-  // },
-  // {
-  //   title: "Mal e o bem",
-  //   category: [1],
-  //   about:
-  //     "A história de um herói guerreiro da idade média que enfrenta o im...",
-  //   coverUrl: "asdasd",
-  // },
 ];
 
 export { mockedBooksRequest, mockedInvalidBodyBooks, mockedListBooks };
