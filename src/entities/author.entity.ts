@@ -7,6 +7,7 @@ import {
   BeforeInsert,
   BeforeUpdate,
   OneToMany,
+  DeleteDateColumn,
 } from "typeorm";
 import Books from "./books.entity";
 import { hashSync } from "bcryptjs";
@@ -42,6 +43,9 @@ class Author {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @OneToMany(() => Books, (books) => books.author)
   books: Books[];

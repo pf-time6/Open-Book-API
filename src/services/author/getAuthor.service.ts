@@ -1,20 +1,25 @@
 import AppDataSource from "../../data-source";
 import Author from "../../entities/author.entity";
 import { AppError } from "../../errors";
-import { ICreateAuthorResponse } from "../../interfaces/author.interface";
-import { createAuthorReturnSchema } from "../../schemas/author";
+import { IAuthorWithBooksResponse } from "../../interfaces";
+import { authorObjectReturnSchema } from "../../schemas/author";
 
 const getAuthorService = async (
   authorId: string
-): Promise<ICreateAuthorResponse> => {
+): Promise<IAuthorWithBooksResponse> => {
   const authorRepo = AppDataSource.getRepository(Author);
-  const author = await authorRepo.findOneBy({ id: authorId });
+
+  const author = await authorRepo
+    .createQueryBuilder("author")
+    .leftJoinAndSelect("author.books", "books")
+    .where("author.id = :id", { id: authorId })
+    .getOne();
 
   if (!author) {
     throw new AppError("Author not found", 404);
   }
 
-  const authorWithoutPassword = await createAuthorReturnSchema.validate(
+  const authorWithoutPassword = await authorObjectReturnSchema.validate(
     author,
     {
       stripUnknown: true,
