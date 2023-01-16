@@ -9,7 +9,11 @@ class Categories {
   @Column({ length: 60 })
   name: string;
 
-
+  @OneToMany(
+    () => Books_Categories,
+    (books_categories) => books_categories.categories
+  )
+  books_categories: Books_Categories[];
 }
 
 export default Categories;
