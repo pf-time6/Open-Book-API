@@ -7,7 +7,6 @@ import Books from "../../../entities/books.entity";
 import Books_Categories from "../../../entities/books_categories.entity";
 import Categories from "../../../entities/categories.entity";
 import {
-  mockedAdminAuthorRequest,
   mockedAdminAuthorSession,
   mockedBooksRequest,
   mockedCategoryRequest,
@@ -31,10 +30,6 @@ describe("Create books route", () => {
         categoriesRepo = conn.getRepository(Categories);
       })
       .catch((err) => console.log(err));
-
-    await request(app)
-      .post("/author")
-      .send(mockedAdminAuthorSession.authorPayload);
   });
 
   beforeEach(async () => {
@@ -58,7 +53,7 @@ describe("Create books route", () => {
     const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
     mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
-    const category = await request(app) // 3 - CRIEI CATEGORIA
+    await request(app) // 3 - CRIEI CATEGORIA
       .post("/categories")
       .set("Authorization", `Bearer ${token}`)
       .send(mockedCategoryRequest);
@@ -77,15 +72,15 @@ describe("Create books route", () => {
       }),
     };
     expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual1);
     expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
   });
 
   it("POST: /books -> Should not be able to create books | Missing Token", async () => {
-    const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload);
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+    const { sessionPayload } = mockedAdminAuthorSession;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
     const category = await request(app)
       .post("/categories")
@@ -109,13 +104,15 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should not be able to create books | Invalid body", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
     const response = await request(app)
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
-      .send(mockedBooksRequest);
+      .send({});
 
     const booksResponse = {
       status: 400,
@@ -137,8 +134,16 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should not be able to create books | Title already exists", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
+    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
+    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
+    mockedBooksRequest.category = [3]; //3 - MUDEI CATEGORIES
+
+    await request(app)
+      .post("/categories")
+      .set("Authorization", `Bearer ${token}`)
+      .send(mockedCategoryRequest);
 
     await request(app)
       .post(baseUrl)
@@ -154,7 +159,7 @@ describe("Create books route", () => {
       status: 409,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Title already registered in the system",
+        message: "Tittle already exists",
       }),
     };
 

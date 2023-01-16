@@ -3,7 +3,7 @@ import { ICreateBookRequestTests } from "../../../interfaces/books.interface";
 
 const mockedBooksRequest: ICreateBookRequestTests = {
   title: "This book is very good",
-  category: [1, 2],
+  category: [1],
   about: "A história de um herói guerreiro da idade média que enfrenta o im...",
   coverUrl: "asdasd",
 };
