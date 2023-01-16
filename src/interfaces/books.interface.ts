@@ -4,6 +4,13 @@ interface ICreateBookRequest {
   about: string;
   coverUrl: string;
 }
+interface ICreateBookRequestTests {
+  authorId?: string;
+  title: string;
+  category: Number[];
+  about: string;
+  coverUrl: string;
+}
 
 interface ICreateBookResponse {
   id: string;
@@ -94,5 +101,9 @@ export {
   iBooksData,
   IBooks_CategoriesData,
   ICategoriesData,
+
+  ICreateBookRequestTests,
+
   IGetBookResposne,
+
 };

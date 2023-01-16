@@ -13,7 +13,7 @@ interface ICreatePageResponse {
   isChapter: boolean;
   chapterTitle: string;
   content: string;
-  createdAt: Date;
+   createdAt: Date;
   books: IBooks;
 }
 
@@ -35,4 +35,13 @@ interface IBooks {
   createdAt: Date;
 }
 
-export { ICreatePageRequest, ICreatePageResponse, IShowPageResponse };
+interface IDecodedToken {
+  email: string;
+  isAdm: boolean;
+  iat: number;
+  ext: number;
+  sub: string;
+}
+
+export { ICreatePageRequest, ICreatePageResponse, IShowPageResponse, IDecodedToken };
+
