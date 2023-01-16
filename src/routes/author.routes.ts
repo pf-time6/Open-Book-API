@@ -9,6 +9,7 @@ import {
 } from "../controllers/author";
 import {
   ensureAuthMiddleware,
+  fieldsNotPermitedUpdateMiddleware,
   isAdmOrOwnAuthorMiddleware,
   isValidIdMiddleware,
   validateSchemaMiddleware,
@@ -32,6 +33,7 @@ authorRoutes.patch(
   ensureAuthMiddleware,
   isValidIdMiddleware,
   isAdmOrOwnAuthorMiddleware,
+  fieldsNotPermitedUpdateMiddleware,
   validateSchemaMiddleware(updateAuthorRequestSchema),
   updateAuthorController
 );

@@ -7,6 +7,7 @@ import ensureBookExists from "./ensureBookExists.middleware";
 import ensurePageExists from "./ensurePageExists.middleware";
 import ensureEmailExistsMiddleware from "./ensureEmailExists.middleware";
 import isAdmOrBookAuthorMiddleware from "./isAdmOrBookAuthor.middleware";
+import fieldsNotPermitedUpdateMiddleware from "./fieldsNotPermitedUpdate.middleware";
 
 export {
   validateSchemaMiddleware,
@@ -18,4 +19,5 @@ export {
   isAdmOrOwnAuthorMiddleware,
   isAdmOrBookAuthorMiddleware,
   isValidIdMiddleware,
+  fieldsNotPermitedUpdateMiddleware,
 };
