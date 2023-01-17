@@ -468,7 +468,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
 <pre>
 {
-    "message": yup.error.errors
+    "message": "Body is empty"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
