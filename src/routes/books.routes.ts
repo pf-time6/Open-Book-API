@@ -4,6 +4,7 @@ import {
   createBookController,
   showBookController,
   updateBookController,
+  deleteBookController,
 } from "../controllers/books";
 import {
   createPagesController,
@@ -54,6 +55,13 @@ booksRoutes.get(
   ensureBookExists,
   ensurePageExists,
   showPageController
+);
+booksRoutes.delete(
+  "/:id",
+  ensureAuthMiddleware,
+  isAdmOrOwnAuthorMiddleware,
+  ensureBookExists,
+  deleteBookController
 );
 
 export default booksRoutes;
