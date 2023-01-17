@@ -78,21 +78,21 @@ describe("List books route", () => {
     expect(response.body).not.toStrictEqual(booksResponse.bodyNotToContain);
   });
 
-  // it("GET: /books -> Should not be able to list books | empty list", async () => {
-  //   const response = await request(app).get(baseUrl);
+  it("GET: /books -> Should not be able to list books | empty list", async () => {
+    const response = await request(app).get(baseUrl);
 
-  //   const booksResponse = {
-  //     status: 404,
-  //     bodyHaveProperty: "message",
-  //     bodyStrictEqual: expect.objectContaining({
-  //       message: "There are no books found",
-  //     }),
-  //   };
+    const booksResponse = {
+      status: 404,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "There are no books found",
+      }),
+    };
 
-  //   expect(response.status).toBe(booksResponse.status);
-  //   expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
-  //   expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
-  // });
+    expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
+  });
 
   it("GET: /books:id -> Should be able to list a specific book", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;

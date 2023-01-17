@@ -1,5 +1,6 @@
 import AppDataSource from "../../data-source";
 import Books from "../../entities/books.entity";
+import { AppError } from "../../errors";
 import {
   iBooksData,
   IListBooksResponse,
@@ -16,6 +17,10 @@ const listBooksService = async (): Promise<IListBooksResponse[]> => {
     .leftJoinAndSelect("books_categories.categories", "categories")
     .leftJoinAndSelect("books.author", "author")
     .getMany();
+
+  if (books.length === 0) {
+    throw new AppError("There are no books found", 404);
+  }
 
   const listBooks = books.map((el: iBooksData) => {
     return ListBooksMapper.func(el);

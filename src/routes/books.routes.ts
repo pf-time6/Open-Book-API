@@ -15,6 +15,7 @@ import {
   ensureAuthMiddleware,
   ensureBookExists,
   ensurePageExists,
+  isAdmOrBookAuthorMiddleware,
   isAdmOrOwnAuthorMiddleware,
   validateSchemaMiddleware,
 } from "../middlewares";
@@ -46,7 +47,7 @@ booksRoutes.post(
 booksRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
-  isAdmOrOwnAuthorMiddleware,
+  isAdmOrBookAuthorMiddleware,
   validateSchemaMiddleware(updateBookRequestSchema),
   updateBookController
 );
