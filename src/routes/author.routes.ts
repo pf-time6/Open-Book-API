@@ -22,7 +22,7 @@ import {
 
 const authorRoutes = Router();
 
-authorRoutes.get("", listAllAuthorsController);
+authorRoutes.get("", ensureAuthMiddleware, listAllAuthorsController);
 authorRoutes.get("/:id", getAuthorController);
 authorRoutes.post(
   "",

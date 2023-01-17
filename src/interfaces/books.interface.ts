@@ -23,6 +23,7 @@ interface ICreateBookResponse {
 }
 
 interface IUpdateBookRequest {
+  title?: string;
   category?: number[];
   about?: string;
   coverUrl?: string;
@@ -110,5 +111,5 @@ export {
   ICategoriesData,
   IGetBookResposne,
   IUpdateBookRequest,
-  ICreateBookRequestSchema
+  ICreateBookRequestSchema,
 };
