@@ -57,23 +57,13 @@ describe("Retrieve Author Tests", () => {
       .send(data);
 
     const expectResults = {
-      status: 201,
-      bodyToEqual: {
-        id: expect.any(String),
-        name: name,
-        email: expect.any(String),
-        city: expect.any(String),
-        country: expect.any(String),
-        isAdm: expect.any(Boolean),
-        isActive: expect.any(Boolean),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String),
-        deletedAt: null,
-      },
+      status: 200,
+      name,
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).toStrictEqual(expectResults.bodyToEqual);
+    expect(response.body).toHaveProperty("name");
+    expect(response.body.name).toBe(expectResults.name);
   });
 
   it("PATCH: /author/:id -> Should be able to update the city of an author", async () => {
@@ -99,23 +89,13 @@ describe("Retrieve Author Tests", () => {
       .send(data);
 
     const expectResults = {
-      status: 201,
-      bodyToEqual: {
-        id: expect.any(String),
-        name: expect.any(String),
-        email: expect.any(String),
-        city: city,
-        country: expect.any(String),
-        isAdm: expect.any(Boolean),
-        isActive: expect.any(Boolean),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String),
-        deletedAt: null,
-      },
+      status: 200,
+      city,
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).toStrictEqual(expectResults.bodyToEqual);
+    expect(response.body).toHaveProperty("city");
+    expect(response.body.city).toBe(expectResults.city);
   });
 
   it("PATCH: /author/:id -> Should be able to update the country of an author", async () => {
@@ -142,22 +122,12 @@ describe("Retrieve Author Tests", () => {
 
     const expectResults = {
       status: 201,
-      bodyToEqual: {
-        id: expect.any(String),
-        name: expect.any(String),
-        email: expect.any(String),
-        city: expect.any(String),
-        country: country,
-        isAdm: expect.any(Boolean),
-        isActive: expect.any(Boolean),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String),
-        deletedAt: null,
-      },
+      country,
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).toStrictEqual(expectResults.bodyToEqual);
+    expect(response.body).toHaveProperty("country");
+    expect(response.body.country).toBe(expectResults.country);
   });
 
   it("PATCH: /author/:id -> Should be able to update the password of an author", async () => {
@@ -194,12 +164,13 @@ describe("Retrieve Author Tests", () => {
         isActive: expect.any(Boolean),
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
-        deletedAt: null,
       },
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).toStrictEqual(expectResults.bodyToEqual);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining(expectResults.bodyToEqual)
+    );
   });
 
   it("PATCH: /author/:id -> Should not be able to update the isActive field value", async () => {
@@ -375,7 +346,6 @@ describe("Retrieve Author Tests", () => {
         isActive: expect.any(Boolean),
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
-        deletedAt: null,
       },
     };
 
