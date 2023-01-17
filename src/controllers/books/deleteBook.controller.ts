@@ -8,7 +8,7 @@ const deleteBookController = async (
 ) => {
   const bookId = req.params.id;
   const data = await deleteBookService(bookId);
-  return res.status(201).json(data);
+  return res.status(204).json(data);
 };
 
 export default deleteBookController;

@@ -1,4 +1,7 @@
-import { ICreateSessionPayloadMock } from "./mock.interface";
+import {
+  ICreateSessionPayloadMock,
+  ICreateSessionPayloadMock2,
+} from "./mock.interface";
 import {
   ICreateAuthorRequest,
   IOmitAuthorPassword,
@@ -11,7 +14,12 @@ import {
   ICreateSessionRequest,
   ICreateSessionResponse,
 } from "./sessions.interface";
-import { ICreateBookRequest, ICreateBookResponse, IUpdateBookRequest, ICreateBookRequestSchema } from "./books.interface";
+import {
+  ICreateBookRequest,
+  ICreateBookResponse,
+  IUpdateBookRequest,
+  ICreateBookRequestSchema,
+} from "./books.interface";
 import {
   ICreatePageRequest,
   ICreatePageResponse,
@@ -36,5 +44,6 @@ export {
   ICategoryRequest,
   IUpdateAuthorResponse,
   IUpdateBookRequest,
-  ICreateBookRequestSchema
+  ICreateBookRequestSchema,
+  ICreateSessionPayloadMock2,
 };

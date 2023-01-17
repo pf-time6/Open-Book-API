@@ -1,12 +1,9 @@
-import { response } from "express";
 import request from "supertest";
 import { DataSource, Repository } from "typeorm";
-import { object, string } from "yup";
 import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Books from "../../../entities/books.entity";
 import Books_Categories from "../../../entities/books_categories.entity";
-import Categories from "../../../entities/categories.entity";
 import {
   mockedAdminAuthorSession,
   mockedBooksRequest,
@@ -19,7 +16,6 @@ describe("List books route", () => {
   let conn: DataSource;
   let booksRepo: Repository<Books>;
   let books_categoriesRepo: Repository<Books_Categories>;
-  let categoriesRepo: Repository<Categories>;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -27,7 +23,6 @@ describe("List books route", () => {
         conn = dataSource;
         booksRepo = conn.getRepository(Books);
         books_categoriesRepo = conn.getRepository(Books_Categories);
-        categoriesRepo = conn.getRepository(Categories);
       })
       .catch((err) => console.log(err));
   });
@@ -78,21 +73,21 @@ describe("List books route", () => {
     expect(response.body).not.toStrictEqual(booksResponse.bodyNotToContain);
   });
 
-  // it("GET: /books -> Should not be able to list books | empty list", async () => {
-  //   const response = await request(app).get(baseUrl);
+  it("GET: /books -> Should not be able to list books | empty list", async () => {
+    const response = await request(app).get(baseUrl);
 
-  //   const booksResponse = {
-  //     status: 404,
-  //     bodyHaveProperty: "message",
-  //     bodyStrictEqual: expect.objectContaining({
-  //       message: "There are no books found",
-  //     }),
-  //   };
+    const booksResponse = {
+      status: 404,
+      bodyHaveProperty: "message",
+      bodyStrictEqual: expect.objectContaining({
+        message: "There are no books found",
+      }),
+    };
 
-  //   expect(response.status).toBe(booksResponse.status);
-  //   expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
-  //   expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
-  // });
+    expect(response.status).toBe(booksResponse.status);
+    expect(response.body).toHaveProperty(booksResponse.bodyHaveProperty);
+    expect(response.body).toStrictEqual(booksResponse.bodyStrictEqual);
+  });
 
   it("GET: /books:id -> Should be able to list a specific book", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
@@ -106,14 +101,10 @@ describe("List books route", () => {
 
     const response = await request(app).get(`${baseUrl}/${book.body.id}`);
 
-    const { title, about, coverUrl } = mockedBooksRequest;
-
     const booksResponse = {
       status: 200,
       bodyStrictEqual2: expect.objectContaining({
-        title,
-        about,
-        coverUrl,
+        ...mockedBooksRequest,
         id: expect.any(String),
         createdAt: expect.any(String),
         author: expect.objectContaining({
