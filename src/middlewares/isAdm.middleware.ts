@@ -6,7 +6,7 @@ const isAdmMiddleware = async (
   next: NextFunction
 ) => {
   if (!req.author.isAdm) {
-    return res.status(403).json({ message: "Haven't permission" });
+    return res.status(401).json({ message: "There are no categories found" });
   }
   return next();
 };

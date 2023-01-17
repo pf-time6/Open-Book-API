@@ -11,7 +11,7 @@ const isValidIdMiddleware = async (
   const author = await authorRepo.findOneBy({ id: req.params.id });
 
   if (!author) {
-    return res.status(403).json({ message: "Author not exists" });
+    return res.status(404).json({ message: "Author not found" });
   }
   return next();
 };
