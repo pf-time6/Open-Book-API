@@ -30,7 +30,7 @@ const updateBookService = async (
         404
       );
     }
-    const relationsWithBooksID = await books_categoryRepo
+    await books_categoryRepo
       .createQueryBuilder("books_category")
       .leftJoinAndSelect("books_category.books", "books")
       .delete()
