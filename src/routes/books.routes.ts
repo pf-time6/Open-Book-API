@@ -38,7 +38,7 @@ booksRoutes.post(
   validateSchemaMiddleware(createPageRequestSchema),
   ensureAuthMiddleware,
   ensureBookExists,
-  isAdmOrBookAuthorMiddleware,
+  isAdmOrOwnAuthorMiddleware,
   ensureAlreadyExistChapter,
   createPagesController
 );
