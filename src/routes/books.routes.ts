@@ -3,6 +3,7 @@ import {
   listBooksController,
   createBookController,
   showBookController,
+  updateBookController,
 } from "../controllers/books";
 import {
   createPagesController,
@@ -13,11 +14,13 @@ import {
   ensureAuthMiddleware,
   ensureBookExists,
   ensurePageExists,
-  isAdmOrBookAuthorMiddleware,
   isAdmOrOwnAuthorMiddleware,
   validateSchemaMiddleware,
 } from "../middlewares";
-import { createBooksRequestSchema } from "../schemas/books";
+import {
+  createBooksRequestSchema,
+  updateBookRequestSchema,
+} from "../schemas/books";
 import { createPageRequestSchema } from "../schemas/pages";
 
 const booksRoutes = Router();
@@ -38,6 +41,13 @@ booksRoutes.post(
   isAdmOrBookAuthorMiddleware,
   ensureAlreadyExistChapter,
   createPagesController
+);
+booksRoutes.patch(
+  "/:id",
+  ensureAuthMiddleware,
+  isAdmOrOwnAuthorMiddleware,
+  validateSchemaMiddleware(updateBookRequestSchema),
+  updateBookController
 );
 booksRoutes.get(
   "/:id/:page",

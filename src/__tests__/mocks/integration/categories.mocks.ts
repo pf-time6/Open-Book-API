@@ -4,6 +4,10 @@ const mockedCategoryRequest: ICategoryRequest = {
   name: "Suspense",
 };
 
+const mockedCategoryRequest2: ICategoryRequest = {
+  name: "Ação",
+};
+
 const mockedInvalidCategoryRequest: object = {};
 
-export { mockedCategoryRequest, mockedInvalidCategoryRequest };
+export { mockedCategoryRequest, mockedInvalidCategoryRequest, mockedCategoryRequest2 };

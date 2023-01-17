@@ -2,7 +2,6 @@ import request from "supertest";
 import { DataSource, Repository } from "typeorm";
 import app from "../../../app";
 import AppDataSource from "../../../data-source";
-import Author from "../../../entities/author.entity";
 import Books from "../../../entities/books.entity";
 import Books_Categories from "../../../entities/books_categories.entity";
 import Categories from "../../../entities/categories.entity";
@@ -49,8 +48,8 @@ describe("Create books route", () => {
     await request(app).post("/author").send(authorPayload); //1 - CRIEI AUTOR
     const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
     const token = authorLogged.body.token; //1 - PEGUEI TOKEN
-    const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
-    mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
+    // const users = await request(app).get("/author"); //2 - LISTEI TODOS AUTORES
+    // mockedBooksRequest.authorId = users.body[0].id; //2 - ADICIONANDO AUTOR NO REQUEST
 
     await request(app) // 3 - CRIEI CATEGORIA
       .post("/categories")
@@ -64,14 +63,15 @@ describe("Create books route", () => {
 
     const booksResponse = {
       status: 201,
-      bodyToEqual1: expect.objectContaining(mockedBooksRequest),
-      bodyToEqual2: expect.objectContaining({
+      bodyToEqual1: expect.objectContaining({
+        ...mockedBooksRequest,
         id: expect.any(String),
         createdAt: expect.any(String),
       }),
     };
+
     expect(response.status).toBe(booksResponse.status);
-    expect(response.body).toStrictEqual(booksResponse.bodyToEqual2);
+    expect(response.body).toStrictEqual(booksResponse.bodyToEqual1);
   });
 
   it("POST: /books -> Should not be able to create books | Missing Token", async () => {
@@ -92,7 +92,7 @@ describe("Create books route", () => {
       status: 401,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "invalid token",
+        message: "Missing or invalid token",
       }),
     };
 
@@ -158,7 +158,7 @@ describe("Create books route", () => {
       status: 409,
       bodyHaveProperty: "message",
       bodyStrictEqual: expect.objectContaining({
-        message: "Tittle already exists",
+        message: "Title already exists",
       }),
     };
 

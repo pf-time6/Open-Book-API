@@ -5,10 +5,12 @@ import {
   deleteAuthorController,
   getAuthorController,
   listAllAuthorsController,
+  restoreAuthorController,
   updateAuthorController,
 } from "../controllers/author";
 import {
   ensureAuthMiddleware,
+  fieldsNotPermitedUpdateMiddleware,
   isAdmOrOwnAuthorMiddleware,
   isValidIdMiddleware,
   validateSchemaMiddleware,
@@ -20,7 +22,7 @@ import {
 
 const authorRoutes = Router();
 
-authorRoutes.get("", listAllAuthorsController);
+authorRoutes.get("", ensureAuthMiddleware, listAllAuthorsController);
 authorRoutes.get("/:id", getAuthorController);
 authorRoutes.post(
   "",
@@ -32,6 +34,7 @@ authorRoutes.patch(
   ensureAuthMiddleware,
   isValidIdMiddleware,
   isAdmOrOwnAuthorMiddleware,
+  fieldsNotPermitedUpdateMiddleware,
   validateSchemaMiddleware(updateAuthorRequestSchema),
   updateAuthorController
 );
@@ -40,6 +43,12 @@ authorRoutes.delete(
   ensureAuthMiddleware,
   isAdmOrOwnAuthorMiddleware,
   deleteAuthorController
+);
+authorRoutes.delete(
+  "/restore/:id",
+  ensureAuthMiddleware,
+  isAdmOrOwnAuthorMiddleware,
+  restoreAuthorController
 );
 
 export default authorRoutes;

@@ -22,7 +22,7 @@ const createBookService = async (
   });
 
   if (bookFound) {
-    throw new AppError("Tittle already exists", 409);
+    throw new AppError("Title already exists", 409);
   }
 
   const authorRepo = AppDataSource.getRepository(Author);

@@ -1,13 +1,14 @@
-interface ICreateBookRequest {
+interface ICreateBookRequestSchema {
   title: string;
   category: number[];
   about: string;
   coverUrl: string;
 }
-interface ICreateBookRequestTests {
+
+interface ICreateBookRequest {
   authorId?: string;
   title: string;
-  category: Number[];
+  category: number[];
   about: string;
   coverUrl: string;
 }
@@ -19,6 +20,13 @@ interface ICreateBookResponse {
   about: string;
   coverUrl: string;
   createdAt: string;
+}
+
+interface IUpdateBookRequest {
+  title?: string;
+  category?: number[];
+  about?: string;
+  coverUrl?: string;
 }
 
 interface IListBooksResponse {
@@ -101,9 +109,7 @@ export {
   iBooksData,
   IBooks_CategoriesData,
   ICategoriesData,
-
-  ICreateBookRequestTests,
-
   IGetBookResposne,
-
+  IUpdateBookRequest,
+  ICreateBookRequestSchema,
 };
