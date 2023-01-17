@@ -28,8 +28,6 @@ describe("Create cateogires tests", () => {
   });
 
   afterAll(async () => {
-    const authors = await authorRepo.find();
-    await authorRepo.remove(authors);
     await conn.destroy();
   });
 
@@ -75,7 +73,52 @@ describe("Create cateogires tests", () => {
     expect(response.body).toStrictEqual(expectValues.bodyToEqual);
   });
 
-  it("POST: /categories -> Should not be able to create a category withoud admin token", async () => {
+  it("POST> /categories -> Should not be able to create a category already created", async () => {
+    const loginPayload = mockedAdminAuthorSession.sessionPayload;
+    const login = await request(app).post("/login").send(loginPayload);
+
+    expect(login.status).toBe(200);
+    expect(login.body).toHaveProperty("token");
+
+    const token: string = login.body.token;
+
+    const newCategory = {
+      name: "Ficção",
+    };
+
+    const expectFirstCategoryValues = {
+      status: 201,
+      bodyToEqual: expect.objectContaining({
+        id: expect.any(Number),
+        name: newCategory.name,
+      }),
+    };
+
+    const firstCategoryResponse = await request(app)
+      .post(baseUrl)
+      .set("Authorization", `Bearer ${token}`)
+      .send(newCategory);
+
+    expect(firstCategoryResponse.status).toBe(expectFirstCategoryValues.status);
+    expect(firstCategoryResponse.body).toStrictEqual(
+      expectFirstCategoryValues.bodyToEqual
+    );
+
+    const expectValues = {
+      status: 409,
+      bodyToHaveProperty: "message",
+    };
+
+    const response = await request(app)
+      .post(baseUrl)
+      .set("Authorization", `Bearer ${token}`)
+      .send(newCategory);
+
+    expect(response.status).toBe(expectValues.status);
+    expect(response.body).toHaveProperty(expectValues.bodyToHaveProperty);
+  });
+
+  it("POST: /categories -> Should not be able to create a category without admin token", async () => {
     const commonAuthorPayload = mockedCommonAuthorRequest;
 
     const createCommonAuthor = await request(app)
@@ -105,6 +148,28 @@ describe("Create cateogires tests", () => {
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
       .send(newValues);
+
+    expect(response.status).toBe(expectValues.status);
+    expect(response.body).toHaveProperty(expectValues.bodyHaveProperty);
+  });
+
+  it("POST: /categories -> Should not be able to create a category without token", async () => {
+    const loginPayload = mockedAdminAuthorSession.sessionPayload;
+    const login = await request(app).post("/login").send(loginPayload);
+
+    expect(login.status).toBe(200);
+    expect(login.body).toHaveProperty("token");
+
+    const newValues = {
+      name: "Ficção",
+    };
+
+    const expectValues = {
+      status: 401,
+      bodyHaveProperty: "message",
+    };
+
+    const response = await request(app).post(baseUrl).send(newValues);
 
     expect(response.status).toBe(expectValues.status);
     expect(response.body).toHaveProperty(expectValues.bodyHaveProperty);

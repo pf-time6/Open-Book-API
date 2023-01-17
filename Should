@@ -1,0 +1,23 @@
+yarn run v1.22.19
+$ cross-env NODE_ENV=test jest --verbose ./src/__tests__/integration/books/updateBooks/PATCH: /author/:id - not be
+  console.log
+    {
+      updatedAt: '2023-01-17T15:28:43.000Z',
+      createdAt: '2023-01-17T15:28:43.000Z',
+      isActive: true,
+      isAdm: false,
+      country: 'Brasil',
+      city: 'Rio de janeiro',
+      email: 'common@gmail.com',
+      name: 'commonUser',
+      id: '89d1a000-8332-4e1d-85ca-ec725189e4e2'
+    }
+
+      at src/__tests__/integration/author/deleteAuthor.spec.ts:42:13
+
+  console.log
+    { message: 'Internal server error' }
+
+      at src/__tests__/integration/books/updateBooks.spec.ts:155:13
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

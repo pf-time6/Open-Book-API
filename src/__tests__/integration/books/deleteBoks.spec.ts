@@ -47,7 +47,7 @@ describe("List books route", () => {
     await conn.destroy();
   });
 
-  it("PATCH: /books/:id -> Should be able to update a book's data", async () => {
+  it("DELETE: /books/:id -> Should be able to delete a book", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
@@ -57,40 +57,25 @@ describe("List books route", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(mockedCategoryRequest);
 
-    await request(app)
-      .post("/categories")
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedCategoryRequest2);
-
     const book = await request(app)
       .post(baseUrl)
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksRequest);
 
     const response = await request(app)
-      .patch(`${baseUrl}/${book.body.id}`)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedBooksUpdateRequest);
+      .delete(`${baseUrl}/${book.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
 
     const expectResults = {
-      status: 200,
-      bodyStrictEqual: expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String),
-          title: expect.any(String),
-          about: mockedBooksUpdateRequest.about,
-          coverUrl: mockedBooksUpdateRequest.coverUrl,
-          createdAt: expect.any(String),
-          books_categories: expect.arrayContaining([expect.any(Object)]),
-        }),
-      ]),
+      status: 204,
+      bodyStrictEqual: expect.objectContaining({}),
     };
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
   });
 
-  it("PATCH: /books/:id -> Should not be able to update a book's data | Missing or invalid token", async () => {
+  it("DELETE: /books/:id -> Should not be able to delete a book | Missing or invalid token", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
@@ -100,9 +85,7 @@ describe("List books route", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(mockedBooksRequest);
 
-    const response = await request(app)
-      .patch(`${baseUrl}/${book.body.id}`)
-      .send(mockedBooksUpdateRequest);
+    const response = await request(app).delete(`${baseUrl}/${book.body.id}`);
 
     const expectResults = {
       status: 401,
@@ -117,43 +100,14 @@ describe("List books route", () => {
     expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
   });
 
-  it("PATCH: /books/:id -> Should not be able to update a book's data | Invalid body", async () => {
-    const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload);
-    const token = authorLogged.body.token;
-
-    const book = await request(app)
-      .post(baseUrl)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedBooksRequest);
-
-    const response = await request(app)
-      .patch(`${baseUrl}/${book.body.id}`)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedInvalidBodyBooks);
-
-    const expectResults = {
-      status: 400,
-      bodyHaveProperty: "message",
-      bodyStrictEqual: expect.objectContaining({
-        message: "Body is empty",
-      }),
-    };
-
-    expect(response.status).toBe(expectResults.status);
-    expect(response.body).toHaveProperty(expectResults.bodyHaveProperty);
-    expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
-  });
-
-  it("PATCH: /books/:id -> Should not be able to update a book's data | Book not found", async () => {
+  it("DELETE: /books/:id -> Should not be able to delete a book | Book not found", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
 
     const response = await request(app)
-      .patch(`${baseUrl}/123`)
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedInvalidBodyBooks);
+      .delete(`${baseUrl}/123`)
+      .set("Authorization", `Bearer ${token}`);
 
     const expectResults = {
       status: 404,
@@ -168,7 +122,7 @@ describe("List books route", () => {
     expect(response.body).toStrictEqual(expectResults.bodyStrictEqual);
   });
 
-  it("PATCH: /books/:id -> Should not be able to update a book's data | Book does not belong to the author", async () => {
+  it("DELETE: /books/:id -> Should not be able to delete a book | Book does not belong to the author", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
     const authorLogged = await request(app).post("/login").send(sessionPayload);
     const token = authorLogged.body.token;
@@ -185,9 +139,8 @@ describe("List books route", () => {
       .send(mockedBooksRequest);
 
     const response = await request(app)
-      .patch(`${baseUrl}/${book.body.id}`)
-      .set("Authorization", `Bearer ${token2}`)
-      .send(mockedBooksUpdateRequest);
+      .delete(`${baseUrl}/${book.body.id}`)
+      .set("Authorization", `Bearer ${token2}`);
 
     const expectResults = {
       status: 403,

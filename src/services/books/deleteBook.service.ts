@@ -25,6 +25,6 @@ const deleteBookService = async (bookId: string) => {
 
   await bookRepo.delete(bookId);
 
-  return { message: "Book deleted" };
+  return {};
 };
 export default deleteBookService;
