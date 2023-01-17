@@ -8,6 +8,8 @@ import {
 } from "../controllers/books";
 import {
   createPagesController,
+  deleteBooksPageController,
+  editBookPageController,
   showPageController,
 } from "../controllers/pages";
 import {
@@ -64,5 +66,7 @@ booksRoutes.delete(
   ensureBookExists,
   deleteBookController
 );
+booksRoutes.patch("/:id/:page", ensureAuthMiddleware, editBookPageController);
+booksRoutes.delete("/:id/:page", ensureAuthMiddleware, deleteBooksPageController);
 
 export default booksRoutes;

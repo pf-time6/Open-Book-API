@@ -6,7 +6,9 @@ import {
   ICategoryResponse,
 } from "../../interfaces/categories.interface";
 
-const createCategoryService = async ( categoryData: ICategoryRequest): Promise<ICategoryResponse> => {
+const createCategoryService = async (
+  categoryData: ICategoryRequest
+): Promise<ICategoryResponse> => {
   const categoryRepo = AppDataSource.getRepository(Categories);
   const createdCategory = categoryRepo.create(categoryData);
 
@@ -15,7 +17,10 @@ const createCategoryService = async ( categoryData: ICategoryRequest): Promise<I
   });
 
   if (alreadyExistCategory) {
-    throw new AppError("Category as already registred", 409);
+    throw new AppError(
+      "Category name already registered into the system.",
+      409
+    );
   }
   await categoryRepo.save(createdCategory);
 
