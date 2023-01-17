@@ -13,11 +13,11 @@ const isAdmOrBookAuthorMiddleware = async (
     where: { id: bookId },
     relations: { author: true },
   });
-  console.log(selectBook);
-
   if (!req.author.isAdm && selectBook.author.id !== req.author.id) {
     return res.status(403).json({ message: "Unauthorized book access." });
   }
+
+  next();
 };
 
 export default isAdmOrBookAuthorMiddleware;

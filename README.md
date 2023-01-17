@@ -88,12 +88,6 @@
     }
 ]
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia de autores:</p>
-<pre>
-{
-    "message": "There are no authors found"
-}
-</pre>
 <hr noshade />
 
 <h2>[200] Mostrar um autor específico cadastrado no sistema e seus respectivos livros.</h2>
@@ -158,12 +152,6 @@
     "updatedAt": "2023-01-01"
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
-<pre>
-{
-    "message": yup.error.errors
-}
-</pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
@@ -189,7 +177,7 @@
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar esta operação:</strong>
 
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> com um objeto vazio:</p>
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">202</strong> com o retorno:</p>
 <pre>
 {
 	"deleted": {
@@ -282,7 +270,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
 {
-    "message": "Missing or invalid token"
+    "message": "Missing or invalid token."
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -294,7 +282,13 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para título de livro já existente:</p>
 <pre>
 {
-    "message": "Title already registered in the system"
+    "message": "Title already registered in the system."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para categoria de livro inexistente:</p>
+<pre>
+{
+    "message": "There is at least one category that is not found in the database."
 }
 </pre>
 <hr noshade />
@@ -694,16 +688,10 @@
         "name": "Action"
     }
 ]</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
-<pre>
-{
-    "message": "There are no categories found"
-}
-</pre>
 <hr noshade />
 
 <h2>[200] Editar categorias cadastradas no sistema.</h2>
-<h3>GET - /categories/:id</h3>
+<h3>PATCH - /categories/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
 
@@ -722,7 +710,7 @@
 <hr noshade />
 
 <h2>[200] Deletar categorias cadastradas no sistema.</h2>
-<h3>GET - /categories/:id</h3>
+<h3>DELETE - /categories/:id</h3>
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
 
