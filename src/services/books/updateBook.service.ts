@@ -18,6 +18,15 @@ const updateBookService = async (
   const categoriesRepo = AppDataSource.getRepository(Categories);
   const books_categoryRepo = AppDataSource.getRepository(Books_Categories);
 
+  if (
+    "title" in payload === false &&
+    "about" in payload === false &&
+    "category" in payload === false &&
+    "coverUrl" in payload === false
+  ) {
+    throw new AppError("Body is empty", 409);
+  }
+
   if ("category" in payload) {
     const loopCategories = await categoriesRepo
       .createQueryBuilder("categories")
@@ -30,6 +39,7 @@ const updateBookService = async (
         404
       );
     }
+
     await books_categoryRepo
       .createQueryBuilder("books_category")
       .leftJoinAndSelect("books_category.books", "books")
