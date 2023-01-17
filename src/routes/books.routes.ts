@@ -62,7 +62,7 @@ booksRoutes.get(
 booksRoutes.delete(
   "/:id",
   ensureAuthMiddleware,
-  isAdmOrOwnAuthorMiddleware,
+  isAdmOrBookAuthorMiddleware,
   ensureBookExists,
   deleteBookController
 );

@@ -15,16 +15,16 @@ const updateBookService = async (
   if (!bookFound) {
     throw new AppError("Book not found", 404);
   }
+
   const categoriesRepo = AppDataSource.getRepository(Categories);
   const books_categoryRepo = AppDataSource.getRepository(Books_Categories);
 
   if (
-    "title" in payload === false &&
     "about" in payload === false &&
     "category" in payload === false &&
     "coverUrl" in payload === false
   ) {
-    throw new AppError("Body is empty", 409);
+    throw new AppError("Body is empty", 400);
   }
 
   if ("category" in payload) {

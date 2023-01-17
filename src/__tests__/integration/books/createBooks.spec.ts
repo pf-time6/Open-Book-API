@@ -4,7 +4,6 @@ import app from "../../../app";
 import AppDataSource from "../../../data-source";
 import Books from "../../../entities/books.entity";
 import Books_Categories from "../../../entities/books_categories.entity";
-import Categories from "../../../entities/categories.entity";
 import {
   mockedAdminAuthorSession,
   mockedBooksRequest,
@@ -17,7 +16,6 @@ describe("Create books route", () => {
   let conn: DataSource;
   let booksRepo: Repository<Books>;
   let book_categoryRepo: Repository<Books_Categories>;
-  let categoriesRepo: Repository<Categories>;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -25,7 +23,6 @@ describe("Create books route", () => {
         conn = dataSource;
         booksRepo = conn.getRepository(Books);
         book_categoryRepo = conn.getRepository(Books_Categories);
-        categoriesRepo = conn.getRepository(Categories);
       })
       .catch((err) => console.log(err));
   });
@@ -33,8 +30,6 @@ describe("Create books route", () => {
   beforeEach(async () => {
     const books_category = await book_categoryRepo.find();
     await book_categoryRepo.remove(books_category);
-    const categories = await categoriesRepo.find();
-    await categoriesRepo.remove(categories);
     const books = await booksRepo.find();
     await booksRepo.remove(books);
   });
@@ -45,11 +40,11 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should be able to create books", async () => {
     const { authorPayload, sessionPayload } = mockedAdminAuthorSession;
-    await request(app).post("/author").send(authorPayload); //1 - CRIEI AUTOR
-    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
-    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    await request(app).post("/author").send(authorPayload);
+    const authorLogged = await request(app).post("/login").send(sessionPayload);
+    const token = authorLogged.body.token;
 
-    await request(app) // 3 - CRIEI CATEGORIA
+    await request(app)
       .post("/categories")
       .set("Authorization", `Bearer ${token}`)
       .send(mockedCategoryRequest);
@@ -73,15 +68,6 @@ describe("Create books route", () => {
   });
 
   it("POST: /books -> Should not be able to create books | Missing Token", async () => {
-    const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
-    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
-
-    await request(app)
-      .post("/categories")
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedCategoryRequest);
-
     const response = await request(app).post(baseUrl).send(mockedBooksRequest);
 
     const booksResponse = {
@@ -99,8 +85,8 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should not be able to create books | Invalid body", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
-    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
+    const authorLogged = await request(app).post("/login").send(sessionPayload);
+    const token = authorLogged.body.token;
 
     const response = await request(app)
       .post(baseUrl)
@@ -127,14 +113,8 @@ describe("Create books route", () => {
 
   it("POST: /books -> Should not be able to create books | Title already exists", async () => {
     const { sessionPayload } = mockedAdminAuthorSession;
-    const authorLogged = await request(app).post("/login").send(sessionPayload); //1 - LOGUEI
-    const token = authorLogged.body.token; //1 - PEGUEI TOKEN
-    mockedBooksRequest.category = [3]; //3 - MUDEI CATEGORIES
-
-    await request(app)
-      .post("/categories")
-      .set("Authorization", `Bearer ${token}`)
-      .send(mockedCategoryRequest);
+    const authorLogged = await request(app).post("/login").send(sessionPayload);
+    const token = authorLogged.body.token;
 
     await request(app)
       .post(baseUrl)
