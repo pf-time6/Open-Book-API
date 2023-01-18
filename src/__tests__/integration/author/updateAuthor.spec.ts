@@ -48,7 +48,7 @@ describe("Retrieve Author Tests", () => {
     const { name } = mockedCommonAuthorPatchRequest;
 
     const data = {
-      name,
+      name: name,
     };
 
     const response = await request(app)
@@ -60,7 +60,7 @@ describe("Retrieve Author Tests", () => {
       status: 200,
       name,
     };
-
+    console.log(response.body);
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toHaveProperty("name");
     expect(response.body.name).toBe(expectResults.name);
@@ -121,7 +121,7 @@ describe("Retrieve Author Tests", () => {
       .send(data);
 
     const expectResults = {
-      status: 201,
+      status: 200,
       country,
     };
 
@@ -153,7 +153,7 @@ describe("Retrieve Author Tests", () => {
       .send(data);
 
     const expectResults = {
-      status: 201,
+      status: 200,
       bodyToEqual: {
         id: expect.any(String),
         name: expect.any(String),
