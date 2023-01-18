@@ -9,7 +9,7 @@ const updateAuthorService = async (
 ): Promise<IUpdateAuthorResponse> => {
   const authorRepo = AppDataSource.getRepository(Author);
 
-  const updateAuthorQuery = authorRepo
+  const updateAuthorQuery = await authorRepo
     .createQueryBuilder("author")
     .update()
     .set({ ...payload })
@@ -19,6 +19,8 @@ const updateAuthorService = async (
   const author = await authorRepo.findOneBy({ id: userId });
   // const updateAuthor = authorRepo.create({ ...author, ...payload });
   // await authorRepo.save(updateAuthor);
+
+  console.log(author);
 
   const authorWithoutPassword = await updateAuthorReturnSchema.validate(
     author,
