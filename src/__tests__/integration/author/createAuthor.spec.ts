@@ -62,8 +62,10 @@ describe("Create Author Tests", () => {
 
   it("POST: /author -> Should be not allowed create a existing Author", async () => {
     const authorPayload = mockedCommonAuthorRequest;
-    const author = authorRepo.create({ ...authorPayload });
-    await authorRepo.save(author);
+
+    const createFirstAuthor = await request(app).post(baseUrl).send(authorPayload)
+
+    expect(createFirstAuthor.status).toBe(201);
 
     const response = await request(app).post(baseUrl).send(authorPayload);
 
@@ -71,6 +73,7 @@ describe("Create Author Tests", () => {
       status: 409,
       bodyHaveProperty: "message",
     };
+
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toHaveProperty(expectResults.bodyHaveProperty);

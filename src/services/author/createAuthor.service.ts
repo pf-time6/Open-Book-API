@@ -19,7 +19,7 @@ const createAuthorService = async (
     .getOne();
 
   if (author) {
-    throw new AppError("Author already exists", 409);
+    throw new AppError("Email already registered to another author", 409);
   }
 
   const authorCreate = authorRepo.create(payload);

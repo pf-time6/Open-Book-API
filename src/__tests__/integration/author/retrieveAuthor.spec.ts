@@ -35,11 +35,26 @@ describe("Retreieve Author Tests", () => {
     const firstAuthorPayload = mockedCommonAuthorRequest;
     const secondAuthorPayload = mockedAdminAuthorRequest;
 
-    const firstAuthor = authorRepo.create({ ...firstAuthorPayload });
-    const secondAuthor = authorRepo.create({ ...secondAuthorPayload });
-    await authorRepo.save([firstAuthor, secondAuthor]);
+    const firstAuthor = await request(app)
+      .post(baseUrl)
+      .send(firstAuthorPayload);
+    const secondAuthor = await request(app)
+      .post(baseUrl)
+      .send(secondAuthorPayload);
 
-    const response = await request(app).get(baseUrl);
+    expect(firstAuthor.status).toBe(201);
+    expect(secondAuthor.status).toBe(201);
+
+    const secondAuthorLogged = await request(app).post("/login").send({
+      email: secondAuthorPayload.email,
+      password: secondAuthorPayload.password,
+    });
+
+    const token = secondAuthorLogged.body.token;
+
+    const response = await request(app)
+      .get(baseUrl)
+      .set("Authorization", `Bearer ${token}`);
 
     const expectResults = {
       status: 200,
@@ -72,10 +87,11 @@ describe("Retreieve Author Tests", () => {
   it("GET: /author:id -> Should be able to retrieve an specific Author", async () => {
     const authorPayload = mockedCommonAuthorRequest;
 
-    const author = authorRepo.create({ ...authorPayload });
-    await authorRepo.save(author);
+    const author = await request(app).post(baseUrl).send(authorPayload);
 
-    const response = await request(app).get(`/author/${author.id}`);
+    expect(author.status).toBe(201);
+
+    const response = await request(app).get(`/author/${author.body.id}`);
 
     const expectResults = {
       status: 200,

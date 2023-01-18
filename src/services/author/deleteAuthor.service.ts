@@ -20,29 +20,7 @@ const deleteAuthorService = async (
   }
 
   if (author.isActive === false) {
-    await authorRepo
-      .createQueryBuilder("author")
-      .restore()
-      .where("id = :id", { id: userId })
-      .execute();
-
-    await authorRepo
-      .createQueryBuilder("author")
-      .update()
-      .set({ isActive: true })
-      .where("id = :id", { id: userId })
-      .execute();
-
-    const author = await authorRepo.findOneBy({ id: userId });
-
-    const authorWithoutPassword = await updateAuthorReturnSchema.validate(
-      author,
-      {
-        stripUnknown: true,
-      }
-    );
-
-    return { restored: authorWithoutPassword };
+    throw new AppError("Author is already deleted", 400);
   }
 
   await authorRepo

@@ -6,7 +6,6 @@ import {
   loginRoutes,
   booksRoutes,
   categoriesRoutes,
-  pagesRoutes,
 } from "./routes";
 import { errorHandler } from "./errors";
 
@@ -18,7 +17,6 @@ app.use(json());
 app.use("/author", authorRoutes);
 app.use("/login", loginRoutes);
 app.use("/books", booksRoutes);
-app.use("", pagesRoutes);
 app.use("/categories", categoriesRoutes);
 
 app.use(errorHandler);
