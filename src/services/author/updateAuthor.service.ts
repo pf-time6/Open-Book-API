@@ -20,8 +20,6 @@ const updateAuthorService = async (
   // const updateAuthor = authorRepo.create({ ...author, ...payload });
   // await authorRepo.save(updateAuthor);
 
-  console.log(author);
-
   const authorWithoutPassword = await updateAuthorReturnSchema.validate(
     author,
     {

@@ -156,8 +156,6 @@ describe("Update categories tests", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(invalidCategoryData);
 
-    // console.log(response.body)
-
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toHaveProperty(expectResults.bodyToHaveProperty);
   });

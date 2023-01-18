@@ -18,7 +18,6 @@ const restoreAuthorService = async (
   if (!author) {
     throw new AppError("Author not found", 404);
   }
-  console.log("oi");
 
   if (author.isActive === false) {
     await authorRepo

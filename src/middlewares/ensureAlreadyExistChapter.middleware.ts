@@ -37,7 +37,6 @@ const ensureAlreadyExistChapter = async (
       where: { chapter: chapterData.chapter },
       relations: { books: true },
     });
-    console.log(alreadyExistChapterNumber);
     if (alreadyExistChapterNumber) {
       throw new AppError("Chapter page already registered for this book", 409);
     }
@@ -48,7 +47,6 @@ const ensureAlreadyExistChapter = async (
     });
 
     if (alreadyExistChapterTitle) {
-      console.log(alreadyExistChapterTitle);
       if (alreadyExistChapterTitle.books.id === bookId) {
         throw new AppError(
           "Chapter title already registered for this book",
