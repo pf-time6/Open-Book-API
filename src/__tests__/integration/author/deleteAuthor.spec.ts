@@ -63,10 +63,15 @@ describe("Delete Author tests", () => {
     const response = await request(app)
       .delete(`${baseUrl}/${idNotBelonging}`)
       .set("Authorization", `Bearer ${token}`);
-    const authorsList = await request(app).get(baseUrl);
+    const authorsList = await request(app)
+      .get(baseUrl)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(204);
-    expect(authorsList.body).toHaveLength(1);
+    expect(authorsList.body).toHaveLength(2);
+    expect(authorsList.body[0]).toStrictEqual(
+      expect.objectContaining({ isActive: false })
+    );
   });
 
   it("DELETE: /author/:id -> Should be able to soft delete author's own account", async () => {
@@ -107,7 +112,9 @@ describe("Delete Author tests", () => {
 
     expect(response.status).toBe(204);
 
-    const authorsList = await request(app).get(baseUrl);
+    const authorsList = await request(app)
+      .get(baseUrl)
+      .set("Authorization", `Bearer ${tokenCommonAuthor}`);
 
     expect(authorsList.body).toHaveLength(1);
   });
@@ -153,7 +160,9 @@ describe("Delete Author tests", () => {
     expect(loginAdmin.status).toBe(200);
     expect(loginAdmin.body).toHaveProperty("token");
 
-    const response = await request(app).delete(`${baseUrl}/ff9421db-666a-4ba9-99e4-33f2d0ed13fd`);
+    const response = await request(app).delete(
+      `${baseUrl}/ff9421db-666a-4ba9-99e4-33f2d0ed13fd`
+    );
 
     const expectResults = {
       status: 401,
