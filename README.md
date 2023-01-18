@@ -282,6 +282,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para título de livro já existente:</p>
 <pre>
 {
+
     "message": "Title already registered in the system."
 }
 </pre>
@@ -289,6 +290,7 @@
 <pre>
 {
     "message": "There is at least one category that is not found in the database."
+
 }
 </pre>
 <hr noshade />
@@ -462,7 +464,7 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
 <pre>
 {
-    "message": yup.error.errors
+    "message": "Body is empty"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
