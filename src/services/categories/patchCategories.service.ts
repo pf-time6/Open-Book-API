@@ -18,6 +18,8 @@ const patchCategoriesService = async (
     where: { name: categoryBody.name },
   });
 
+  console.log(categoryNameFound)
+
   if (!updatedCategory) {
     throw new AppError("Category not found", 404);
   }
