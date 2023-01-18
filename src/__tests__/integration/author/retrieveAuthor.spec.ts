@@ -35,14 +35,26 @@ describe("Retreieve Author Tests", () => {
     const firstAuthorPayload = mockedCommonAuthorRequest;
     const secondAuthorPayload = mockedAdminAuthorRequest;
 
-    const firstAuthor = await request(app).post(baseUrl).send(firstAuthorPayload)
-    const secondAuthor = await request(app).post(baseUrl).send(secondAuthorPayload)
+    const firstAuthor = await request(app)
+      .post(baseUrl)
+      .send(firstAuthorPayload);
+    const secondAuthor = await request(app)
+      .post(baseUrl)
+      .send(secondAuthorPayload);
 
     expect(firstAuthor.status).toBe(201);
     expect(secondAuthor.status).toBe(201);
 
+    const secondAuthorLogged = await request(app).post("/login").send({
+      email: secondAuthorPayload.email,
+      password: secondAuthorPayload.password,
+    });
 
-    const response = await request(app).get(baseUrl);
+    const token = secondAuthorLogged.body.token;
+
+    const response = await request(app)
+      .get(baseUrl)
+      .set("Authorization", `Bearer ${token}`);
 
     const expectResults = {
       status: 200,
