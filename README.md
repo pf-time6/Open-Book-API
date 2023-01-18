@@ -21,15 +21,15 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
 <pre>
 {
-    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-    "email": "marcelohm@gmail.com",
-    "name": "Marcelo Henrique Marques",
-    "city": "Belo Horizonte",
-    "country": "Brasil",
-    "isAdm": false,
+    "updatedAt": "2023-01-18T18:46:12.725Z",
+    "createdAt": "2023-01-18T18:46:12.725Z",
     "isActive": true,
-    "createdAt": "2023-01-01",
-    "updatedAt": "2023-01-01"
+    "isAdm": true,
+    "country": "Brasil",
+    "city": "Belo Horizonte",
+    "email": "mhmarques@rpgroom.com.br",
+    "name": "Marcelo Henrique A. Marques",
+    "id": "146c8c8b-fef1-4487-8641-cff3ef748c7a"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
@@ -49,42 +49,42 @@
 <h2>[200] Listar autores cadastrados no sistema e seus respectivos livros.</h2>
 <h3>GET - /author</h3>
 
-<strong>Essa rota não necessita autenticação bearer token nem request body:</strong>
+<strong>Essa rota necessita autenticação bearer token sem request body:</strong>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para listagem bem sucedida:</p>
 <pre>
 [
     {
-    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-    "email": "marcelohm@gmail.com",
-    "name": "Marcelo Henrique Marques",
-    "city": "Belo Horizonte",
-    "country": "Brasil",
-    "isAdm": false,
-    "isActive": true,
-    "createdAt": "2023-01-01",
-    "updatedAt": "2023-01-01",
-    "books":[
-        {
-            "uuid": "97036eff-9a4a-4062-b11a-014f3842808a",
-            "title": "Hammerdown",
-            "category": ["Fiction","Adventure","Action"],
-            "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado.",
-            "coverUrl": "http://mh.app.br/HDCover.png"
-        }
-    ]
+        "id": "146c8c8b-fef1-4487-8641-cff3ef748c7a",
+        "name": "Marcelo Henrique A. Marques",
+        "email": "mhmarques@rpgroom.com.br",
+        "isAdm": true,
+        "isActive": true,
+        "country": "Brasil",
+        "city": "Belo Horizonte",
+        "updatedAt": "2023-01-18T18:46:12.725Z",
+        "createdAt": "2023-01-18T18:46:12.725Z",
+        "books": [
+            {
+                "id": "24ee6f3d-8ba8-4e68-8ab7-cc118bd5ca75",
+                "title": "Hammerdown. The 1st Book",
+                "about": "Hammerdown is a mercenary from Sentry, the main city of the desert of Saint Blade.",
+                "coverUrl": "https://mh.app.br/bookCover.png",
+                "createdAt": "2023-01-18T18:51:25.092Z"
+            }
+        ]
     },
     {
-    "id": "ce486924-b51f-4c39-a04f-5792e997cfad",
-    "email": "paulonogres@gmail.com",
-    "name": "Paulo Nogueira Resende",
-    "city": "Rio de Janeiro",
-    "country": "Brasil",
-    "isAdm": false,
-    "isActive": true,
-    "createdAt": "2023-01-02",
-    "updatedAt": "2023-01-02",
-    "books":[]
+        "id": "fae43b77-1c12-4fb4-af8e-4fb13fab5e26",
+        "name": "Ronaldo Algusto Moreira Alves",
+        "email": "ramalves@email.com",
+        "isAdm": false,
+        "isActive": true,
+        "country": "Brasil",
+        "city": "Miritituba",
+        "updatedAt": "2023-01-18T18:50:16.343Z",
+        "createdAt": "2023-01-18T18:50:16.343Z",
+        "books": []
     }
 ]
 </pre>
@@ -97,26 +97,26 @@
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
-{
-    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-    "email": "marcelohm@gmail.com",
-    "name": "Marcelo Henrique Marques",
-    "city": "Belo Horizonte",
-    "country": "Brasil",
-    "isAdm": false,
-    "isActive": true,
-    "createdAt": "2023-01-01",
-    "updatedAt": "2023-01-01",
-    "books":[
-        {
-            "id": "97036eff-9a4a-4062-b11a-014f3842808a",
-            "title": "Hammerdown",
-            "category": ["Fiction","Adventure","Action"],
-            "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado.",
-            "coverUrl": "http://mh.app.br/HDCover.png"
-        }
-    ]
-}
+    {
+        "id": "146c8c8b-fef1-4487-8641-cff3ef748c7a",
+        "name": "Marcelo Henrique A. Marques",
+        "email": "mhmarques@rpgroom.com.br",
+        "isAdm": true,
+        "isActive": true,
+        "country": "Brasil",
+        "city": "Belo Horizonte",
+        "updatedAt": "2023-01-18T18:46:12.725Z",
+        "createdAt": "2023-01-18T18:46:12.725Z",
+        "books": [
+            {
+                "id": "24ee6f3d-8ba8-4e68-8ab7-cc118bd5ca75",
+                "title": "Hammerdown. The 1st Book",
+                "about": "Hammerdown is a mercenary from Sentry, the main city of the desert of Saint Blade.",
+                "coverUrl": "https://mh.app.br/bookCover.png",
+                "createdAt": "2023-01-18T18:51:25.092Z"
+            }
+        ]
+    }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para autor inexistente ou não encontrado:</p>
 <pre>
@@ -141,15 +141,16 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
 {
-    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-    "email": "marcelohm@gmail.com",
-    "name": "Marcelo Henrique Marques",
-    "city": "Belo Horizonte",
-    "country": "Brasil",
-    "isAdm": false,
-    "isActive": true,
-    "createdAt": "2023-01-01",
-    "updatedAt": "2023-01-01"
+	"id": "c0b3d95e-08db-41db-a018-6f02b1aefc45",
+	"name": "Ronaldo Algusto M. Alves",
+	"email": "ramalves@email.com",
+	"city": "São Paulo",
+	"country": "Brasil",
+	"isAdm": false,
+	"isActive": true,
+	"createdAt": "2023-01-18T17:09:29.508Z",
+	"updatedAt": "2023-01-18T17:24:09.865Z",
+	"deletedAt": null
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
@@ -177,22 +178,9 @@
 
 <strong>Essa rota necessita autenticação bearer token e é preciso enviar o id do autor como parâmetro. Apenas administradores e o próprio autor podem realizar esta operação:</strong>
 
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">202</strong> com o retorno:</p>
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">204</strong> com o retorno vazio</p>
 <pre>
-{
-	"deleted": {
-		"id": "1f2031fb-681f-42cd-87ac-6452fd5d66a9",
-		"name": "12345",
-		"email": "pablo2@mail.com",
-		"city": "Rio de janeiro",
-		"country": "Brasil",
-		"isAdm": true,
-		"isActive": false,
-		"createdAt": "2023-01-12T12:36:16.475Z",
-		"updatedAt": "2023-01-14T11:43:07.040Z",
-		"deletedAt": "2023-01-14T11:43:07.040Z"
-	}
-}
+{}
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
@@ -236,10 +224,125 @@
     "message": yup.error.errors
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para email e/ou senha inválidas ou inexistente:</p>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para email e/ou senha inválidas ou inexistente:</p>
 <pre>
 {
     "message": "Email or password invalid"
+}
+</pre>
+<hr noshade />
+
+<h2>[201] Criar nova opção de categoria para livros.</h2>
+<h3>POST - /categories</h3>
+
+<strong>Essa rota necessita autenticação bearer token de administrador. Campo de envio para request:</strong>
+
+<ul>
+    <li><strong>name: </strong>Entrada obrigatória do tipo string com máximo de 60 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
+<pre>
+{
+    "id": "1",
+    "name": "Adventure"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
+<pre>
+{
+    "message": "Missing or invalid token"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
+<pre>
+{
+    "message": yup.error.errors
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para nome de categoria já inexistente:</p>
+<pre>
+{
+    "message": "Category name already registered into the system."
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para criação não autorizada:</p>
+<pre>
+{
+    "message": "Unauthorized credential"
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Mostrar listagem de categorias cadastradas no sistema.</h2>
+<h3>GET - /categories</h3>
+
+<strong>Essa rota não necessita autenticação bearer token nem request body.</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+[
+    {
+        "id": 1,
+        "name": "Adventure"
+    },
+    {
+        "id": 2,
+        "name": "Science Fiction"
+    },
+    {
+        "id": 3,
+        "name": "Action"
+    },
+    {
+        "id": 4,
+        "name": "Romance"
+    }
+]
+</pre>
+<hr noshade />
+
+<h2>[200] Editar categorias cadastradas no sistema.</h2>
+<h3>PATCH - /categories/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+	"id": 4,
+	"name": "Drama"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
+<pre>
+{
+    "message": "There are no categories found"
+}
+</pre>
+<hr noshade />
+
+<h2>[200] Deletar categorias cadastradas no sistema.</h2>
+<h3>DELETE - /categories/:id</h3>
+
+<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
+<pre>
+{
+    "message": "Category deleted"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
+<pre>
+{
+    "message": "There are no categories found"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para categoria utilizada em algum book:</p>
+<pre>
+{
+    "message": "Category is already being used""
 }
 </pre>
 <hr noshade />
@@ -259,12 +362,15 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
 <pre>
 {
-    "id": "97036eff-9a4a-4062-b11a-014f3842808a",
-    "title": "Hammerdown",
-    "category": [1,8,12],
-    "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
-    "coverUrl": "http://mh.app.br/HDCover.png",
-    "createdAt": "2023-01-01"
+    "id": "2f455fae-64ea-472d-8d4d-3b2308daae16",
+    "title": "Star Bards. Interstellar Colonies",
+    "category": [
+        1,
+        2
+    ],
+    "about": "A gang of galatic mercenaries led by a couple of bards.",
+    "coverUrl": "https://starbards.com/bookCover.png",
+    "createdAt": "Wed Jan 18 2023 15:51:27 GMT-0300 (Horário Padrão de Brasília)"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
@@ -282,15 +388,13 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para título de livro já existente:</p>
 <pre>
 {
-
     "message": "Title already registered in the system."
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para categoria de livro inexistente:</p>
 <pre>
 {
-    "message": "There is at least one category that is not found in the database."
-
+    "message": "There is at least one category that is not in the database."
 }
 </pre>
 <hr noshade />
@@ -304,31 +408,37 @@
 <pre>
 [
     {
-        "id": "97036eff-9a4a-4062-b11a-014f3842808a",
-        "title": "Hammerdown",
-        "category": ["Fiction","Action","Adventure"],
-        "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
-        "coverUrl": "http://mh.app.br/HDCover.png"
-        "author":{
-            "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-            "email": "marcelohm@gmail.com",
-            "name": "Marcelo Henrique Marques",
+        "id": "24ee6f3d-8ba8-4e68-8ab7-cc118bd5ca75",
+        "title": "Hammerdown. The 1st Book",
+        "about": "Hammerdown is a mercenary from Sentry, the main city of the desert of Saint Blade.",
+        "category": [
+            "Adventure",
+            "Science Fiction"
+        ],
+        "coverUrl": "https://mh.app.br/bookCover.png",
+        "author": {
+            "id": "146c8c8b-fef1-4487-8641-cff3ef748c7a",
+            "email": "mhmarques@rpgroom.com.br",
+            "name": "Marcelo Henrique A. Marques",
             "city": "Belo Horizonte",
-            "country": "Brasil",
+            "country": "Brasil"
         }
     },
     {
-        "id": "7acb5d30-9d2b-4f15-aeb4-d71b67a6d051",
-        "title": "Interstellar Citizen",
-        "category": ["Fiction","Science","Adventure"],
-        "about": "Diário de um explorador espacial humano e suas máquinas companheiras de aventuras."
-        "coverUrl": "http://imgur.com/ICCover.png"
-        "author":{
-            "id": "ce486924-b51f-4c39-a04f-5792e997cfad",
-            "email": "paulonogres@gmail.com",
-            "name": "Paulo Nogueira Resende",
-            "city": "Rio de Janeiro",
-            "country": "Brasil",
+        "id": "b4edf618-2b68-49a5-b0f2-70f97453e43a",
+        "title": "Star Bards. Interstellar Colonies",
+        "about": "A gang of galatic mercenaries led by a couple of bards.",
+        "category": [
+            "Science Fiction",
+            "Action"
+        ],
+        "coverUrl": "https://starbards.com/bookCover.png",
+        "author": {
+            "id": "fae43b77-1c12-4fb4-af8e-4fb13fab5e26",
+            "email": "ramalves@email.com",
+            "name": "Ronaldo Algusto Moreira Alves",
+            "city": "Miritituba",
+            "country": "Brasil"
         }
     }
 ]
@@ -357,12 +467,20 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
 <pre>
 {
-    "book": "97036eff-9a4a-4062-b11a-014f3842808a",
     "page": 1,
-    "chapter": 1,
+    "chapter": 0,
     "isChapter": true,
-    "chapterTitle": "O Tesouro de Samarilla",
-    "content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
+    "chapterTitle": "Introdução",
+    "content": "Este livro é uma aventura imaginada no futuro muito distante. Um tempo em que a raça humana coloniza múltiplos planetas.",
+    "books": {
+        "id": "b4edf618-2b68-49a5-b0f2-70f97453e43a",
+        "title": "Star Bards. Interstellar Colonies",
+        "about": "A gang of galatic mercenaries led by a couple of bards.",
+        "coverUrl": "https://starbards.com/bookCover.png",
+        "createdAt": "2023-01-18T19:08:29.114Z"
+    },
+    "id": "54933404-b75e-49a6-b8da-6a69363e4ec5",
+    "createdAt": "2023-01-18T19:08:42.713Z"
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
@@ -401,6 +519,12 @@
     "message": "Chapter page already registered for this book"
 }
 </pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para chapter tittle e isChapter true já existente para o este livro:</p>
+<pre>
+{
+    "message": "Chapter title already registered for this book"
+}
+</pre>
 <hr noshade />
 
 <h2>[200] Mostrar informações sobre um livro específico.</h2>
@@ -411,17 +535,27 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
 {
-    "id": "97036eff-9a4a-4062-b11a-014f3842808a",
-    "title": "Hammerdown",
-    "category": ["Fiction","Action","Adventure"],
-    "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
-    "coverUrl": "http://mh.app.br/HDCover.png"
-    "author":{
-        "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-        "email": "marcelohm@gmail.com",
-        "name": "Marcelo Henrique Marques",
+    "id": "f246c397-6ed4-405d-9df5-ab239733ce91",
+    "title": "Hammerdown. The 1st Book",
+    "about": "Hammerdown is a mercenary from Sentry, the main city of the desert of Saint Blade.",
+    "category": [
+    {
+        "id": "1",
+        "name": "Adventure"
+    },
+    {
+        "id": "2",
+        "name": "Science Fiction"
+    }
+    ],
+    "coverUrl": "https://mh.app.br/bookCover.png",
+    "createdAt": "2023-01-18T17:35:09.275Z",
+    "author": {
+        "id": "5f7fc983-89c4-41e3-9b63-81453cb8a378",
+        "email": "mhmarques@rpgroom.com.br",
+        "name": "Marcelo Henrique A. Marques",
         "city": "Belo Horizonte",
-        "country": "Brasil",
+        "country": "Brasil"
     }
 }
 </pre>
@@ -447,12 +581,27 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para alteração realizada com sucesso:</p>
 <pre>
 {
-    "id": "97036eff-9a4a-4062-b11a-014f3842808a",
-    "title": "Hammerdown",
-    "category": [1,8,12],
-    "about": "A história de um herói guerreiro da idade média que enfrenta o império para salvar todo um povoado."
-    "coverUrl": "http://mh.app.br/HDCover.png",
-    "createdAt": "2023-01-01"
+    "id": "c69023d5-c795-4671-b4d4-d6bd49b7afde",
+    "title": "Star Bards. Interstellar Colonies",
+    "about": "A gang of galatic mercenaries led by a couple of bards and a diverse crew.",
+    "coverUrl": "https://starbards.com/bookCover.png",
+    "createdAt": "2023-01-18T17:35:19.859Z",
+    "books_categories": [
+    {
+        "id": 1,
+        "categories": {
+            "id": 1,
+            "name": "Science Fiction"
+        }
+    },
+    {
+        "id": 2,
+        "categories": {
+            "id": 2,
+            "name": "Action"
+        }
+    }
+    ]
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
@@ -518,12 +667,19 @@
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
 <pre>
 {
-	"book": "97036eff-9a4a-4062-b11a-014f3842808a",
-	"page": 1,
-	"chapter": 1,
-	"isChapter": true,
-	"chapterTitle": "O Tesouro de Samarilla",
-	"content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
+    "page": 1,
+    "chapter": 0,
+    "isChapter": true,
+    "chapterTitle": "Introdução",
+    "content": "Este livro é uma aventura imaginada no futuro muito distante. Um tempo em que a raça humana coloniza múltiplos planetas.",
+    "createdAt": "2023-01-18T17:39:16.695Z",
+    "books": {
+        "id": "ac320b94-691d-470f-9e95-c7f113616b43",
+        "title": "Star Bards. Interstellar Colonies",
+        "about": "A gang of galatic mercenaries led by a couple of bards.",
+        "coverUrl": "https://starbards.com/bookCover.png",
+        "createdAt": "2023-01-18T17:37:33.817Z"
+    }
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para livro inexistente ou não encontrado:</p>
@@ -551,14 +707,14 @@
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para alteração realizada com sucesso:</p>
 <pre>
-{
-    "book": "97036eff-9a4a-4062-b11a-014f3842808a",
-    "page": 1,
+    {
+    "content": "Pelas escotilhas que formam o observatório da ponte de comando é possível enxergar uma equipe sentada em uma mesa de reunião discutindo assuntos diversos organizados em um plano detalhado na tela do tablet que uma mulher de dread locks segura enquanto os verifica.",
+    "chapterTitle": "Calisto Protocol",
+    "isChapter": false,
     "chapter": 1,
-    "isChapter": true,
-    "chapterTitle": "O Tesouro de Samarilla",
-    "content": "Era noite na Taberna Adaga Cega, subúrbio da cidade de Sentry em Saint Blade, a chuva fina cai do lado de fora, do lado de dentro o som das gotas ecoam uniformemente o salão onde se encontra Hammerdown bebendo várias canecas de ale enquanto conversa com o taberneiro."
-}
+    "page": 3,
+    "id": "d51fdb59-a3b9-4d6d-848b-26cf06d69d78"
+    }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
 <pre>
@@ -627,111 +783,4 @@
 </pre>
 <hr noshade />
 
-<h2>[201] Criar nova opção de categoria para livros.</h2>
-<h3>POST - /categories</h3>
 
-<strong>Essa rota necessita autenticação bearer token de administrador. Campo de envio para request:</strong>
-
-<ul>
-    <li><strong>name: </strong>Entrada obrigatória do tipo string com máximo de 60 chars.</li>
-</ul>
-
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
-<pre>
-{
-    "id": "12",
-    "name": "Action"
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para ausência de autenticação por token:</p>
-<pre>
-{
-    "message": "Missing or invalid token"
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
-<pre>
-{
-    "message": yup.error.errors
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para nome de categoria já inexistente:</p>
-<pre>
-{
-    "message": "Category name already registered into the system."
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para criação não autorizada:</p>
-<pre>
-{
-    "message": "Unauthorized category creation"
-}
-</pre>
-<hr noshade />
-
-<h2>[200] Mostrar listagem de categorias cadastradas no sistema.</h2>
-<h3>GET - /categories</h3>
-
-<strong>Essa rota não necessita autenticação bearer token nem request body.</strong>
-
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
-<pre>
-[
-    {
-        "id": 1,
-        "name": "Fiction"
-    },
-    {
-        "id": 8,
-        "name": "Adventure"
-    },
-    {
-        "id": 12,
-        "name": "Action"
-    }
-]</pre>
-<hr noshade />
-
-<h2>[200] Editar categorias cadastradas no sistema.</h2>
-<h3>PATCH - /categories/:id</h3>
-
-<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
-
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
-<pre>
-{
-    "name": "Fiction"
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
-<pre>
-{
-    "message": "There are no categories found"
-}
-</pre>
-<hr noshade />
-
-<h2>[200] Deletar categorias cadastradas no sistema.</h2>
-<h3>DELETE - /categories/:id</h3>
-
-<strong>Essa rota necessita autenticação bearer token e é preciso enviar o id da categoria como parâmetro. Apenas administradores podem realizar modificação no campo:</strong>
-
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para retorno bem sucedido:</p>
-<pre>
-{
-    "message": "Category deleted"
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">404</strong> para lista vazia:</p>
-<pre>
-{
-    "message": "There are no categories found"
-}
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para categoria utilizada em algum book:</p>
-<pre>
-{
-    "message": "Category is already being used""
-}
-</pre>
-<hr noshade />

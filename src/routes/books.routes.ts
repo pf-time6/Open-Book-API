@@ -18,7 +18,6 @@ import {
   ensureBookExists,
   ensurePageExists,
   isAdmOrBookAuthorMiddleware,
-  isAdmOrOwnAuthorMiddleware,
   validateSchemaMiddleware,
 } from "../middlewares";
 import {
@@ -42,7 +41,7 @@ booksRoutes.post(
   validateSchemaMiddleware(createPageRequestSchema),
   ensureAuthMiddleware,
   ensureBookExists,
-  isAdmOrOwnAuthorMiddleware,
+  isAdmOrBookAuthorMiddleware,
   ensureAlreadyExistChapter,
   createPagesController
 );
@@ -66,7 +65,7 @@ booksRoutes.delete(
   ensureBookExists,
   deleteBookController
 );
-booksRoutes.patch("/:id/:page", ensureAuthMiddleware, editBookPageController);
-booksRoutes.delete("/:id/:page", ensureAuthMiddleware, deleteBooksPageController);
+booksRoutes.patch("/:id/:page", ensureAuthMiddleware,  isAdmOrBookAuthorMiddleware, editBookPageController);
+booksRoutes.delete("/:id/:page", ensureAuthMiddleware, isAdmOrBookAuthorMiddleware, deleteBooksPageController);
 
 export default booksRoutes;
