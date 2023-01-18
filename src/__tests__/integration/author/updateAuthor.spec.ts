@@ -60,7 +60,6 @@ describe("Retrieve Author Tests", () => {
       status: 200,
       name,
     };
-    console.log(response.body);
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toHaveProperty("name");
     expect(response.body.name).toBe(expectResults.name);
