@@ -298,7 +298,7 @@ describe("Retrieve Author Tests", () => {
       .send(data);
 
     const expectResults = {
-      status: 403,
+      status: 401,
       bodyToHaveProperty: "message",
     };
 

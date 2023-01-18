@@ -162,7 +162,6 @@ describe("Create book pages route", () => {
   //   const { sessionPayload } = mockedAdminAuthorSession;
   //   const authorLogged = await request(app).post("/login").send(sessionPayload);
   //   const token = authorLogged.body.token;
-  //   const decoded: IDecodedToken = jwt_decode(token);
 
   //   await request(app)
   //     .post(baseUrl)
